@@ -1,0 +1,56 @@
+{
+  "contact": {
+    "phone": {
+      "main": "01 23 45 67 89",
+      "mainLink": "0123456789",
+      "secondary": "06 12 34 56 78",
+      "secondaryLink": "0612345678"
+    },
+    "email": {
+      "main": "contact@votre-entreprise.fr",
+      "display": "contact@votre-entreprise.fr"
+    },
+    "address": {
+      "street": "123 Rue de la République",
+      "postalCode": "75001",
+      "city": "Paris"
+    },
+    "hours": {
+      "schedule": [
+        "Lundi - Vendredi : 9h00 - 18h00",
+        "Samedi : 9h00 - 12h00",
+        "Dimanche : Fermé"
+      ]
+    }
+  },
+  "contactForm": {
+    "responseTime": "24h",
+    "serviceOptions": [
+      "Création de site web",
+      "Refonte de site existant",
+      "E-commerce",
+      "Application mobile",
+      "Référencement SEO",
+      "Maintenance et support",
+      "Formation",
+      "Autre"
+    ]
+  },
+  "trustBadges": [
+    {
+      "badge": "Certifié Google Partner"
+    },
+    {
+      "badge": "Garantie satisfaction"
+    },
+    {
+      "badge": "Support 7j/7"
+    },
+    {
+      "badge": "Devis gratuit"
+    },
+    {
+      "badge": "RGPD conforme"
+    }
+  ]
+}

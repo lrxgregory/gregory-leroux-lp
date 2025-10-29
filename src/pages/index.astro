@@ -5,13 +5,15 @@ import Layout from '../layouts/Layout.astro'
 // - UI
 import Hero from '../components/blocks/hero/HomeCTA.astro'
 import Features from '../components/blocks/features/FeatureCards.astro'
-import Testimonial from '../components/blocks/testimonials/BasicDark.astro'
 import HighlightBlocks from '../components/blocks/highlights/HightlightRows.astro'
-import CTA from '../components/blocks/CTA/BasicDark.astro'
+import Steps from '../components/blocks/Steps.astro'
+import ContactForm from '../components/blocks/contact/ContactForm.astro'
+import PricingColumns from '../components/blocks/pricing/PricingColumns.astro'
+import FaqSticky from '../components/blocks/FAQ/FaqSticky.astro'
 
-// Content
-// - Testimonial background
-import testimonialBackground from '../assets/testimonial-bg-01.webp'
+// Data
+import faqData from '../data/json-files/faqData.json'
+
 // - SEO
 const SEO = {
 	title: 'Foxi | Your Productivity Toolkit',
@@ -23,7 +25,9 @@ const SEO = {
 <Layout title={SEO.title} description={SEO.description}>
 	<Hero />
 	<Features />
-	<Testimonial bg={testimonialBackground} bgPosition="right" />
+	<Steps />
 	<HighlightBlocks />
-	<CTA />
+	<PricingColumns />
+	<FaqSticky title="Questions fréquentes" data={faqData} />
+	<ContactForm variant="simple" />
 </Layout>

@@ -1,0 +1,314 @@
+---
+// Contact Form - Unified Component
+// ------------
+// Description: Formulaire de contact avec variants (full/simple)
+
+// Components
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+
+// Data
+import clientData from '../../../../src/data/json-files/clientData.json'
+
+interface Props {
+  variant?: 'full' | 'simple'
+  id?: string
+  title?: string
+  subtitle?: string
+}
+
+const { 
+  variant = 'full',
+  id = 'contact',
+  title = 'Demandez votre <strong>devis gratuit</strong>',
+  subtitle = `Remplissez le formulaire ci-dessous et recevez une réponse sous ${clientData.contactForm.responseTime}.`
+} = Astro.props
+
+const isSimple = variant === 'simple'
+const formId = isSimple ? 'contact-form-simple' : 'contact-form'
+const messageId = isSimple ? 'form-message-simple' : 'form-message'
+---
+
+<Section id={id} classes="bg-white dark:bg-neutral-950">
+	<Row>
+		<Col span="12" align="center" classes="mb-12">
+			<h2 class="text-pretty" set:html={title} />
+			<p class="pb-0 text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+				{subtitle}
+			</p>
+		</Col>
+	</Row>
+
+	<Row>
+		<Col span="12" classes={isSimple ? "max-w-2xl mx-auto" : "lg:grid lg:grid-cols-2 lg:gap-12"}>
+			
+			{!isSimple && (
+				<!-- Contact Info - Seulement pour variant="full" -->
+				<div class="mb-8 lg:mb-0">
+					<div class="rounded-2xl border border-neutral-200 bg-neutral-50 p-8 dark:border-neutral-800 dark:bg-neutral-900">
+						<h3 class="mb-6 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+							Contactez-nous
+						</h3>
+
+						<div class="space-y-6">
+							<!-- Phone -->
+							<div class="flex items-start gap-4">
+								<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400">
+									<svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
+									</svg>
+								</div>
+								<div>
+									<div class="mb-1 font-semibold text-neutral-900 dark:text-neutral-100">Téléphone</div>
+									<a href={`tel:${clientData.contact.phone.mainLink}`} class="block text-primary-600 hover:text-primary-700 dark:text-primary-400">
+										{clientData.contact.phone.main}
+									</a>
+									{clientData.contact.phone.secondary && (
+										<a href={`tel:${clientData.contact.phone.secondaryLink}`} class="block text-primary-600 hover:text-primary-700 dark:text-primary-400">
+											{clientData.contact.phone.secondary}
+										</a>
+									)}
+								</div>
+							</div>
+
+							<!-- Email -->
+							<div class="flex items-start gap-4">
+								<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400">
+									<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+									</svg>
+								</div>
+								<div>
+									<div class="mb-1 font-semibold text-neutral-900 dark:text-neutral-100">Email</div>
+									<a href={`mailto:${clientData.contact.email.main}`} class="text-primary-600 hover:text-primary-700 dark:text-primary-400">
+										{clientData.contact.email.display}
+									</a>
+								</div>
+							</div>
+
+							<!-- Address -->
+							<div class="flex items-start gap-4">
+								<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400">
+									<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+									</svg>
+								</div>
+								<div>
+									<div class="mb-1 font-semibold text-neutral-900 dark:text-neutral-100">Adresse</div>
+									<p class="text-neutral-600 dark:text-neutral-400">
+										{clientData.contact.address.street}<br />
+										{clientData.contact.address.postalCode} {clientData.contact.address.city}, France
+									</p>
+								</div>
+							</div>
+
+							<!-- Hours -->
+							<div class="flex items-start gap-4">
+								<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400">
+									<svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+									</svg>
+								</div>
+								<div>
+									<div class="mb-1 font-semibold text-neutral-900 dark:text-neutral-100">Horaires</div>
+									<div class="text-sm text-neutral-600 dark:text-neutral-400">
+										{clientData.contact.hours.schedule.map((hours) => (
+											<p>{hours}</p>
+										))}
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Trust Badges -->
+						<div class="mt-8 border-t border-neutral-200 pt-6 dark:border-neutral-800">
+							<div class="mb-3 text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+								Garanties & Certifications
+							</div>
+							<div class="flex flex-wrap gap-3">
+								{clientData.trustBadges.map((badge) => (
+									<span class="inline-flex items-center gap-2 rounded-lg bg-white px-3 py-2 text-xs font-medium text-neutral-700 shadow-sm dark:bg-neutral-800 dark:text-neutral-300">
+										<svg class="h-4 w-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+										</svg>
+										{badge.badge}
+									</span>
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+			)}
+
+			<!-- Contact Form -->
+			<div class={isSimple ? "rounded-2xl border border-neutral-200 bg-neutral-50 p-8 dark:border-neutral-800 dark:bg-neutral-900" : ""}>
+				<form id={formId} class="space-y-6" method="POST" action="/api/contact">
+
+					<!-- Service Type -->
+					<div>
+						<label for="service" class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+							Type de demande *
+						</label>
+						<select
+							id="service"
+							name="service"
+							required
+							class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+						>
+							<option value="">Sélectionnez un service</option>
+							{clientData.contactForm.serviceOptions.map((service) => (
+								<option value={service}>{service}</option>
+							))}
+						</select>
+					</div>
+
+					<!-- Name -->
+					<div>
+						<label for="name" class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+							Nom complet *
+						</label>
+						<input
+							type="text"
+							id="name"
+							name="name"
+							required
+							placeholder="Jean Dupont"
+							class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+						/>
+					</div>
+
+					<!-- Phone -->
+					<div>
+						<label for="phone" class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+							Téléphone *
+						</label>
+						<input
+							type="tel"
+							id="phone"
+							name="phone"
+							required
+							placeholder="06 12 34 56 78"
+							class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+						/>
+					</div>
+
+					<!-- Email -->
+					<div>
+						<label for="email" class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+							Email *
+						</label>
+						<input
+							type="email"
+							id="email"
+							name="email"
+							required
+							placeholder="jean.dupont@example.com"
+							class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+						/>
+					</div>
+
+					<!-- Message -->
+					<div>
+						<label for="message" class="mb-2 block text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+							Votre message *
+						</label>
+						<textarea
+							id="message"
+							name="message"
+							required
+							rows="4"
+							placeholder={isSimple ? "Décrivez votre projet : type d'activité, objectifs, délais..." : "Décrivez votre besoin..."}
+							class="w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-100"
+						></textarea>
+					</div>
+
+					<!-- RGPD -->
+					<div class="flex items-start gap-3">
+						<input
+							type="checkbox"
+							id="rgpd"
+							name="rgpd"
+							required
+							class="mt-1 h-4 w-4 rounded border-neutral-300 text-primary-600 focus:ring-2 focus:ring-primary-500/20 dark:border-neutral-700"
+						/>
+						<label for="rgpd" class="text-sm text-neutral-600 dark:text-neutral-400">
+							J'accepte que mes données soient utilisées pour me recontacter concernant ma demande *
+						</label>
+					</div>
+
+					<!-- Submit Button -->
+					<button
+						type="submit"
+						class="w-full rounded-lg bg-primary-600 px-6 py-4 text-lg font-semibold text-white transition-all hover:bg-primary-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500/50 dark:bg-primary-500 dark:hover:bg-primary-600"
+					>
+						Envoyer ma demande
+					</button>
+
+					<p class="text-center text-sm text-neutral-500 dark:text-neutral-500">
+						{isSimple 
+							? `📞 Réponse garantie sous ${clientData.contactForm.responseTime} • 💬 Devis gratuit et sans engagement`
+							: `Réponse garantie sous ${clientData.contactForm.responseTime}`
+						}
+					</p>
+
+					<!-- Message de succès/erreur -->
+					<div id={messageId} class="hidden rounded-lg p-4 text-center"></div>
+				</form>
+			</div>
+		</Col>
+	</Row>
+</Section>
+
+<script define:vars={{ formId, messageId }}>
+	document.addEventListener('astro:page-load', () => {
+		const form = document.getElementById(formId) as HTMLFormElement;
+		const messageDiv = document.getElementById(messageId);
+		const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+		if (!form || !messageDiv || !submitButton) return;
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			// Désactiver le bouton
+			const originalText = submitButton.textContent;
+			submitButton.textContent = 'Envoi en cours...';
+			submitButton.disabled = true;
+			messageDiv.classList.add('hidden');
+
+			try {
+				const formData = new FormData(form);
+
+				const response = await fetch('/api/contact', {
+					method: 'POST',
+					body: formData,
+				});
+
+				const result = await response.json();
+
+				if (response.ok && result.success) {
+					// Succès
+					messageDiv.textContent = `✅ ${result.message}`;
+					messageDiv.className = 'rounded-lg p-4 text-center bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
+					form.reset();
+				} else {
+					// Erreur
+					messageDiv.textContent = `❌ ${result.message || 'Une erreur est survenue'}`;
+					messageDiv.className = 'rounded-lg p-4 text-center bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
+				}
+
+				messageDiv.classList.remove('hidden');
+			} catch (error) {
+				messageDiv.textContent = '❌ Impossible d\'envoyer le message. Veuillez réessayer.';
+				messageDiv.className = 'rounded-lg p-4 text-center bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300';
+				messageDiv.classList.remove('hidden');
+			} finally {
+				// Réactiver le bouton
+				submitButton.textContent = originalText;
+				submitButton.disabled = false;
+			}
+		});
+	});
+</script>

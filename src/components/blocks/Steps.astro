@@ -1,0 +1,99 @@
+---
+// Steps Component
+// ------------
+// Description: Timeline component showing process steps with numbers and connecting lines
+// Props: title, subtitle, steps array, classes for styling
+
+import Section from '../ui/Section.astro'
+import Row from '../ui/Row.astro'
+import Col from '../ui/Col.astro'
+
+interface Step {
+  title: string
+  description: string
+  icon?: string
+}
+
+interface Props {
+  title?: string
+  subtitle?: string
+  steps?: Step[]
+  classes?: string
+}
+
+const { 
+  title = "Notre méthode en 4 étapes",
+  subtitle = "De votre premier appel à votre site en ligne : simple et rapide",
+  steps = [{
+				title: '<span class="font-medium">Rendez-vous découverte</span> (30min)',
+				description:
+					"On définit vos besoins et choisit l'offre adaptée parmi nos 3 formules. Devis personnalisé immédiat."
+			},
+			{
+				title: '<span class="font-medium">Composition sur-mesure</span>',
+				description:
+					'On sélectionne les composants adaptés à votre activité dans notre bibliothèque. Vous validez la structure.'
+			},
+			{
+				title: '<span class="font-medium">Personnalisation complète</span>',
+				description:
+					'Vos contenus, couleurs, images - tout est adapté à votre identité. Aperçus réguliers pour validation.'
+			},
+			{
+				title: '<span class="font-medium">Livraison & formation</span>',
+				description:
+					'Site en ligne + formation personnalisée pour que vous soyez autonome. Support inclus.'
+			}],
+  classes = ""
+} = Astro.props
+
+---
+
+<Section classes={`py-20 ${classes}`}>
+  <Row>
+    <Col span="12" align="center">
+      <div class="mb-16">
+        <h2 class="mb-6 text-4xl font-bold text-neutral-900 dark:text-white">
+          {title}
+        </h2>
+        <p class="mx-auto max-w-2xl text-xl text-neutral-600 dark:text-neutral-300">
+          {subtitle}
+        </p>
+      </div>
+    </Col>
+  </Row>
+  
+  <Row>
+    <Col span="12">
+      <div class="mx-auto max-w-4xl">
+        <div class="space-y-8">
+          {steps.map((step, index) => (
+            <div class="flex gap-6 items-start">
+              <!-- Numéro/Icône -->
+              <div class="flex-shrink-0">
+                <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white font-bold text-xl shadow-lg">
+                  {index + 1}
+                </div>
+              </div>
+              
+              <!-- Contenu -->
+              <div class="flex-1 pb-8 relative">
+                <!-- Ligne de connexion -->
+                {index < steps.length - 1 && (
+                  <div class="absolute -left-14 top-16 w-0.5 h-full bg-gradient-to-b from-primary-300 to-neutral-200 dark:from-primary-700 dark:to-neutral-700 -z-10"></div>
+                )}
+                
+                <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700 ml-2">
+                  <h3 class="mb-3 text-xl font-semibold text-neutral-900 dark:text-white" set:html={step.title} />
+                  <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Col>
+  </Row>
+</Section>
