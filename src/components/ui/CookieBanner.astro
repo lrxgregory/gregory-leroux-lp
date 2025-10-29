@@ -1,0 +1,76 @@
+---
+// Cookie Banner Component
+---
+
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 p-4 z-50 hidden">
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+			<div class="flex-1">
+				<p class="text-sm text-gray-600 dark:text-gray-300">
+					Nous utilisons des cookies pour améliorer votre expérience sur notre site. 
+					En continuant à naviguer, vous acceptez notre utilisation des cookies.
+					<a href="/privacy" class="text-primary-600 dark:text-primary-400 hover:underline ml-1">En savoir plus</a>
+				</p>
+			</div>
+			<div class="flex gap-3">
+				<button 
+					id="cookie-decline" 
+					class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-800 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+				>
+					Refuser
+				</button>
+				<button 
+					id="cookie-accept" 
+					class="px-4 py-2 text-sm font-medium text-white bg-primary-600 rounded-md hover:bg-primary-700 transition-colors"
+				>
+					Accepter
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	// Cookie Banner Logic
+	function initCookieBanner() {
+		const banner = document.getElementById('cookie-banner');
+		const acceptBtn = document.getElementById('cookie-accept');
+		const declineBtn = document.getElementById('cookie-decline');
+
+		// Check if user has already made a choice
+		const cookieChoice = localStorage.getItem('cookie-consent');
+		
+		if (!cookieChoice) {
+			banner.classList.remove('hidden');
+		}
+
+		acceptBtn.addEventListener('click', () => {
+			localStorage.setItem('cookie-consent', 'accepted');
+			banner.classList.add('hidden');
+			// Enable analytics and tracking cookies
+			enableTrackingCookies();
+		});
+
+		declineBtn.addEventListener('click', () => {
+			localStorage.setItem('cookie-consent', 'declined');
+			banner.classList.add('hidden');
+			// Disable analytics and tracking cookies
+			disableTrackingCookies();
+		});
+	}
+
+	function enableTrackingCookies() {
+		// Enable Google Analytics, Google Tag Manager, etc.
+		console.log('Tracking cookies enabled');
+		// Add your analytics initialization code here
+	}
+
+	function disableTrackingCookies() {
+		// Disable Google Analytics, Google Tag Manager, etc.
+		console.log('Tracking cookies disabled');
+		// Add code to disable analytics here
+	}
+
+	// Initialize when DOM is loaded
+	document.addEventListener('DOMContentLoaded', initCookieBanner);
+</script>
