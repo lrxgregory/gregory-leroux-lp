@@ -1,0 +1,44 @@
+---
+// Service Area / Zone d'intervention Section
+// ------------
+// Description: Section showing the geographical coverage area with cities list
+
+// Components
+// - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+
+// Config
+---
+
+<Section id="zone-intervention" classes="bg-neutral-50 dark:bg-neutral-900">
+	<Row>
+		<Col span="12" align="center" classes="mb-12">
+			<h2 class="text-pretty">Zone d'intervention</h2>
+			<p class="mx-auto max-w-3xl pb-0 text-lg text-neutral-600 dark:text-neutral-400">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+				incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+				exercitation ullamco laboris.
+			</p>
+		</Col>
+	</Row>
+
+	<Row>
+		<Col span="12" classes="mb-8">
+			<div
+				class="aspect-video w-full overflow-hidden rounded-2xl border border-neutral-200 shadow-lg dark:border-neutral-800"
+			>
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615509614!3d48.85837007928746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel%20Tower!5e0!3m2!1sen!2sfr!4v1234567890123"
+					width="100%"
+					height="100%"
+					style="border:0;"
+					allowfullscreen=""
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					title="Zone d'intervention - Paris, Lyon, Marseille"></iframe>
+			</div>
+		</Col>
+	</Row>
+</Section>

@@ -263,9 +263,9 @@ const messageId = isSimple ? 'form-message-simple' : 'form-message'
 
 <script define:vars={{ formId, messageId }}>
 	document.addEventListener('astro:page-load', () => {
-		const form = document.getElementById(formId) as HTMLFormElement;
+		const form = document.getElementById(formId);
 		const messageDiv = document.getElementById(messageId);
-		const submitButton = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+		const submitButton = form?.querySelector('button[type="submit"]');
 
 		if (!form || !messageDiv || !submitButton) return;
 

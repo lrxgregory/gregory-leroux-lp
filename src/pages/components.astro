@@ -1,0 +1,1500 @@
+---
+// Page de démonstration des composants
+// ------------
+// Description: Bibliothèque visuelle de tous les composants disponibles pour les clients
+
+// Layout
+import Layout from '../layouts/Layout.astro'
+
+// Hero variants
+import Hero from '../components/blocks/hero/Hero.astro'
+
+// Features variants
+import Features from '../components/blocks/features/Features.astro'
+import FeatureSticky from '../components/blocks/features/FeatureSticky.astro'
+
+// CTA variants
+import CTA from '../components/blocks/CTA/CTA.astro'
+
+// Gallery
+import BeforeAfter from '../components/blocks/gallery/BeforeAfter.astro'
+import MarqueeGallery from '../components/blocks/gallery/MarqueeGallery.astro'
+import ProjectGallery from '../components/blocks/gallery/ProjectGallery.astro'
+
+// FAQ
+import FAQSticky from '../components/blocks/FAQ/FaqSticky.astro'
+import FAQ from '../components/blocks/FAQ/FAQ.astro'
+
+// Media
+import MediaTextSection from '../components/blocks/media/MediaTextSection.astro'
+
+// Contact
+import ContactForm from '../components/blocks/contact/ContactForm.astro'
+
+// Reviews
+import GoogleReviews from '../components/blocks/reviews/GoogleReviews.astro'
+
+// Highlights
+import HightlightRows from '../components/blocks/highlights/HightlightRows.astro'
+
+// Coverage
+import ServiceArea from '../components/blocks/coverage/ServiceArea.astro'
+
+// Social Proof
+import SocialProof from '../components/blocks/socialproof/Basic.astro'
+
+// UI Components
+import Section from '../components/ui/Section.astro'
+import Row from '../components/ui/Row.astro'
+import Col from '../components/ui/Col.astro'
+import DesignSystemDemo from '../components/ui/DesignSystemDemo.astro'
+
+// Images for demos - Using Picsum placeholder images
+const heatpumpImg = { src: 'https://picsum.photos/id/237/400/300' }
+const maintenanceImg = { src: 'https://picsum.photos/id/180/400/300' }
+const plumbingImg = { src: 'https://picsum.photos/id/162/400/300' }
+
+// Demo data
+const faqData = [
+	{
+		question: "Première question fréquente ?",
+		answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+		open: true
+	},
+	{
+		question: 'Deuxième question importante ?',
+		answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+		open: false
+	},
+	{
+		question: "Troisième question courante ?",
+		answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.',
+		open: false
+	}
+]
+
+const featuresData = [
+	{ title: 'Avantage 1', icon: 'bolt', description: 'Description courte' },
+	{ title: 'Avantage 2', icon: 'shield-check', description: 'Description courte' },
+	{ title: 'Avantage 3', icon: 'document-text', description: 'Description courte' },
+	{ title: 'Avantage 4', icon: 'credit-card', description: 'Description courte' },
+	{ title: 'Avantage 5', icon: 'device-phone-mobile', description: 'Description courte' },
+	{ title: 'Avantage 6', icon: 'check-circle', description: 'Description courte' }
+]
+
+const projectsData = [
+	{
+		id: 'projet-1',
+		image: heatpumpImg.src,
+		alt: 'Projet exemple 1',
+		title: 'Projet A',
+		category: 'Catégorie 1',
+		description: 'Description du projet A'
+	},
+	{
+		id: 'projet-2',
+		image: maintenanceImg.src,
+		alt: 'Projet exemple 2',
+		title: 'Projet B',
+		category: 'Catégorie 2',
+		description: 'Description du projet B'
+	},
+	{
+		id: 'projet-3',
+		image: plumbingImg.src,
+		alt: 'Projet exemple 3',
+		title: 'Projet C',
+		category: 'Catégorie 3',
+		description: 'Description du projet C'
+	}
+]
+---
+
+<Layout
+	title="Bibliothèque de composants"
+	description="Découvrez tous les composants disponibles pour votre site web"
+>
+	<!-- Page Header -->
+	<Section padding="both" classes="bg-gradient-to-br from-primary-500 to-primary-700 text-white">
+		<Row>
+			<Col span="12" align="center">
+				<h1 class="mb-4 text-5xl font-bold text-white">Créez votre Landing Page parfaite</h1>
+				<p class="mx-auto mb-8 max-w-3xl text-xl text-white/90">
+					Suivez notre guide étape par étape pour construire une landing page qui convertit. 
+					Chaque section a été pensée pour maximiser vos résultats.
+				</p>
+
+				<!-- Process Steps -->
+				<div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 text-center md:grid-cols-3">
+					<div class="rounded-lg bg-white/10 p-6">
+						<div class="text-4xl mb-3">🎨</div>
+						<h3 class="text-lg font-bold text-white mb-2">1. Choisissez votre style</h3>
+						<p class="text-sm text-white/80">Design, polices et couleurs</p>
+					</div>
+					<div class="rounded-lg bg-white/10 p-6">
+						<div class="text-4xl mb-3">🧩</div>
+						<h3 class="text-lg font-bold text-white mb-2">2. Sélectionnez vos sections</h3>
+						<p class="text-sm text-white/80">Composants optimisés pour convertir</p>
+					</div>
+					<div class="rounded-lg bg-white/10 p-6">
+						<div class="text-4xl mb-3">🚀</div>
+						<h3 class="text-lg font-bold text-white mb-2">3. Générez votre site</h3>
+						<p class="text-sm text-white/80">Prêt en quelques minutes</p>
+					</div>
+				</div>
+
+				<p class="mx-auto mt-6 max-w-2xl text-lg text-white/80">
+					<strong>Pourquoi cette méthode fonctionne ?</strong> Nous suivons les meilleures pratiques 
+					de conversion utilisées par les plus grandes entreprises.
+				</p>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Navigation des étapes -->
+	<Section
+		classes="sticky top-0 z-10 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 shadow-sm"
+	>
+		<Row>
+			<Col span="12">
+				<nav class="flex flex-wrap justify-center gap-2 px-4 text-sm">
+					<a
+						href="#style-selection"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>🎨 Style</a
+					>
+					<a
+						href="#hero-section"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>🎯 Hero</a
+					>
+					<a
+						href="#social-proof"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>🏆 Preuve sociale</a
+					>
+					<a
+						href="#benefits"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>✨ Bénéfices</a
+					>
+					<a
+						href="#how-it-works"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>🔄 Processus</a
+					>
+					<a
+						href="#testimonials"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>💬 Témoignages</a
+					>
+					<a
+						href="#faq"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>❓ FAQ</a
+					>
+					<a
+						href="#final-cta"
+						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
+						>🚀 CTA Final</a
+					>
+				</nav>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- ÉTAPE 1: Personnalisation du style -->
+	<Section id="style-selection" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-12 text-center">
+					<div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-2 text-primary-700 font-semibold mb-4">
+						<span class="text-2xl">🎨</span>
+						Étape 1 sur 3
+					</div>
+					<h2 class="mb-4 text-4xl font-bold">Choisissez votre identité visuelle</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+						Votre style visuel influence directement la perception de votre marque. 
+						Sélectionnez le design system qui correspond à votre secteur d'activité.
+					</p>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- ÉTAPE 2: Construction de votre landing page -->
+	<Section id="hero-section" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-12 text-center">
+					<div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-2 text-primary-700 font-semibold mb-4">
+						<span class="text-2xl">🧩</span>
+						Étape 2 sur 3
+					</div>
+					<h2 class="mb-4 text-4xl font-bold">Construisez votre landing page</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+						Suivez l'ordre optimal de conversion. Chaque section a un rôle précis dans le parcours de vos visiteurs.
+					</p>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- 1️⃣ Hero Section -->
+	<div class="landing-section">
+		<div class="section-header">
+			<div class="section-number">1️⃣</div>
+			<div>
+				<h3 class="section-title">Hero Section</h3>
+				<p class="section-description">
+					<strong>Pourquoi c'est crucial :</strong> Vous avez 3 secondes pour convaincre. 
+					Le hero doit immédiatement expliquer ce que vous faites et inciter à l'action.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ Titre accrocheur</span>
+					<span class="tip">✅ Sous-titre explicatif</span>
+					<span class="tip">✅ CTA visible</span>
+					<span class="tip">✅ Badges de confiance</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Hero Variant 1: Home (Centered) -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Recommandé</span>
+						<h4 class="component-demo__title">Hero Complet - Page d'accueil</h4>
+						<p class="component-demo__description">
+							Design centré avec titre, description, 2 boutons d'action et badges de confiance.
+							Taux de conversion optimal.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="hero-home" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Hero variant="home" />
+			</div>
+		</div>
+
+		<!-- Hero Variant 2: Page Header -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Simple</span>
+						<h4 class="component-demo__title">Hero Simple - En-tête</h4>
+						<p class="component-demo__description">
+							Version minimaliste pour les pages internes ou les approches sobres.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="hero-simple" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Hero
+					variant="page"
+					title="Titre de page"
+					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+				/>
+			</div>
+		</div>
+	</div>
+
+	<!-- Design Systems Selection -->
+	<Section classes="bg-white dark:bg-neutral-900">
+		<Row>
+			<Col span="12">
+				<div class="mb-8">
+					<h3 class="mb-4 text-2xl font-bold">1. Choisissez votre Design System</h3>
+					<p class="text-neutral-600 dark:text-neutral-400 mb-6">
+						Chaque style véhicule une image différente. Sélectionnez celui qui correspond à votre secteur et positionnement.
+					</p>
+				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col span="12" classes="mb-6">
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+					<label class="design-system-option">
+						<input type="radio" name="design-system" value="modern" />
+						<div class="design-system-card">
+							<h4 class="font-bold mb-2">Modern</h4>
+							<p class="text-sm text-neutral-600 mb-4">Coins arrondis moyens, ombres douces</p>
+							<div class="space-y-2">
+								<div class="rounded-lg bg-primary-500 p-2 text-center text-white text-sm shadow-md">
+									Bouton Modern
+								</div>
+								<div class="rounded-xl bg-white p-3 shadow-sm dark:bg-neutral-800 text-sm">
+									Carte Modern
+								</div>
+							</div>
+						</div>
+					</label>
+
+					<label class="design-system-option">
+						<input type="radio" name="design-system" value="soft" />
+						<div class="design-system-card">
+							<h4 class="font-bold mb-2">Soft</h4>
+							<p class="text-sm text-neutral-600 mb-4">Coins très arrondis, ombres prononcées</p>
+							<div class="space-y-2">
+								<div class="rounded-full bg-primary-500 p-2 text-center text-white text-sm shadow-lg">
+									Bouton Soft
+								</div>
+								<div class="rounded-2xl bg-white p-3 shadow-md dark:bg-neutral-800 text-sm">
+									Carte Soft
+								</div>
+							</div>
+						</div>
+					</label>
+
+					<label class="design-system-option">
+						<input type="radio" name="design-system" value="sharp" />
+						<div class="design-system-card">
+							<h4 class="font-bold mb-2">Sharp</h4>
+							<p class="text-sm text-neutral-600 mb-4">Coins peu arrondis, bordures visibles</p>
+							<div class="space-y-2">
+								<div class="rounded-md border-2 border-primary-500 bg-primary-500 p-2 text-center text-white text-sm">
+									Bouton Sharp
+								</div>
+								<div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-neutral-700 dark:bg-neutral-800 text-sm">
+									Carte Sharp
+								</div>
+							</div>
+						</div>
+					</label>
+
+					<label class="design-system-option">
+						<input type="radio" name="design-system" value="minimal" />
+						<div class="design-system-card">
+							<h4 class="font-bold mb-2">Minimal</h4>
+							<p class="text-sm text-neutral-600 mb-4">Coins droits, bordures fines, style épuré</p>
+							<div class="space-y-2">
+								<div class="border-2 border-primary-500 bg-primary-500 p-2 text-center text-white text-sm">
+									Bouton Minimal
+								</div>
+								<div class="border border-neutral-200 bg-white p-3 dark:border-neutral-700 dark:bg-neutral-800 text-sm">
+									Carte Minimal
+								</div>
+							</div>
+						</div>
+					</label>
+
+					<label class="design-system-option">
+						<input type="radio" name="design-system" value="elegant" />
+						<div class="design-system-card">
+							<h4 class="font-bold mb-2">Elegant</h4>
+							<p class="text-sm text-neutral-600 mb-4">Coins très arrondis, ombres XXL, animations</p>
+							<div class="space-y-2">
+								<div class="transform rounded-2xl bg-primary-500 p-2 text-center text-white text-sm shadow-xl transition-all hover:-translate-y-1">
+									Bouton Elegant
+								</div>
+								<div class="transform rounded-3xl bg-white p-3 shadow-lg transition-all hover:-translate-y-1 dark:bg-neutral-800 text-sm">
+									Carte Elegant
+								</div>
+							</div>
+						</div>
+					</label>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Typographies Selection -->
+	<Section classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-8">
+					<h3 class="mb-4 text-2xl font-bold">2. Sélectionnez vos polices</h3>
+					<p class="text-neutral-600 dark:text-neutral-400 mb-6">
+						La typographie influence la perception de votre marque. Choisissez une police principale et une secondaire.
+					</p>
+				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col span="6">
+				<h4 class="font-bold mb-4">Police principale (titres)</h4>
+				<div class="space-y-3">
+					<label class="font-option">
+						<input type="radio" name="primary-font" value="inter" />
+						<div class="font-preview" style="font-family: 'Inter Variable', sans-serif;">
+							<span class="font-name">Inter Variable</span>
+							<span class="font-sample">Moderne et lisible</span>
+						</div>
+					</label>
+					<label class="font-option">
+						<input type="radio" name="primary-font" value="outfit" />
+						<div class="font-preview" style="font-family: 'Outfit Variable', sans-serif;">
+							<span class="font-name">Outfit Variable</span>
+							<span class="font-sample">Friendly et accessible</span>
+						</div>
+					</label>
+					<label class="font-option">
+						<input type="radio" name="primary-font" value="jakarta" />
+						<div class="font-preview" style="font-family: 'Plus Jakarta Sans Variable', sans-serif;">
+							<span class="font-name">Plus Jakarta Sans</span>
+							<span class="font-sample">Élégant et premium</span>
+						</div>
+					</label>
+					<label class="font-option">
+						<input type="radio" name="primary-font" value="sora" />
+						<div class="font-preview" style="font-family: 'Sora Variable', sans-serif;">
+							<span class="font-name">Sora Variable</span>
+							<span class="font-sample">Unique et mémorable</span>
+						</div>
+					</label>
+				</div>
+			</Col>
+			<Col span="6">
+				<h4 class="font-bold mb-4">Police secondaire (textes)</h4>
+				<div class="space-y-3">
+					<label class="font-option">
+						<input type="radio" name="secondary-font" value="manrope" />
+						<div class="font-preview" style="font-family: 'Manrope Variable', sans-serif;">
+							<span class="font-name">Manrope Variable</span>
+							<span class="font-sample">Géométrique et moderne</span>
+						</div>
+					</label>
+					<label class="font-option">
+						<input type="radio" name="secondary-font" value="work-sans" />
+						<div class="font-preview" style="font-family: 'Work Sans Variable', sans-serif;">
+							<span class="font-name">Work Sans Variable</span>
+							<span class="font-sample">Professionnelle et neutre</span>
+						</div>
+					</label>
+					<label class="font-option">
+						<input type="radio" name="secondary-font" value="dm-sans" />
+						<div class="font-preview" style="font-family: 'DM Sans Variable', sans-serif;">
+							<span class="font-name">DM Sans Variable</span>
+							<span class="font-sample">Clean et lisible</span>
+						</div>
+					</label>
+					<label class="font-option">
+						<input type="radio" name="secondary-font" value="nunito" />
+						<div class="font-preview" style="font-family: 'Nunito Sans Variable', sans-serif;">
+							<span class="font-name">Nunito Sans Variable</span>
+							<span class="font-sample">Ronde et amicale</span>
+						</div>
+					</label>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Color Selection -->
+	<Section classes="bg-white dark:bg-neutral-900">
+		<Row>
+			<Col span="12">
+				<div class="mb-8">
+					<h3 class="mb-4 text-2xl font-bold">3. Choisissez votre couleur primaire</h3>
+					<p class="text-neutral-600 dark:text-neutral-400 mb-6">
+						La couleur primaire sera utilisée pour vos boutons, liens et éléments d'accentuation.
+					</p>
+				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col span="12">
+				<div class="grid grid-cols-4 md:grid-cols-8 gap-4">
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="blue" />
+						<div class="color-preview bg-blue-500"></div>
+						<span class="color-name">Bleu</span>
+					</label>
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="green" />
+						<div class="color-preview bg-green-500"></div>
+						<span class="color-name">Vert</span>
+					</label>
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="purple" />
+						<div class="color-preview bg-purple-500"></div>
+						<span class="color-name">Violet</span>
+					</label>
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="red" />
+						<div class="color-preview bg-red-500"></div>
+						<span class="color-name">Rouge</span>
+					</label>
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="orange" />
+						<div class="color-preview bg-orange-500"></div>
+						<span class="color-name">Orange</span>
+					</label>
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="yellow" />
+						<div class="color-preview bg-yellow-500"></div>
+						<span class="color-name">Jaune</span>
+					</label>
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="pink" />
+						<div class="color-preview bg-pink-500"></div>
+						<span class="color-name">Rose</span>
+					</label>
+					<label class="color-option">
+						<input type="radio" name="primary-color" value="indigo" />
+						<div class="color-preview bg-indigo-500"></div>
+						<span class="color-name">Indigo</span>
+					</label>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- 2️⃣ Preuve Sociale -->
+	<div class="landing-section">
+		<div class="section-header">
+			<div class="section-number">2️⃣</div>
+			<div>
+				<h3 class="section-title">Preuve Sociale</h3>
+				<p class="section-description">
+					<strong>Pourquoi c'est crucial :</strong> Les visiteurs cherchent des preuves que d'autres vous font confiance. 
+					Les logos de clients rassurent immédiatement.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ Logos reconnaissables</span>
+					<span class="tip">✅ Certifications</span>
+					<span class="tip">✅ Partenaires</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Essentiel</span>
+						<h4 class="component-demo__title">Logos Partenaires</h4>
+						<p class="component-demo__description">
+							Affichez vos clients, partenaires ou certifications pour renforcer votre crédibilité.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="social-proof" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<SocialProof />
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- 3️⃣ Bénéfices -->
+	<div class="landing-section" id="benefits">
+		<div class="section-header">
+			<div class="section-number">3️⃣</div>
+			<div>
+				<h3 class="section-title">Bénéfices</h3>
+				<p class="section-description">
+					<strong>Fonctionnalités ≠ Bénéfices :</strong> Ne listez pas ce que vous faites, 
+					mais les avantages que vos clients en retirent. Concentrez-vous sur leurs gains.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ Orienté client</span>
+					<span class="tip">✅ Gains concrets</span>
+					<span class="tip">✅ Problèmes résolus</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Features Variant 1: image -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Visuel</span>
+						<h4 class="component-demo__title">Grille avec images</h4>
+						<p class="component-demo__description">
+							Format visuel impactant. Idéal pour présenter 4-6 bénéfices principaux avec des visuels.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="benefits-image" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Features variant="image" />
+			</div>
+		</div>
+
+		<!-- Features Variant 2: List -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Compact</span>
+						<h4 class="component-demo__title">Liste avec icônes</h4>
+						<p class="component-demo__description">
+							Format scannable rapidement. Parfait pour présenter jusqu'à 8 bénéfices.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="benefits-list" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Features variant="list" />
+			</div>
+		</div>
+
+		<!-- Features Variant 3: Cards -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Équilibré</span>
+						<h4 class="component-demo__title">Cartes centrées</h4>
+						<p class="component-demo__description">
+							Design équilibré entre visuel et contenu. Idéal pour 4 bénéfices clés.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="benefits-cards" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Features variant="cards" />
+			</div>
+		</div>
+	</div>
+
+	<!-- 4️⃣ Comment ça marche -->
+	<div class="landing-section" id="how-it-works">
+		<div class="section-header">
+			<div class="section-number">4️⃣</div>
+			<div>
+				<h3 class="section-title">Comment ça marche ?</h3>
+				<p class="section-description">
+					<strong>La simplicité rassure :</strong> Expliquez votre processus en 3-5 étapes maximum. 
+					Vos prospects doivent comprendre immédiatement comment vous travaillez.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ 3-5 étapes max</span>
+					<span class="tip">✅ Processus clair</span>
+					<span class="tip">✅ Rassure le prospect</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Processus</span>
+						<h4 class="component-demo__title">Étapes du processus</h4>
+						<p class="component-demo__description">
+							Présentez votre méthode de travail étape par étape pour rassurer vos prospects.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="steps-process" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<!-- Ici on pourrait ajouter le composant Steps si il existe -->
+				<div class="p-8 text-center text-neutral-500">
+					Composant "Étapes du processus" à développer
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- SECTION: Sections Image + Texte -->
+	<Section id="media-text" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-8 text-center">
+					<h2 class="mb-3 text-4xl font-bold">Sections Image + Texte</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400">
+						Présentez vos services ou votre entreprise en combinant visuels et contenu.
+						Parfait pour raconter votre histoire.
+					</p>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Media Text - Image Left -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">Media 1</span>
+			<h3 class="component-demo__title">Image à gauche, texte à droite</h3>
+			<p class="component-demo__description">
+				Layout 50/50 avec image à gauche et contenu texte à droite. Supporte images et
+				vidéos. Idéal pour présenter un service en détail.
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<MediaTextSection
+				image={heatpumpImg.src}
+				imageAlt="Image exemple"
+				mediaPosition="left"
+				title="Titre de section"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+				cta={{
+					text: 'Bouton d\'action',
+					href: '#contact',
+					variant: 'primary'
+				}}
+			/>
+		</div>
+	</div>
+
+	<!-- Media Text - Image Right -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">Media 2</span>
+			<h3 class="component-demo__title">Image à droite, texte à gauche</h3>
+			<p class="component-demo__description">
+				Layout inversé : texte à gauche, image à droite. Permet d'alterner les layouts pour
+				créer un rythme visuel dans la page.
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<MediaTextSection
+				image={maintenanceImg.src}
+				imageAlt="Image exemple 2"
+				mediaPosition="right"
+				title="Autre titre de section"
+				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
+				backgroundColor="gray"
+				cta={{
+					text: 'Autre bouton',
+					href: '#contact',
+					variant: 'primary'
+				}}
+			/>
+		</div>
+	</div>
+
+	<!-- SECTION: Galeries -->
+	<Section id="galeries" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-8 text-center">
+					<h2 class="mb-3 text-4xl font-bold">Galeries Photos</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400">
+						Montrez vos réalisations avec style. Les images parlent mieux que les mots.
+					</p>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Gallery: Before/After -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">Galerie 1</span>
+			<h3 class="component-demo__title">Avant / Après</h3>
+			<p class="component-demo__description">
+				Slider interactif pour comparer vos réalisations avant/après. Parfait pour les
+				rénovations, installations de pompes à chaleur, etc.
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<BeforeAfter />
+		</div>
+	</div>
+
+	<!-- Gallery: Marquee -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">Galerie 2</span>
+			<h3 class="component-demo__title">Galerie défilante</h3>
+			<p class="component-demo__description">
+				Défilement automatique et infini de vos photos. Effet moderne et dynamique pour
+				présenter plusieurs réalisations.
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<MarqueeGallery />
+		</div>
+	</div>
+
+	<!-- Gallery: Project Gallery -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">Galerie 3</span>
+			<h3 class="component-demo__title">Galerie de projets avec filtres</h3>
+			<p class="component-demo__description">
+				Grille de projets avec filtres par catégorie et lightbox (zoom sur clic). Idéal pour
+				un portfolio de réalisations organisé par type (chauffage, plomberie, etc.).
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<ProjectGallery
+				title="Galerie de projets"
+				subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+				projects={projectsData}
+				columns={3}
+				showCategories={true}
+			/>
+		</div>
+	</div>
+
+	<!-- 7️⃣ CTA Final -->
+	<div class="landing-section" id="final-cta">
+		<div class="section-header">
+			<div class="section-number">7️⃣</div>
+			<div>
+				<h3 class="section-title">CTA Final</h3>
+				<p class="section-description">
+					<strong>L'étape décisive :</strong> Après avoir présenté vos bénéfices et rassuré vos prospects, 
+					c'est le moment de les inciter à passer à l'action avec un CTA puissant.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ Message clair</span>
+					<span class="tip">✅ Urgence/Scarcité</span>
+					<span class="tip">✅ Bouton contrasté</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- CTA -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Conversion</span>
+						<h4 class="component-demo__title">CTA avec rating</h4>
+						<p class="component-demo__description">
+							CTA optimisé avec preuve sociale intégrée pour maximiser les conversions.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="cta-final" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<CTA variant="light" />
+			</div>
+		</div>
+	</div>
+
+	<!-- 6️⃣ FAQ -->
+	<div class="landing-section" id="faq">
+		<div class="section-header">
+			<div class="section-number">6️⃣</div>
+			<div>
+				<h3 class="section-title">FAQ</h3>
+				<p class="section-description">
+					<strong>Anticipez les objections :</strong> Répondez aux questions fréquentes 
+					pour lever les freins à l'achat avant qu'ils ne se posent.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ Questions courantes</span>
+					<span class="tip">✅ Lève les objections</span>
+					<span class="tip">✅ Rassure sur l'achat</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- FAQ Basic -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Simple</span>
+						<h4 class="component-demo__title">FAQ accordéon</h4>
+						<p class="component-demo__description">
+							Format classique et efficace. Questions/réponses dépliables.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="faq-basic" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<FAQ variant="basic" data={faqData} />
+			</div>
+		</div>
+
+		<!-- FAQ Default (numbered) -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Recommandé</span>
+						<h4 class="component-demo__title">FAQ numérotée avec CTA</h4>
+						<p class="component-demo__description">
+							Version optimisée avec numéros et CTA intégré. Meilleur pour la conversion.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="faq-numbered" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<FAQ
+					variant="default"
+					title="Questions <strong>fréquentes</strong>"
+					subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+					data={faqData}
+				/>
+			</div>
+		</div>
+
+		<!-- FAQ Grid -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Scan rapide</span>
+						<h4 class="component-demo__title">FAQ grille statique</h4>
+						<p class="component-demo__description">
+							Toutes les réponses visibles d'un coup. Plus rapide à scanner.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="faq-grid" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<FAQ
+					variant="grid"
+					title="Questions <strong>fréquentes</strong>"
+					subtitle="Lorem ipsum dolor sit amet"
+					data={faqData}
+				/>
+			</div>
+		</div>
+	</div>
+
+	<!-- 8️⃣ Contact -->
+	<div class="landing-section" id="contact">
+		<div class="section-header">
+			<div class="section-number">8️⃣</div>
+			<div>
+				<h3 class="section-title">Contact</h3>
+				<p class="section-description">
+					<strong>Facilitez la prise de contact :</strong> Un formulaire simple et efficace 
+					pour transformer vos visiteurs en prospects qualifiés.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ Formulaire simple</span>
+					<span class="tip">✅ Champs essentiels</span>
+					<span class="tip">✅ Validation en temps réel</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Contact Form -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Essentiel</span>
+						<h4 class="component-demo__title">Formulaire de contact</h4>
+						<p class="component-demo__description">
+							Formulaire optimisé avec validation et envoi automatique par email.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="contact-form" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<ContactForm />
+			</div>
+		</div>
+	</div>
+
+	<!-- 5️⃣ Témoignages -->
+	<div class="landing-section" id="testimonials">
+		<div class="section-header">
+			<div class="section-number">5️⃣</div>
+			<div>
+				<h3 class="section-title">Témoignages</h3>
+				<p class="section-description">
+					<strong>Rien ne vaut l'expérience client :</strong> Les témoignages authentiques 
+					sont plus convaincants que tous vos arguments commerciaux.
+				</p>
+				<div class="section-tips">
+					<span class="tip">✅ Témoignages authentiques</span>
+					<span class="tip">✅ Résultats concrets</span>
+					<span class="tip">✅ Photos clients</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Google Reviews -->
+		<div class="component-demo">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<span class="component-demo__badge">Avis Google</span>
+						<h4 class="component-demo__title">Avis Google avec rating</h4>
+						<p class="component-demo__description">
+							Affichez vos avis Google pour rassurer instantanément vos visiteurs.
+						</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="google-reviews" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<GoogleReviews />
+			</div>
+		</div>
+	</div>
+
+	<!-- SECTION: Highlights -->
+	<Section id="highlights" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-8 text-center">
+					<h2 class="mb-3 text-4xl font-bold">Points forts alternés</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400">
+						Sections image + texte qui alternent (gauche/droite) pour créer un rythme
+						visuel.
+					</p>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Highlight Rows -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">Highlights 1</span>
+			<h3 class="component-demo__title">4 sections alternées</h3>
+			<p class="component-demo__description">
+				Bloc de 4 sections (texte + illustration SVG) qui alternent automatiquement. Idéal
+				pour présenter vos avantages clés de manière visuelle et dynamique.
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<HightlightRows />
+		</div>
+	</div>
+
+	<!-- SECTION: Zone d'intervention -->
+	<Section id="coverage" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-8 text-center">
+					<h2 class="mb-3 text-4xl font-bold">Zone d'intervention</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400">
+						Montrez votre zone géographique avec Google Maps intégré.
+					</p>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Service Area -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">Coverage 1</span>
+			<h3 class="component-demo__title">Carte Google Maps</h3>
+			<p class="component-demo__description">
+				Carte interactive Google Maps iframe pour montrer votre zone d'intervention. Liste
+				automatique des villes desservies depuis client.ts.
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<ServiceArea />
+		</div>
+	</div>
+
+	<!-- SECTION: Preuve Sociale -->
+	<Section id="social-proof" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-8 text-center">
+					<h2 class="mb-3 text-4xl font-bold">Preuve sociale</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400">
+						Logos de partenaires, certifications ou clients pour renforcer la
+						crédibilité.
+					</p>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Social Proof -->
+	<div class="component-demo">
+		<div class="component-demo__label">
+			<span class="component-demo__badge">SocialProof 1</span>
+			<h3 class="component-demo__title">Logos partenaires</h3>
+			<p class="component-demo__description">
+				Ligne de logos (clients, partenaires, certifications) pour renforcer la confiance.
+				Facilement personnalisable avec vos propres images.
+			</p>
+		</div>
+		<div class="component-demo__preview">
+			<SocialProof />
+		</div>
+	</div>
+
+	<!-- ÉTAPE 3: Résumé et génération -->
+	<Section id="summary" padding="both" classes="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20">
+		<Row>
+			<Col span="12">
+				<div class="text-center mb-12">
+					<div class="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-green-700 font-semibold mb-4">
+						<span class="text-2xl">🚀</span>
+						Étape 3 sur 3
+					</div>
+					<h2 class="mb-4 text-4xl font-bold">Votre landing page est prête !</h2>
+					<p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
+						Vous avez sélectionné tous les éléments nécessaires pour créer une landing page qui convertit. 
+						Il ne reste plus qu'à la générer !
+					</p>
+				</div>
+			</Col>
+		</Row>
+
+		<Row>
+			<Col span="12">
+				<div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
+					<h3 class="text-2xl font-bold mb-6 text-center">Résumé de vos sélections</h3>
+					
+					<div class="grid md:grid-cols-2 gap-8 mb-8">
+						<div>
+							<h4 class="font-bold text-lg mb-4 flex items-center gap-2">
+								<span class="text-2xl">🎨</span>
+								Style visuel
+							</h4>
+							<div class="space-y-2 text-neutral-600 dark:text-neutral-400">
+								<p>• Design system : <span class="font-medium">À sélectionner</span></p>
+								<p>• Police principale : <span class="font-medium">À sélectionner</span></p>
+								<p>• Couleur primaire : <span class="font-medium">À sélectionner</span></p>
+							</div>
+						</div>
+						
+						<div>
+							<h4 class="font-bold text-lg mb-4 flex items-center gap-2">
+								<span class="text-2xl">🧩</span>
+								Composants sélectionnés
+							</h4>
+							<div class="space-y-2 text-neutral-600 dark:text-neutral-400">
+								<p>• Hero section : <span class="font-medium">À sélectionner</span></p>
+								<p>• Preuve sociale : <span class="font-medium">Optionnel</span></p>
+								<p>• Bénéfices : <span class="font-medium">À sélectionner</span></p>
+								<p>• Témoignages : <span class="font-medium">Optionnel</span></p>
+								<p>• FAQ : <span class="font-medium">Recommandé</span></p>
+								<p>• Contact : <span class="font-medium">Obligatoire</span></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="text-center">
+						<button class="inline-flex items-center gap-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-primary-600 hover:to-primary-700 transition-all transform hover:scale-105 shadow-lg">
+							<span class="text-2xl">⚡</span>
+							Générer ma landing page
+						</button>
+						<p class="mt-4 text-sm text-neutral-500">
+							Votre site sera prêt en moins de 5 minutes
+						</p>
+					</div>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- SECTION: Différenciation Automatique -->
+	<Section
+		padding="both"
+		classes="bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
+	>
+		<Row>
+			<Col span="12" align="center">
+				<h2 class="mb-6 text-4xl font-bold">Différenciation Automatique</h2>
+				<p class="mx-auto mb-8 max-w-3xl text-lg text-neutral-600 dark:text-neutral-400">
+					Chaque site généré est <strong>automatiquement unique</strong> grâce à notre système
+					de randomisation intelligent.
+				</p>
+			</Col>
+		</Row>
+		<Row>
+			<Col span="12">
+				<div class="mb-6 text-center">
+					<div
+						class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-2xl dark:bg-primary-900"
+					>
+						🎨
+					</div>
+					<h3 class="mb-3 text-xl font-bold">Variants Visuels</h3>
+					<p class="text-neutral-600 dark:text-neutral-400">
+						3 Hero variants × 3 Features variants × 3 FAQ variants = <strong
+							>27 combinaisons</strong
+						> de layouts différents
+					</p>
+				</div>
+			</Col>
+			<Col span="12">
+				<div class="mb-6 text-center">
+					<div
+						class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-2xl dark:bg-primary-900"
+					>
+						🎭
+					</div>
+					<h3 class="mb-3 text-xl font-bold">Design Systems</h3>
+					<p class="text-neutral-600 dark:text-neutral-400">
+						5 styles (Modern, Soft, Sharp, Minimal, Elegant) avec des <strong
+							>bordures, ombres et animations</strong
+						> différentes
+					</p>
+				</div>
+			</Col>
+			<Col span="12">
+				<div class="mb-6 text-center">
+					<div
+						class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-2xl dark:bg-primary-900"
+					>
+						🔤
+					</div>
+					<h3 class="mb-3 text-xl font-bold">Typographies</h3>
+					<p class="text-neutral-600 dark:text-neutral-400">
+						8 fonts professionnelles sélectionnées pour créer des <strong
+							>personnalités visuelles</strong
+						> distinctes
+					</p>
+				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col span="12" align="center">
+				<div class="rounded-xl bg-white p-8 shadow-lg dark:bg-neutral-800">
+					<h3 class="mb-4 text-2xl font-bold">Résultat : 1,944 Combinaisons Possibles</h3>
+					<p class="mb-6 text-lg text-neutral-600 dark:text-neutral-400">
+						Même avec <strong>15 clients dans la même ville</strong>, chacun aura un
+						site visuellement unique !
+					</p>
+					<div class="grid grid-cols-1 gap-4 text-left md:grid-cols-2">
+						<div class="rounded-lg bg-neutral-50 p-4 dark:bg-neutral-700">
+							<h4 class="mb-2 font-semibold">Client A - Plombier Lille</h4>
+							<p class="text-sm text-neutral-600 dark:text-neutral-400">
+								Hero Split + Features Cards + FAQ Grid + Design Soft + Font Inter +
+								Couleur Bleue
+							</p>
+						</div>
+						<div class="rounded-lg bg-neutral-50 p-4 dark:bg-neutral-700">
+							<h4 class="mb-2 font-semibold">Client B - Plombier Lille</h4>
+							<p class="text-sm text-neutral-600 dark:text-neutral-400">
+								Hero Centered + Features List + FAQ Basic + Design Sharp + Font
+								Outfit + Couleur Verte
+							</p>
+						</div>
+					</div>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Footer CTA -->
+	<Section padding="both" classes="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
+		<Row>
+			<Col span="12" align="center">
+				<h2 class="mb-4 text-4xl font-bold text-white">Prêt à créer votre site ?</h2>
+				<p class="mx-auto mb-8 max-w-2xl text-xl text-white/90">
+					Choisissez les composants qui vous plaisent et nous assemblerons votre site sur
+					mesure en quelques heures. <strong
+						>Chaque site est automatiquement unique !</strong
+					>
+				</p>
+				<a
+					href="mailto:contact@gregoryleroux.com"
+					class="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-4 text-lg font-semibold text-primary-700 transition-colors hover:bg-neutral-100"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+						class="h-6 w-6"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+						></path>
+					</svg>
+					Demander un devis
+				</a>
+			</Col>
+		</Row>
+	</Section>
+</Layout>
+
+<style>
+	/* Component Demo Blocks */
+	.component-demo {
+		@apply mb-16 last:mb-0;
+	}
+
+	.component-demo__label {
+		@apply rounded-t-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900;
+	}
+
+	.component-demo__badge {
+		@apply mb-3 inline-block rounded-full bg-primary-100 px-3 py-1 text-sm font-semibold text-primary-700 dark:bg-primary-900 dark:text-primary-300;
+	}
+
+	.component-demo__title {
+		@apply mb-2 text-2xl font-bold text-neutral-900 dark:text-white;
+	}
+
+	.component-demo__description {
+		@apply leading-relaxed text-neutral-600 dark:text-neutral-400;
+	}
+
+	.component-demo__preview {
+		@apply overflow-hidden rounded-b-xl border-x border-b border-neutral-200 dark:border-neutral-800;
+		@apply bg-white dark:bg-neutral-900;
+	}
+
+	/* Smooth scroll */
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* Landing Page Sections */
+	.landing-section {
+		@apply mb-16 last:mb-0;
+	}
+
+	.section-header {
+		@apply mb-8 flex gap-6 items-start p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-950/30 dark:to-primary-900/30 rounded-xl border border-primary-200 dark:border-primary-800;
+	}
+
+	.section-number {
+		@apply text-4xl font-bold text-primary-600 dark:text-primary-400 flex-shrink-0;
+	}
+
+	.section-title {
+		@apply text-2xl font-bold text-neutral-900 dark:text-white mb-2;
+	}
+
+	.section-description {
+		@apply text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed;
+	}
+
+	.section-tips {
+		@apply flex flex-wrap gap-2;
+	}
+
+	.tip {
+		@apply inline-flex items-center gap-1 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium;
+	}
+
+	/* Component Selector */
+	.component-selector {
+		@apply relative cursor-pointer;
+	}
+
+	.component-selector input {
+		@apply sr-only;
+	}
+
+	.checkmark {
+		@apply w-6 h-6 bg-white border-2 border-neutral-300 rounded-md flex items-center justify-center transition-all;
+	}
+
+	.component-selector input:checked + .checkmark {
+		@apply bg-primary-500 border-primary-500;
+	}
+
+	.component-selector input:checked + .checkmark::after {
+		content: '✓';
+		@apply text-white font-bold;
+	}
+
+	/* Design System Options */
+	.design-system-option {
+		@apply cursor-pointer;
+	}
+
+	.design-system-option input {
+		@apply sr-only;
+	}
+
+	.design-system-card {
+		@apply p-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-xl transition-all hover:border-primary-300 dark:hover:border-primary-600;
+	}
+
+	.design-system-option input:checked + .design-system-card {
+		@apply border-primary-500 bg-primary-50 dark:bg-primary-950/30;
+	}
+
+	/* Font Options */
+	.font-option {
+		@apply cursor-pointer;
+	}
+
+	.font-option input {
+		@apply sr-only;
+	}
+
+	.font-preview {
+		@apply p-3 border-2 border-neutral-200 dark:border-neutral-700 rounded-lg transition-all hover:border-primary-300 dark:hover:border-primary-600 flex flex-col;
+	}
+
+	.font-option input:checked + .font-preview {
+		@apply border-primary-500 bg-primary-50 dark:bg-primary-950/30;
+	}
+
+	.font-name {
+		@apply font-bold text-sm;
+	}
+
+	.font-sample {
+		@apply text-neutral-600 dark:text-neutral-400 text-sm;
+	}
+
+	/* Color Options */
+	.color-option {
+		@apply cursor-pointer text-center;
+	}
+
+	.color-option input {
+		@apply sr-only;
+	}
+
+	.color-preview {
+		@apply w-12 h-12 rounded-lg mx-auto mb-2 border-4 border-transparent transition-all;
+	}
+
+	.color-option input:checked + .color-preview {
+		@apply border-neutral-800 dark:border-white scale-110;
+	}
+
+	.color-name {
+		@apply text-sm font-medium;
+	}
+</style>

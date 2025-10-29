@@ -1,0 +1,302 @@
+---
+// Project Gallery Component
+// Displays a grid of project photos with optional lightbox
+// Perfect for showcasing completed work (plumbing, heating, electrical)
+
+interface Props {
+	title?: string
+	subtitle?: string
+	projects?: Array<{
+		id: string
+		image: string
+		alt: string
+		title: string
+		category?: string
+		description?: string
+	}>
+	columns?: 2 | 3 | 4
+	showCategories?: boolean
+}
+
+const {
+	title = 'Nos Projets',
+	subtitle = 'Découvrez nos réalisations récentes',
+	projects = [
+		{
+			id: 'project-1',
+			image: '/images/project-1.jpg',
+			alt: 'Installation chaudière',
+			title: 'Installation chaudière',
+			category: 'Chauffage',
+			description: 'Installation chaudière à condensation'
+		}
+	],
+	columns = 3,
+	showCategories = true
+} = Astro.props
+
+// Extract unique categories
+const categories = showCategories
+	? ['Tous', ...new Set(projects.map((p) => p.category).filter(Boolean))]
+	: []
+
+const gridClasses = {
+	2: 'md:grid-cols-2',
+	3: 'md:grid-cols-3',
+	4: 'md:grid-cols-4'
+}
+---
+
+<section class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900">
+	<div class="container mx-auto px-4">
+		<!-- Header -->
+		<div class="text-center mb-12">
+			<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+				{title}
+			</h2>
+			{subtitle && <p class="text-lg text-gray-600 dark:text-gray-300">{subtitle}</p>}
+		</div>
+
+		<!-- Category Filter (if enabled) -->
+		{
+			showCategories && categories.length > 0 && (
+				<div class="flex flex-wrap justify-center gap-3 mb-8" data-filter-buttons>
+					{categories.map((category) => (
+						<button
+							class="filter-btn px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300
+                   bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300
+                   hover:bg-primary-500 hover:text-white
+                   data-[active=true]:bg-primary-600 data-[active=true]:text-white"
+							data-category={category}
+							data-active={category === 'Tous' ? 'true' : 'false'}
+						>
+							{category}
+						</button>
+					))}
+				</div>
+			)
+		}
+
+		<!-- Projects Grid -->
+		<div
+			class={`grid grid-cols-1 ${gridClasses[columns]} gap-6`}
+			data-gallery-grid
+		>
+			{
+				projects.map((project) => (
+					<div
+						class="gallery-item group cursor-pointer"
+						data-category={project.category || 'Tous'}
+						data-project-id={project.id}
+					>
+						<div class="relative overflow-hidden rounded-lg shadow-lg aspect-[4/3] bg-gray-200 dark:bg-gray-800">
+							<!-- Image -->
+							<img
+								src={project.image}
+								alt={project.alt}
+								class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+								loading="lazy"
+							/>
+
+							<!-- Overlay on Hover -->
+							<div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+								<h3 class="text-white text-xl font-semibold mb-2">{project.title}</h3>
+								{project.description && (
+									<p class="text-white/90 text-sm mb-3">{project.description}</p>
+								)}
+								{project.category && (
+									<span class="inline-block bg-primary-500 text-white px-3 py-1 rounded text-xs font-medium w-fit">
+										{project.category}
+									</span>
+								)}
+							</div>
+
+							<!-- Zoom Icon -->
+							<div class="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+								<svg
+									class="w-5 h-5 text-gray-700"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="2"
+										d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
+									/>
+								</svg>
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+
+		<!-- Empty State (if no projects match filter) -->
+		<div
+			class="text-center py-12 hidden"
+			data-empty-state
+		>
+			<p class="text-gray-600 dark:text-gray-400 text-lg">Aucun projet dans cette catégorie</p>
+		</div>
+	</div>
+
+	<!-- Lightbox Modal -->
+	<div
+		id="gallery-lightbox"
+		class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4"
+		data-lightbox
+	>
+		<button
+			class="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+			data-lightbox-close
+		>
+			<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"></path>
+			</svg>
+		</button>
+
+		<div class="max-w-5xl w-full">
+			<img
+				src=""
+				alt=""
+				class="w-full h-auto rounded-lg"
+				data-lightbox-image
+			/>
+			<div class="text-center mt-4">
+				<h3 class="text-white text-2xl font-semibold" data-lightbox-title></h3>
+				<p class="text-white/80 mt-2" data-lightbox-description></p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	// Gallery Filter & Lightbox
+	function initGallery() {
+		const filterButtons = document.querySelectorAll('.filter-btn')
+		const galleryItems = document.querySelectorAll('.gallery-item')
+		const emptyState = document.querySelector('[data-empty-state]')
+		const lightbox = document.querySelector('[data-lightbox]') as HTMLElement
+		const lightboxImage = document.querySelector('[data-lightbox-image]') as HTMLImageElement
+		const lightboxTitle = document.querySelector('[data-lightbox-title]')
+		const lightboxDescription = document.querySelector('[data-lightbox-description]')
+		const lightboxClose = document.querySelector('[data-lightbox-close]')
+
+		// Filter functionality
+		filterButtons.forEach((button) => {
+			button.addEventListener('click', () => {
+				const category = button.getAttribute('data-category')
+
+				// Update active button
+				filterButtons.forEach((btn) => btn.setAttribute('data-active', 'false'))
+				button.setAttribute('data-active', 'true')
+
+				// Filter gallery items
+				let visibleCount = 0
+				galleryItems.forEach((item) => {
+					const itemCategory = item.getAttribute('data-category')
+
+					if (category === 'Tous' || itemCategory === category) {
+						;(item as HTMLElement).style.display = 'block'
+						visibleCount++
+					} else {
+						;(item as HTMLElement).style.display = 'none'
+					}
+				})
+
+				// Show/hide empty state
+				if (emptyState) {
+					if (visibleCount === 0) {
+						emptyState.classList.remove('hidden')
+					} else {
+						emptyState.classList.add('hidden')
+					}
+				}
+			})
+		})
+
+		// Lightbox functionality
+		galleryItems.forEach((item) => {
+			item.addEventListener('click', () => {
+				const projectId = item.getAttribute('data-project-id')
+				const img = item.querySelector('img') as HTMLImageElement
+				const title = item.querySelector('h3')?.textContent || ''
+				const description = item.querySelector('p')?.textContent || ''
+
+				if (lightbox && lightboxImage) {
+					lightboxImage.src = img.src
+					lightboxImage.alt = img.alt
+
+					if (lightboxTitle) lightboxTitle.textContent = title
+					if (lightboxDescription) lightboxDescription.textContent = description
+
+					lightbox.classList.remove('hidden')
+					lightbox.classList.add('flex')
+					document.body.style.overflow = 'hidden'
+				}
+			})
+		})
+
+		// Close lightbox
+		if (lightboxClose) {
+			lightboxClose.addEventListener('click', closeLightbox)
+		}
+
+		if (lightbox) {
+			lightbox.addEventListener('click', (e) => {
+				if (e.target === lightbox) {
+					closeLightbox()
+				}
+			})
+		}
+
+		// ESC key to close
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
+				closeLightbox()
+			}
+		})
+
+		function closeLightbox() {
+			if (lightbox) {
+				lightbox.classList.add('hidden')
+				lightbox.classList.remove('flex')
+				document.body.style.overflow = ''
+			}
+		}
+	}
+
+	// Initialize on page load
+	document.addEventListener('astro:page-load', initGallery)
+</script>
+
+<style>
+	.filter-btn {
+		box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	.filter-btn:hover {
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+	}
+
+	.gallery-item {
+		animation: fadeIn 0.5s ease-in-out;
+	}
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>

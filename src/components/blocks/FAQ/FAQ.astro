@@ -1,0 +1,259 @@
+---
+// FAQ Unified Component with Variants
+// ------------
+// Description: Unified FAQ component supporting multiple display variants:
+// - "default": Modern design with numbered questions, JSON-LD, CTA box
+// - "basic": Simple accordion list in a card (centered, 8 columns)
+// - "column": Two column accordion layout
+// - "grid": Grid layout with chevron icons and static Q&A (no accordion)
+
+// Components - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+import Button from '../../ui/Button.astro'
+
+// Components - UI
+import Accordion from '../../ui/Accordion.astro'
+import Card from '../../ui/cards/partials/Card.astro'
+
+// Props
+type Variant = 'default' | 'basic' | 'grid'
+
+interface Props {
+	variant?: Variant
+	title?: string
+	subtitle?: string
+	data?: Array<{
+		question: string
+		answer: string
+		open?: boolean
+	}>
+	classes?: string
+	includeCTA?: boolean // Only for "default" variant
+	includeStructuredData?: boolean // Only for "default" variant
+}
+
+const {
+	variant = 'default',
+	title = 'Questions <strong>fréquentes</strong>',
+	subtitle = "Vous avez des questions ? Nous avons les réponses. Si vous ne trouvez pas ce que vous cherchez, n'hésitez pas à nous contacter.",
+	data = [
+		{
+			question: 'Quels sont vos tarifs pour une intervention ?',
+			answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.'
+		},
+		{
+			question: 'Dans quels délais intervenez-vous ?',
+			answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+		},
+		{
+			question: "Proposez-vous un service d'urgence ?",
+			answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.'
+		},
+		{
+			question: 'Quelles sont vos garanties ?',
+			answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
+		}
+	],
+	classes = '',
+	includeCTA = true,
+	includeStructuredData = true
+} = Astro.props
+
+const siteUrl = Astro.site || 'https://example.com'
+
+const faqStructuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: data.map((faq) => ({
+		'@type': 'Question',
+		name: faq.question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: faq.answer
+		}
+	}))
+}
+---
+
+{
+	variant === 'default' && (
+		<Section id="faq" classes={`bg-white dark:bg-neutral-950 ${classes}`}>
+			<Row>
+				<Col span="12" align="center" classes="mb-12">
+					<h2 class="text-pretty" set:html={title} />
+					<p
+						class="mx-auto max-w-3xl pb-0 text-lg text-neutral-600 dark:text-neutral-400"
+						set:html={subtitle}
+					/>
+				</Col>
+			</Row>
+
+			<Row>
+				<Col span="12" classes="max-w-4xl mx-auto w-full">
+					<div class="w-full space-y-4">
+						{data.map((faq, index) => (
+							<details class="group block w-full rounded-xl border border-neutral-200 bg-white transition-all hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+								<summary class="flex cursor-pointer list-none items-center justify-between px-6 py-5 font-semibold text-neutral-900 dark:text-neutral-100 [&::-webkit-details-marker]:hidden">
+									<span class="flex flex-1 items-start gap-3 pr-4">
+										<span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-primary-700 dark:bg-primary-900/30 dark:text-primary-400">
+											{index + 1}
+										</span>
+										<span class="flex-1 text-left">{faq.question}</span>
+									</span>
+									<svg
+										class="h-5 w-5 shrink-0 text-neutral-500 transition-transform group-open:rotate-180"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M19 9l-7 7-7-7"
+										/>
+									</svg>
+								</summary>
+								<div class="border-t border-neutral-100 px-6 py-5 dark:border-neutral-800">
+									<p class="pl-10 leading-relaxed text-neutral-600 dark:text-neutral-400">
+										{faq.answer}
+									</p>
+								</div>
+							</details>
+						))}
+					</div>
+				</Col>
+			</Row>
+
+			{includeCTA && (
+				<Row>
+					<Col span="12" align="center" classes="mt-12">
+						<div class="rounded-2xl border border-primary-200 bg-primary-50 p-8 dark:border-primary-900/30 dark:bg-primary-950/30">
+							<h3 class="mb-3 text-xl font-bold text-neutral-900 dark:text-neutral-100">
+								Vous avez d'autres questions ?
+							</h3>
+							<p class="mb-6 text-neutral-600 dark:text-neutral-400">
+								Notre équipe est là pour répondre à toutes vos interrogations.
+							</p>
+							<div class="flex flex-col gap-3 sm:flex-row sm:justify-center">
+								<Button size="lg" style="primary" link="tel:+33123456789">
+									<svg
+										class="mr-2 h-5 w-5"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+									>
+										<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+									</svg>
+									01 23 45 67 89
+								</Button>
+								<Button
+									size="lg"
+									style="secondary"
+									link="mailto:contact@example.com"
+								>
+									<svg
+										class="mr-2 h-5 w-5"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+										/>
+									</svg>
+									Envoyer un email
+								</Button>
+							</div>
+						</div>
+					</Col>
+				</Row>
+			)}
+		</Section>
+	)
+}
+
+{
+	variant === 'basic' && (
+		<Section id="faq" classes={classes}>
+			<Row>
+				<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+					<h2 class="text-pretty" set:html={title} />
+					<p class="text-lg leading-relaxed" set:html={subtitle} />
+				</Col>
+				<Col span="2" />
+				<Col span="8">
+					<Card classes="divide-y divide-neutral-100 dark:divide-neutral-800">
+						{data.map((faq) => (
+							<Accordion title={faq.question} text={faq.answer} open={faq.open} />
+						))}
+					</Card>
+				</Col>
+				<Col span="2" />
+			</Row>
+		</Section>
+	)
+}
+
+{
+	variant === 'grid' && (
+		<Section id="faq" classes={classes}>
+			<Row>
+				<Col span="12" align="center" classes="mb-8 md:mb-12">
+					<p class="text-secondary text-base font-bold uppercase tracking-wide dark:text-blue-200">
+						Questions fréquentes
+					</p>
+					<h2
+						class="leading-tighter mt-2 text-pretty text-3xl font-bold tracking-tighter md:text-4xl"
+						set:html={title}
+					/>
+					<p class="text-muted mx-auto mt-4 max-w-3xl text-xl" set:html={subtitle} />
+				</Col>
+			</Row>
+
+			<Row>
+				<Col span="12" classes="mx-auto max-w-6xl">
+					<div class="grid gap-8 gap-y-8 sm:grid-cols-2 md:gap-y-12">
+						{data.map((faq) => (
+							<div class="flex max-w-none flex-row">
+								<div class="flex justify-center">
+									<svg
+										class="text-primary mr-2 mt-1 h-6 w-6 flex-shrink-0 rtl:ml-2 rtl:mr-0"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										stroke-width="2"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M9 5l7 7-7 7"
+										/>
+									</svg>
+								</div>
+								<div class="mt-0.5">
+									<h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+										{faq.question}
+									</h3>
+									<p class="text-muted mt-3 text-neutral-600 dark:text-neutral-400">
+										{faq.answer}
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</Col>
+			</Row>
+		</Section>
+	)
+}
+
+{
+	includeStructuredData && variant === 'default' && (
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+	)
+}

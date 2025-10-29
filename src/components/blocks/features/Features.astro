@@ -1,0 +1,161 @@
+---
+// Features Unified Component with Variants
+// ------------
+// Description: Unified features component supporting 3 display variants:
+// - "cards": Grid of feature cards with images (3 columns)
+// - "list": Simple list with icons (responsive grid)
+// - "cards": Grid of contact/service cards (4 columns)
+
+// Components - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+
+// Components - UI
+import FeatureCard from '../../ui/cards/FeatureCard.astro'
+import Feature from '../../ui/Feature.astro'
+import BasicCard from '../../ui/cards/BasicCard.astro'
+
+// Props
+type Variant = 'image' | 'list' | 'cards'
+
+interface Props {
+	variant?: Variant
+	title?: string
+	subtitle?: string
+	data?: Array<{
+		title: string
+		description: string
+		icon?: string
+		image?: string
+	}>
+	classes?: string
+}
+
+const {
+	variant = 'image',
+	title = 'Nos <strong>services</strong>',
+	subtitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <strong>Ut enim ad minim veniam</strong>, quis nostrud exercitation.",
+	data = [
+		{
+			title: 'Service A',
+			description:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.',
+			icon: 'light-bulb',
+			image: 'https://picsum.photos/id/237/400/300'
+		},
+		{
+			title: 'Service B',
+			description:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.',
+			icon: 'shield-check',
+			image: 'https://picsum.photos/id/180/400/300'
+		},
+		{
+			title: 'Service C',
+			description:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor.',
+			icon: 'bolt',
+			image: 'https://picsum.photos/id/162/400/300'
+		},
+		{
+			title: 'Service D',
+			description:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore.',
+			icon: 'bolt',
+			image: 'https://picsum.photos/id/201/400/300'
+		},
+		{
+			title: 'Service E',
+			description:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.',
+			icon: 'device-phone-mobile',
+			image: 'https://picsum.photos/id/225/400/300'
+		},
+		{
+			title: 'Service F',
+			description:
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.',
+			icon: 'trophy',
+			image: 'https://picsum.photos/id/244/400/300'
+		}
+	],
+	classes = ''
+} = Astro.props
+---
+
+{
+	variant === 'image' && (
+		<Section id="services" classes={classes}>
+			<Row>
+				<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+					<h2 class="text-pretty" set:html={title} />
+					<p class="pb-0 text-lg" set:html={subtitle} />
+				</Col>
+			</Row>
+			<Row>
+				{data.map((service, index) => (
+					<Col span="4" classes={index >= 3 ? 'pt-6' : ''}>
+						<FeatureCard
+							title={service.title}
+							subtitle={service.description}
+							image={service.image || 'https://picsum.photos/id/237/400/300'}
+						/>
+					</Col>
+				))}
+			</Row>
+		</Section>
+	)
+}
+
+{
+	variant === 'list' && (
+		<Section id="services" classes={classes}>
+			<Row>
+				<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+					<h2 class="text-pretty" set:html={title} />
+					<p class="pb-0 text-lg" set:html={subtitle} />
+				</Col>
+			</Row>
+			<Row>
+				{data.slice(0, 8).map((service) => (
+					<Col span="4">
+						<Feature
+							title={service.title}
+							icon={service.icon || 'bolt'}
+							align="left"
+							classes="mb-12"
+						>
+							{service.description}
+						</Feature>
+					</Col>
+				))}
+			</Row>
+		</Section>
+	)
+}
+
+{
+	variant === 'cards' && (
+		<Section id="services" classes={classes}>
+			<Row>
+				<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
+					<h2 class="text-balance" set:html={title} />
+					<p class="pb-0 text-lg" set:html={subtitle} />
+				</Col>
+			</Row>
+			<Row>
+				{data.slice(0, 4).map((service) => (
+					<Col span="3">
+						<BasicCard
+							title={service.title}
+							subtitle={service.description}
+							icon={service.icon || 'rocket'}
+							classes="text-center dark:!bg-neutral-800/50"
+						/>
+					</Col>
+				))}
+			</Row>
+		</Section>
+	)
+}

@@ -1,0 +1,291 @@
+---
+// Marquee Gallery Component
+// Auto-scrolling gallery with 3 rows (top: right, middle: left, bottom: right)
+// Includes lightbox modal on click
+// Perfect for showcasing multiple projects in an engaging, dynamic way
+
+interface Props {
+	title?: string
+	subtitle?: string
+	description?: string
+	projects?: Array<{
+		image: string
+		alt: string
+	}>
+}
+
+const {
+	title = 'Galerie',
+	subtitle = 'Nos Réalisations',
+	description = 'Découvrez quelques-uns de nos projets réalisés avec passion et expertise.',
+	projects = [
+		// Default images - should be replaced by client
+		{ image: 'https://picsum.photos/id/70/200/300', alt: 'Réalisation 1' },
+		{ image: 'https://picsum.photos/id/80/200/300', alt: 'Réalisation 2' },
+		{ image: 'https://picsum.photos/id/90/200/300', alt: 'Réalisation 3' },
+		{ image: 'https://picsum.photos/id/100/200/300', alt: 'Réalisation 4' },
+		{ image: 'https://picsum.photos/id/120/200/300', alt: 'Réalisation 5' },
+		{ image: 'https://picsum.photos/id/60/200/300', alt: 'Réalisation 6' }
+	]
+} = Astro.props
+
+// Split projects into 3 rows (repeat if not enough)
+const getRowProjects = (rowIndex: number) => {
+	const itemsPerRow = 6
+	const start = rowIndex * itemsPerRow
+	const rowProjects = []
+
+	for (let i = 0; i < itemsPerRow; i++) {
+		const index = (start + i) % projects.length
+		rowProjects.push(projects[index])
+	}
+
+	return rowProjects
+}
+
+const topRow = getRowProjects(0)
+const middleRow = getRowProjects(1)
+const bottomRow = getRowProjects(2)
+---
+
+<section class="md:py-28 py-24" id="marquee-gallery">
+	<div class="flex justify-center site-container">
+		<div class="mx-auto text-center mb-16 md:max-w-4xl">
+			{title && <h2 class="font-medium font-heading md:text-xl text-accent text-lg">{title}</h2>}
+			{subtitle && <h2 class="mt-4 h2">{subtitle}</h2>}
+			{description && <p class="mt-4 description text-pretty">{description}</p>}
+		</div>
+	</div>
+
+	<!-- Marquee Wrapper -->
+	<div class="flex flex-col gap-6 marquee-wrapper md:gap-10 overflow-hidden relative">
+		<!-- Top Row (scrolls right) -->
+		<div class="flex gap-6 md:gap-10 overflow-hidden relative marquee-row">
+			<div class="flex gap-6 md:gap-10 animate-marquee items-center justify-around min-w-full shrink-0">
+				{
+					topRow.map((project, index) => (
+						<img
+							alt={project.alt}
+							class="transition-transform aspect-[4/3] cursor-pointer gallery-image max-w-[clamp(10rem,28vmin,20rem)] object-cover rounded-md shadow-md hover:scale-105"
+							src={project.image}
+							loading="lazy"
+							data-index={index}
+							data-row="top"
+						/>
+					))
+				}
+			</div>
+			<!-- Duplicate for seamless loop -->
+			<div
+				class="flex gap-6 md:gap-10 animate-marquee items-center justify-around min-w-full shrink-0"
+				aria-hidden="true"
+			>
+				{
+					topRow.map((project, index) => (
+						<img
+							alt={project.alt}
+							class="transition-transform aspect-[4/3] cursor-pointer gallery-image max-w-[clamp(10rem,28vmin,20rem)] object-cover rounded-md shadow-md hover:scale-105"
+							src={project.image}
+							loading="lazy"
+							data-index={index}
+							data-row="top"
+							aria-hidden="true"
+						/>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- Middle Row (scrolls left) -->
+		<div class="flex gap-6 md:gap-10 overflow-hidden relative marquee-row">
+			<div
+				class="flex gap-6 md:gap-10 animate-marquee items-center justify-around min-w-full shrink-0 [animation-direction:reverse]"
+			>
+				{
+					middleRow.map((project, index) => (
+						<img
+							alt={project.alt}
+							class="transition-transform aspect-[4/3] cursor-pointer gallery-image max-w-[clamp(10rem,28vmin,20rem)] object-cover rounded-md shadow-md hover:scale-105"
+							src={project.image}
+							loading="lazy"
+							data-index={index}
+							data-row="middle"
+						/>
+					))
+				}
+			</div>
+			<!-- Duplicate for seamless loop -->
+			<div
+				class="flex gap-6 md:gap-10 animate-marquee items-center justify-around min-w-full shrink-0 [animation-direction:reverse]"
+				aria-hidden="true"
+			>
+				{
+					middleRow.map((project, index) => (
+						<img
+							alt={project.alt}
+							class="transition-transform aspect-[4/3] cursor-pointer gallery-image max-w-[clamp(10rem,28vmin,20rem)] object-cover rounded-md shadow-md hover:scale-105"
+							src={project.image}
+							loading="lazy"
+							data-index={index}
+							data-row="middle"
+							aria-hidden="true"
+						/>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- Bottom Row (scrolls right) -->
+		<div class="flex gap-6 md:gap-10 overflow-hidden relative marquee-row">
+			<div class="flex gap-6 md:gap-10 animate-marquee items-center justify-around min-w-full shrink-0">
+				{
+					bottomRow.map((project, index) => (
+						<img
+							alt={project.alt}
+							class="transition-transform aspect-[4/3] cursor-pointer gallery-image max-w-[clamp(10rem,28vmin,20rem)] object-cover rounded-md shadow-md hover:scale-105"
+							src={project.image}
+							loading="lazy"
+							data-index={index}
+							data-row="bottom"
+						/>
+					))
+				}
+			</div>
+			<!-- Duplicate for seamless loop -->
+			<div
+				class="flex gap-6 md:gap-10 animate-marquee items-center justify-around min-w-full shrink-0"
+				aria-hidden="true"
+			>
+				{
+					bottomRow.map((project, index) => (
+						<img
+							alt={project.alt}
+							class="transition-transform aspect-[4/3] cursor-pointer gallery-image max-w-[clamp(10rem,28vmin,20rem)] object-cover rounded-md shadow-md hover:scale-105"
+							src={project.image}
+							loading="lazy"
+							data-index={index}
+							data-row="bottom"
+							aria-hidden="true"
+						/>
+					))
+				}
+			</div>
+		</div>
+	</div>
+
+	<!-- Lightbox Modal -->
+	<div class="hidden fixed items-center inset-0 justify-center z-50" id="lightbox-overlay">
+		<div
+			class="absolute inset-0 bg-black/80 duration-300 opacity-0 transition-opacity"
+			id="lightbox-backdrop"
+		>
+		</div>
+		<div class="z-10 duration-500 ease-out relative transition-all" id="lightbox-container">
+			<img
+				alt="Image agrandie"
+				class="max-h-[90vh] max-w-[90vw] object-contain duration-300 rounded-lg shadow-2xl transition-all"
+				src=""
+				id="lightbox-image"
+			/>
+			<button
+				class="flex transition-colors -right-4 -top-4 absolute bg-background hover:bg-muted items-center justify-center rounded-full shadow-md size-10 text-foreground"
+				aria-label="Fermer la lightbox"
+				id="close-lightbox"
+			>
+				<svg class="size-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"
+					></path>
+				</svg>
+			</button>
+		</div>
+	</div>
+</section>
+
+<script>
+	// Lightbox functionality
+	const images = document.querySelectorAll('.gallery-image')
+	const lightboxOverlay = document.getElementById('lightbox-overlay')
+	const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement
+	const lightboxBackdrop = document.getElementById('lightbox-backdrop')
+	const lightboxContainer = document.getElementById('lightbox-container')
+	const closeButton = document.getElementById('close-lightbox')
+
+	function openLightbox(imageSrc: string, imageAlt: string) {
+		if (!lightboxOverlay || !lightboxImage || !lightboxBackdrop || !lightboxContainer) return
+
+		lightboxImage.src = imageSrc
+		lightboxImage.alt = imageAlt
+
+		// Show lightbox
+		lightboxOverlay.classList.remove('hidden')
+		lightboxOverlay.classList.add('flex')
+
+		// Trigger animations
+		requestAnimationFrame(() => {
+			lightboxBackdrop.classList.remove('opacity-0')
+			lightboxBackdrop.classList.add('opacity-100')
+			lightboxContainer.classList.remove('scale-90', 'opacity-0')
+			lightboxContainer.classList.add('scale-100', 'opacity-100')
+		})
+
+		// Pause marquee animations
+		document.querySelectorAll('.animate-marquee').forEach((el) => {
+			;(el as HTMLElement).style.animationPlayState = 'paused'
+		})
+	}
+
+	function closeLightbox() {
+		if (!lightboxOverlay || !lightboxBackdrop || !lightboxContainer) return
+
+		// Fade out
+		lightboxBackdrop.classList.remove('opacity-100')
+		lightboxBackdrop.classList.add('opacity-0')
+		lightboxContainer.classList.remove('scale-100', 'opacity-100')
+		lightboxContainer.classList.add('scale-90', 'opacity-0')
+
+		// Hide after animation
+		setTimeout(() => {
+			lightboxOverlay.classList.remove('flex')
+			lightboxOverlay.classList.add('hidden')
+		}, 300)
+
+		// Resume marquee animations
+		document.querySelectorAll('.animate-marquee').forEach((el) => {
+			;(el as HTMLElement).style.animationPlayState = 'running'
+		})
+	}
+
+	// Event listeners
+	images.forEach((img) => {
+		img.addEventListener('click', (e) => {
+			const target = e.currentTarget as HTMLImageElement
+			openLightbox(target.src, target.alt)
+		})
+	})
+
+	closeButton?.addEventListener('click', closeLightbox)
+	lightboxBackdrop?.addEventListener('click', closeLightbox)
+
+	// Close on ESC key
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') {
+			closeLightbox()
+		}
+	})
+</script>
+
+<style>
+	/* Ensure container doesn't create horizontal scroll */
+	.marquee-wrapper {
+		width: 100%;
+	}
+
+	.marquee-row {
+		width: 100%;
+	}
+
+	/* Pause animation on hover */
+	.marquee-row:hover .animate-marquee {
+		animation-play-state: paused;
+	}
+</style>

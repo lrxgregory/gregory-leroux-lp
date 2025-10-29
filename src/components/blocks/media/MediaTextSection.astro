@@ -1,0 +1,146 @@
+---
+// MediaTextSection Component
+// Flexible section with media (image or video) on one side and text content on the other
+// Perfect for services pages, feature highlights, about sections
+
+interface Props {
+	// Media options - use either image OR video
+	image?: string
+	imageAlt?: string
+	video?: string
+	videoType?: 'video/mp4' | 'video/webm' | 'video/ogg'
+	videoPoster?: string // Optional thumbnail for video before it plays
+	autoPlay?: boolean
+	loop?: boolean
+	muted?: boolean
+	controls?: boolean
+
+	// Layout
+	mediaPosition?: 'left' | 'right'
+	backgroundColor?: 'white' | 'gray' | 'transparent'
+
+	// Content
+	title: string
+	description: string
+	cta?: {
+		text: string
+		href: string
+		variant?: 'primary' | 'secondary'
+	}
+
+	// Custom classes
+	className?: string
+}
+
+const {
+	image,
+	imageAlt = '',
+	video,
+	videoType = 'video/mp4',
+	videoPoster,
+	autoPlay = true,
+	loop = true,
+	muted = true,
+	controls = true,
+	mediaPosition = 'left',
+	backgroundColor = 'transparent',
+	title,
+	description,
+	cta,
+	className = ''
+} = Astro.props
+
+// Background color mapping
+const bgColors = {
+	white: 'bg-white',
+	gray: 'bg-neutral-50 dark:bg-neutral-900',
+	transparent: 'bg-transparent'
+}
+
+// Determine if we're showing a video or image
+const isVideo = !!video
+const isImage = !!image && !video
+
+// Grid flow for media position
+const gridFlow = mediaPosition === 'right' ? 'lg:grid-flow-dense' : ''
+---
+
+<section class={`py-16 sm:py-24 ${bgColors[backgroundColor]} ${className}`}>
+	<div class="mx-auto max-w-7xl px-6 lg:px-8">
+		<div class={`grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16 items-center ${gridFlow}`}>
+			<!-- Media (Image or Video) -->
+			<div class={`relative ${mediaPosition === 'right' ? 'lg:col-start-2' : ''}`}>
+				{
+					isVideo && (
+						<video
+							src={video}
+							poster={videoPoster}
+							autoplay={autoPlay}
+							loop={loop}
+							muted={muted}
+							playsinline
+							controls={controls}
+							class="w-full h-auto rounded-lg shadow-2xl"
+						>
+							<source src={video} type={videoType} />
+							Votre navigateur ne supporte pas la lecture de vidéos.
+						</video>
+					)
+				}
+
+				{
+					isImage && (
+						<img
+							src={image}
+							alt={imageAlt}
+							loading="lazy"
+							class="w-full h-auto rounded-lg shadow-2xl object-cover"
+						/>
+					)
+				}
+			</div>
+
+			<!-- Text Content -->
+			<div
+				class={`flex flex-col justify-center ${mediaPosition === 'right' ? 'lg:col-start-1 lg:row-start-1' : ''}`}
+			>
+				<h2 class="text-3xl font-bold tracking-tight sm:text-4xl mb-6 font-heading">
+					{title}
+				</h2>
+				<p class="text-lg text-neutral-600 dark:text-neutral-300 leading-relaxed mb-8 description">
+					{description}
+				</p>
+
+				{
+					cta && (
+						<div>
+							<a
+								href={cta.href}
+								class={`inline-flex items-center justify-center rounded-md px-6 py-3 text-base font-semibold transition-colors ${
+									cta.variant === 'secondary'
+										? 'bg-neutral-200 text-neutral-900 hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-600'
+										: 'bg-primary-500 text-white hover:bg-primary-600 shadow-md hover:shadow-lg'
+								}`}
+							>
+								{cta.text}
+							</a>
+						</div>
+					)
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	/* Ensure video maintains aspect ratio and doesn't overflow */
+	video {
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* Smooth transitions for hover effects */
+	a {
+		transition: all 0.2s ease-in-out;
+	}
+</style>

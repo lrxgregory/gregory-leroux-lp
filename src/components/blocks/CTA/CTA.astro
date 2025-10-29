@@ -1,0 +1,98 @@
+---
+// CTA Unified Component with Variants
+// ------------
+// Description: Unified CTA (Call-To-Action) component supporting 2 display variants:
+// - "light": Simple centered CTA with rating and button (light background)
+// - "dark": CTA with background image, badge notification, and button (dark mode)
+
+// Components - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+
+// Components - UI
+import CTACard from '../../ui/CTA.astro'
+import Button from '../../ui/Button.astro'
+import Ratings from '../../ui/Rating.astro'
+import ChipNotification from '../../ui/ChipNotification.astro'
+import Highlight from '../../ui/Highlight.astro'
+import { Image } from 'astro:assets'
+
+// Content - For dark variant
+import ctaImage from '../../../assets/cta-dark-bg.webp'
+import badge from '../../../assets/badge.svg'
+
+// Props
+type Variant = 'light' | 'dark'
+
+interface Props {
+	variant?: Variant
+	title?: string
+	text?: string
+	buttonText?: string
+	buttonLink?: string
+	buttonStyle?: 'primary' | 'secondary' | 'neutral'
+	rating?: 0 | 1 | 2 | 3 | 4 | 5
+	ratingText?: string
+	classes?: string
+}
+
+const {
+	variant = 'light',
+	title = 'Titre d\'appel à l\'action',
+	text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+	buttonText = 'Bouton d\'action',
+	buttonLink = '#contact',
+	buttonStyle = 'primary',
+	rating = 5,
+	ratingText = '4.9/5 - Avis clients',
+	classes = ''
+} = Astro.props
+---
+
+{variant === 'light' && (
+	<Section classes={classes}>
+		<Row>
+			<Col span="1" />
+			<Col span="10">
+				<CTACard
+					title={title}
+					text={text}
+					classes="!shadow-none"
+				>
+					<Ratings rating={rating} text={ratingText} classes="mb-4" />
+					<Button size="lg" style={buttonStyle} link={buttonLink}>
+						{buttonText}
+					</Button>
+				</CTACard>
+			</Col>
+			<Col span="1" />
+		</Row>
+	</Section>
+)}
+
+{variant === 'dark' && (
+	<Section classes={classes}>
+		<Row>
+			<Col span="1" />
+			<Col span="10">
+				<CTACard
+					title={title}
+					text={text}
+					mode="dark"
+					bg={ctaImage}
+				>
+					<ChipNotification radius="rounded-full" classes="mb-6 box">
+						<Image src={badge} alt="Certifié RGE" class="h-12 w-12" slot="button" />
+						<span class="hidden md:block">Artisan certifié,</span>
+						<Highlight classes="md:ml-2"> RGE QualiPAC </Highlight>
+					</ChipNotification>
+					<Button size="lg" style={buttonStyle} link={buttonLink}>
+						{buttonText}
+					</Button>
+				</CTACard>
+			</Col>
+			<Col span="1" />
+		</Row>
+	</Section>
+)}

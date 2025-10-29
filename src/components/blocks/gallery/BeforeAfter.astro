@@ -1,0 +1,207 @@
+---
+// Before/After Slider Component
+// Shows before/after comparison with interactive slider
+// Perfect for plumbers, electricians, contractors to showcase their work
+
+interface Props {
+	title?: string
+	subtitle?: string
+	projects?: Array<{
+		id: string
+		title: string
+		description?: string
+		beforeImage: string
+		afterImage: string
+		beforeAlt: string
+		afterAlt: string
+	}>
+}
+
+const {
+	title = 'Nos Réalisations',
+	subtitle = 'Découvrez la qualité de notre travail',
+	projects = [
+		{
+			id: 'project-1',
+			title: 'Rénovation complète',
+			description: 'Installation complète système de chauffage',
+			beforeImage: '/src/assets/cards/heatpump.jpg',
+			afterImage: '/src/assets/cards/maintenance.jpg',
+			beforeAlt: 'Avant travaux',
+			afterAlt: 'Après travaux'
+		},
+		{
+			id: 'project-1',
+			title: 'Rénovation complète',
+			description: 'Installation complète système de chauffage',
+			beforeImage: '/src/assets/cards/heatpump.jpg',
+			afterImage: '/src/assets/cards/maintenance.jpg',
+			beforeAlt: 'Avant travaux',
+			afterAlt: 'Après travaux'
+		}
+	]
+} = Astro.props
+---
+
+<section class="py-16 md:py-24">
+	<div class="container mx-auto px-4">
+		<!-- Header -->
+		<div class="text-center mb-12">
+			<h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+				{title}
+			</h2>
+			{subtitle && <p class="text-lg text-gray-600 dark:text-gray-300">{subtitle}</p>}
+		</div>
+
+		<!-- Projects Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+			{
+				projects.map((project) => (
+					<div class="before-after-container" data-project-id={project.id}>
+						<!-- Project Title -->
+						<div class="mb-4">
+							<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+								{project.title}
+							</h3>
+							{project.description && (
+								<p class="text-gray-600 dark:text-gray-400">{project.description}</p>
+							)}
+						</div>
+
+						<!-- Before/After Slider -->
+						<div class="relative overflow-hidden rounded-lg shadow-xl aspect-[4/3]" style="touch-action: none; user-select: none;">
+							<!-- Before Image (Background - Full Width) -->
+							<img
+								src={project.beforeImage}
+								alt={project.beforeAlt}
+								class="absolute inset-0 w-full h-full object-cover"
+								loading="lazy"
+							/>
+
+							<!-- After Image (Foreground with clip-path) -->
+							<div
+								class="after-image absolute inset-0"
+								style="clip-path: inset(0px 0px 0px 50%); will-change: clip-path;"
+							>
+								<img
+									src={project.afterImage}
+									alt={project.afterAlt}
+									class="w-full h-full object-cover"
+									loading="lazy"
+								/>
+							</div>
+
+							<!-- Slider Handle Container -->
+							<div
+								class="slider-handle absolute top-0 h-full left-1/2 cursor-ew-resize"
+								style="transform: translate3d(-50%, 0px, 0px);"
+								role="slider"
+								aria-label="Drag to compare before and after"
+								aria-valuemin="0"
+								aria-valuemax="100"
+								aria-valuenow="50"
+							>
+								<!-- Vertical Line -->
+								<div class="absolute top-0 h-full w-0.5 bg-white left-1/2 -translate-x-1/2" style="box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>
+
+								<!-- Circle Handle with Arrows -->
+								<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full border-2 border-white bg-black/20 backdrop-blur-sm flex items-center justify-center gap-2" style="box-shadow: 0 0 4px rgba(0,0,0,0.35);">
+									<!-- Left Arrow -->
+									<div class="w-0 h-0 border-t-[8px] border-t-transparent border-r-[10px] border-r-white border-b-[8px] border-b-transparent"></div>
+									<!-- Right Arrow -->
+									<div class="w-0 h-0 border-t-[8px] border-t-transparent border-l-[10px] border-l-white border-b-[8px] border-b-transparent"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<script>
+	// Before/After Slider Interaction
+	function initBeforeAfterSliders() {
+		const containers = document.querySelectorAll('.before-after-container')
+
+		containers.forEach((container) => {
+			const sliderHandle = container.querySelector('.slider-handle') as HTMLElement
+			const afterImage = container.querySelector('.after-image') as HTMLElement
+			const sliderContainer = container.querySelector(
+				'.relative.overflow-hidden'
+			) as HTMLElement
+
+			if (!sliderHandle || !afterImage || !sliderContainer) return
+
+			let isDragging = false
+
+			function updateSlider(e: MouseEvent | TouchEvent) {
+				if (!isDragging) return
+
+				const rect = sliderContainer.getBoundingClientRect()
+				let clientX: number
+
+				if (e instanceof MouseEvent) {
+					clientX = e.clientX
+				} else {
+					clientX = e.touches[0].clientX
+				}
+
+				let x = ((clientX - rect.left) / rect.width) * 100
+				x = Math.max(0, Math.min(100, x)) // Clamp between 0-100
+
+				// Update slider position
+				sliderHandle.style.left = `${x}%`
+
+				// Update after image clip-path (reveal from left)
+				afterImage.style.clipPath = `inset(0px 0px 0px ${x}%)`
+
+				// Update aria-valuenow for accessibility
+				sliderHandle.setAttribute('aria-valuenow', Math.round(x).toString())
+			}
+
+			function startDrag(e: MouseEvent | TouchEvent) {
+				isDragging = true
+				updateSlider(e)
+				e.preventDefault()
+			}
+
+			function stopDrag() {
+				isDragging = false
+			}
+
+			// Mouse events
+			sliderHandle.addEventListener('mousedown', startDrag)
+			document.addEventListener('mousemove', updateSlider)
+			document.addEventListener('mouseup', stopDrag)
+
+			// Touch events
+			sliderHandle.addEventListener('touchstart', startDrag)
+			document.addEventListener('touchmove', updateSlider)
+			document.addEventListener('touchend', stopDrag)
+		})
+	}
+
+	// Initialize on page load
+	document.addEventListener('astro:page-load', initBeforeAfterSliders)
+</script>
+
+<style>
+	.before-after-container {
+		user-select: none;
+	}
+
+	.slider-handle {
+		transition: none; /* Disable transition during drag */
+	}
+
+	.before-image {
+		transition: none; /* Disable transition during drag */
+	}
+
+	/* Smooth cursor change on hover */
+	.relative.overflow-hidden:hover {
+		cursor: ew-resize;
+	}
+</style>
