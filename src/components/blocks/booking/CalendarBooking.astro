@@ -1,0 +1,138 @@
+---
+/**
+ * CalendarBooking - Système de réservation Cal.com simplifié
+ *
+ * MODE SIMPLE : Un seul calendrier
+ * MODE ÉQUIPE : Sélection technicien + intervention → affiche le bon calendrier
+ *
+ * CONVENTION : Les calendriers dans CalEmbed doivent avoir l'ID calendar-{tech}-{type}
+ * Exemple : calendar-pierre-depannage
+ */
+
+import CalEmbed from './CalEmbed.astro';
+
+interface Props {
+  mode: 'single' | 'team';
+  title?: string;
+  description?: string;
+  teamOptions?: {
+    technicians: Array<{ name: string; value: string }>;
+    interventionTypes: Array<{ name: string; value: string }>;
+  };
+}
+
+const {
+  mode = 'single',
+  title = 'Prendre rendez-vous',
+  description = 'Réservez votre créneau en ligne',
+  teamOptions,
+} = Astro.props;
+
+const uniqueId = `cal-${Math.random().toString(36).substring(2, 11)}`;
+---
+
+<section class="py-16 md:py-24 bg-neutral-50 dark:bg-neutral-900">
+  <div class="container mx-auto px-4">
+
+    <!-- Titre -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-neutral-900 dark:text-white mb-4">
+        {title}
+      </h2>
+      {description && (
+        <p class="text-lg text-neutral-600 dark:text-neutral-300">{description}</p>
+      )}
+    </div>
+
+    {mode === 'single' ? (
+      <!-- MODE SIMPLE -->
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-4" style="height: 600px;">
+          <CalEmbed mode="single" />
+        </div>
+      </div>
+    ) : (
+      <!-- MODE ÉQUIPE -->
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+        <!-- Formulaire (1/3) -->
+        <div>
+          <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-semibold mb-6">Sélectionnez</h3>
+
+            <div class="space-y-4">
+              <div>
+                <label for={`${uniqueId}-tech`} class="block text-sm font-medium mb-2">
+                  Technicien
+                </label>
+                <select id={`${uniqueId}-tech`} class="w-full px-4 py-3 border rounded-lg">
+                  <option value="">Choisir...</option>
+                  {teamOptions?.technicians.map(t => (
+                    <option value={t.value}>{t.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label for={`${uniqueId}-type`} class="block text-sm font-medium mb-2">
+                  Type d'intervention
+                </label>
+                <select id={`${uniqueId}-type`} class="w-full px-4 py-3 border rounded-lg">
+                  <option value="">Choisir...</option>
+                  {teamOptions?.interventionTypes.map(t => (
+                    <option value={t.value}>{t.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calendrier (2/3) -->
+        <div class="lg:col-span-2">
+          <div class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-4" style="height: 600px;">
+            <!-- Message par défaut -->
+            <div id={`${uniqueId}-msg`} class="flex items-center justify-center h-full">
+              <p class="text-neutral-500">Sélectionnez un technicien et un type d'intervention</p>
+            </div>
+            <!-- Tous les calendriers (cachés par défaut) -->
+            <CalEmbed mode="team" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Script -->
+      <script is:inline define:vars={{ uniqueId }}>
+        document.addEventListener('DOMContentLoaded', () => {
+          const tech = document.getElementById(`${uniqueId}-tech`);
+          const type = document.getElementById(`${uniqueId}-type`);
+          const msg = document.getElementById(`${uniqueId}-msg`);
+
+          function update() {
+            // Masquer tous les calendriers
+            document.querySelectorAll('[id^="calendar-"]').forEach(el => el.style.display = 'none');
+
+            if (!tech.value || !type.value) {
+              msg.style.display = 'flex';
+              return;
+            }
+
+            msg.style.display = 'none';
+            const id = `calendar-${tech.value}-${type.value}`;
+            const cal = document.getElementById(id);
+
+            if (cal) {
+              cal.style.display = 'block';
+            } else {
+              msg.innerHTML = '<p class="text-red-500">Calendrier introuvable</p>';
+              msg.style.display = 'flex';
+            }
+          }
+
+          tech.addEventListener('change', update);
+          type.addEventListener('change', update);
+        });
+      </script>
+    )}
+  </div>
+</section>

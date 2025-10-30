@@ -1,0 +1,97 @@
+---
+/**
+ * CalEmbed - Wrapper simple pour les calendriers Cal.com
+ *
+ * Structure :
+ * - Section SINGLE : Calendriers visibles par défaut (mode solopreneur)
+ * - Section TEAM : Calendriers cachés par défaut (mode équipe avec sélection)
+ *
+ * @param mode - 'single' (affiche section single) ou 'team' (affiche section team)
+ */
+
+interface Props {
+	mode?: 'single' | 'team'
+}
+
+const { mode = 'team' } = Astro.props
+---
+
+<div class="cal-wrapper">
+	{mode === 'single' ? (
+		<!-- ============================================ -->
+		<!-- SECTION SINGLE : Calendriers visibles       -->
+		<!-- ============================================ -->
+		<!-- Collez vos calendriers Cal.com ici sans display:none -->
+		<!-- Format : <div id="mon-calendrier-single" style="width:100%;height:100%;overflow:auto"></div> -->
+
+		<div id="calendar-single-default" style="width:100%; height:100%; overflow:auto;" class="pt-8"></div>
+		<script type="text/javascript">
+			;(function (C, A, L) {
+				let p = function (a, ar) { a.q.push(ar) }
+				let d = C.document
+				C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === 'string'){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ['initNamespace', namespace]);} else p(cal, ar); return;} p(cal, ar); };
+			})(window, 'https://app.cal.com/embed/embed.js', 'init')
+			Cal('init', 'single-default', { origin: 'https://app.cal.com' })
+			Cal.ns['single-default']('inline', {
+				elementOrSelector: '#calendar-single-default',
+				config: { layout: 'month_view' },
+				calLink: 'gregory-leroux-dev/rdv-intervention'
+			})
+			Cal.ns['single-default']('ui', { hideEventTypeDetails: true, layout: 'month_view' })
+		</script>
+
+	) : (
+		<!-- ============================================ -->
+		<!-- SECTION TEAM : Calendriers cachés           -->
+		<!-- ============================================ -->
+		<!-- Collez vos calendriers Cal.com ici avec display:none -->
+		<!-- Format ID : calendar-{technicien}-{intervention} -->
+
+		<!-- Calendrier Pierre Durand - Dépannage -->
+		<div id="calendar-pierre-durand-depannage" style="width:100%; height:100%; overflow:auto; display:none;" class="pt-8"></div>
+		<script type="text/javascript">
+			;(function (C, A, L) {
+				let p = function (a, ar) { a.q.push(ar) }
+				let d = C.document
+				C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === 'string'){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ['initNamespace', namespace]);} else p(cal, ar); return;} p(cal, ar); };
+			})(window, 'https://app.cal.com/embed/embed.js', 'init')
+			Cal('init', 'pierre-durand-depannage', { origin: 'https://app.cal.com' })
+			Cal.ns['pierre-durand-depannage']('inline', {
+				elementOrSelector: '#calendar-pierre-durand-depannage',
+				config: { layout: 'month_view' },
+				calLink: 'gregory-leroux-dev/rdv-intervention'
+			})
+			Cal.ns['pierre-durand-depannage']('ui', { hideEventTypeDetails: true, layout: 'month_view' })
+		</script>
+
+		<!-- Calendrier Pierre Durand - Installation -->
+		<div id="calendar-pierre-durand-installation" style="width:100%; height:100%; overflow:auto; display:none;"></div>
+		<script type="text/javascript">
+			;(function (C, A, L) {
+				let p = function (a, ar) { a.q.push(ar) }
+				let d = C.document
+				C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === 'string'){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ['initNamespace', namespace]);} else p(cal, ar); return;} p(cal, ar); };
+			})(window, 'https://app.cal.com/embed/embed.js', 'init')
+			Cal('init', 'pierre-durand-installation', { origin: 'https://app.cal.com' })
+			Cal.ns['pierre-durand-installation']('inline', {
+				elementOrSelector: '#calendar-pierre-durand-installation',
+				config: { layout: 'month_view' },
+				calLink: 'gregory-leroux-dev/rdv-intervention'
+			})
+			Cal.ns['pierre-durand-installation']('ui', { hideEventTypeDetails: true, layout: 'month_view' })
+		</script>
+
+		<!--
+		Ajoutez vos autres calendriers team ici
+		Format : calendar-{technicien}-{intervention}
+		N'oubliez pas : display:none !
+		-->
+	)}
+</div>
+
+<style>
+	.cal-wrapper {
+		width: 100%;
+		height: 100%;
+	}
+</style>
