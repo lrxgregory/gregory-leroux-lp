@@ -1,77 +1,118 @@
 [
 	{
 		"header": {
-			"title": "Basic",
-			"subtitle": "Ideal for individual developers.",
-			"currency": "$",
-			"price": "19",
-			"priceLabel": "month, billed anually",
-			"priceMontly": "25",
-			"priceLabelMontly": "month",
-			"buttonName": "Try for free",
-			"buttonLink": "/"
+			"title": "Vitrine",
+			"subtitle": "L'essentiel pour démarrer",
+			"currency": "€",
+			"price": "490",
+			"priceLabel": "TTC",
+			"buttonName": "Obtenir un devis",
+			"buttonLink": "#contact"
 		},
 		"body": {
 			"listItems": [
-				{ "listItem": "Join forces with fellow architects" },
-				{ "listItem": "Present your projects with flair and captivate your audience." },
-				{ "listItem": "Immerse yourself in the dynamic realm of architecture." }
+				{
+					"listItem": "Site responsive (mobile, tablette, desktop)"
+				},
+				{
+					"listItem": "Formulaire de contact"
+				},
+				{
+					"listItem": "Optimisation SEO + données structurées"
+				},
+				{
+					"listItem": "Gestion de l'hébergement"
+				},
+				{
+					"listItem": "Nom de domaine 1 an inclus"
+				},
+				{
+					"listItem": "Livraison en 7 jours"
+				}
 			]
 		},
 		"footer": {
-			"buttonName": "See all features",
-			"buttonLink": "/"
+			"buttonName": "Voir tous les détails",
+			"buttonLink": "#contact"
 		},
 		"type": "basic"
 	},
 	{
 		"header": {
-			"title": "Team",
-			"subtitle": "Ideal for small teams",
-			"currency": "$",
-			"price": "29",
-			"priceLabel": "month, billed anually",
-			"priceMontly": "35",
-			"priceLabelMontly": "month",
-			"buttonName": "Try for free",
-			"buttonLink": "/"
+			"title": "Pro",
+			"subtitle": "Maximisez vos conversions",
+			"currency": "€",
+			"price": "790",
+			"priceLabel": "TTC",
+			"buttonName": "Obtenir un devis",
+			"buttonLink": "#contact"
 		},
 		"body": {
 			"listItems": [
-				{ "listItem": "Join forces with fellow architects" },
-				{ "listItem": "Present your projects with flair and captivate your audience." },
-				{ "listItem": "Immerse yourself in the dynamic realm of architecture." },
-				{ "listItem": "Unlock endless inspiration" }
+				{
+					"listItem": "Tout de l'offre Vitrine"
+				},
+				{
+					"listItem": "Bouton WhatsApp flottant"
+				},
+				{
+					"listItem": "Avis Google intégrés automatiquement"
+				},
+				{
+					"listItem": "Section FAQ personnalisée"
+				},
+				{
+					"listItem": "Composants pro"
+				},
+				{
+					"listItem": "Optimisation fiche Google Business"
+				},
+				{
+					"listItem": "Support technique 3 mois"
+				},
+				{
+					"listItem": "Livraison en 10 jours"
+				}
 			]
 		},
 		"footer": {
-			"buttonName": "See all features",
-			"buttonLink": "/"
+			"buttonName": "Voir tous les détails",
+			"buttonLink": "#contact"
 		},
 		"type": "featured"
 	},
 	{
 		"header": {
-			"title": "Enterprise",
-			"subtitle": "Ideal for companies",
-			"currency": "$",
-			"price": "49",
-			"priceLabel": "month, billed anually",
-			"priceMontly": "65",
-			"priceLabelMontly": "month",
-			"buttonName": "Try for free",
-			"buttonLink": "/"
+			"title": "Premium",
+			"subtitle": "Solution complète clé en main",
+			"currency": "€",
+			"price": "990",
+			"priceLabel": "TTC",
+			"buttonName": "Obtenir un devis",
+			"buttonLink": "#contact"
 		},
 		"body": {
 			"listItems": [
-				{ "listItem": "Join forces with fellow architects" },
-				{ "listItem": "Present your projects with flair and captivate your audience." },
-				{ "listItem": "Immerse yourself in the dynamic realm of architecture." }
+				{
+					"listItem": "Tout de l'offre Pro"
+				},
+				{
+					"listItem": "Système de réservation Cal.com"
+				},
+				{
+					"listItem": "1 composant personnalisé inclus"
+				},
+				{
+					"listItem": "Support prioritaire 6 mois"
+				},
+				{
+					"listItem": "Livraison en 14 jours"
+				}
 			]
 		},
 		"footer": {
-			"buttonName": "See all features",
-			"buttonLink": "/"
+			"buttonName": "Voir tous les détails",
+			"buttonLink": "#contact"
 		},
 		"type": "basic"
 	}

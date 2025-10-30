@@ -8,7 +8,7 @@ import Features from '../components/blocks/features/FeatureCards.astro'
 import HighlightBlocks from '../components/blocks/highlights/HightlightRows.astro'
 import Steps from '../components/blocks/Steps.astro'
 import ContactForm from '../components/blocks/contact/ContactForm.astro'
-import PricingColumns from '../components/blocks/pricing/PricingColumns.astro'
+import Pricing from '../components/blocks/pricing/Pricing.astro'
 import FaqSticky from '../components/blocks/FAQ/FaqSticky.astro'
 
 // Data
@@ -16,9 +16,9 @@ import faqData from '../data/json-files/faqData.json'
 
 // - SEO
 const SEO = {
-	title: 'Foxi | Your Productivity Toolkit',
+	title: 'Site Vitrine Professionnel en 7 Jours | Prix Fixe Sans Surprise',
 	description:
-		'Foxi is a powerful productivity toolkit designed to enhance your workflow and boost your productivity. With features like analytics, security, and integrations, Foxi is the perfect solution for your business.'
+		'Artisan, ostéopathe, naturopathe ? Obtenez votre site vitrine professionnel livré en 7 jours. Design moderne, formulaire contact, WhatsApp, prise de RDV. Prix fixe dès 890€ HT. Devis gratuit.'
 }
 ---
 
@@ -27,7 +27,7 @@ const SEO = {
 	<Features />
 	<Steps />
 	<HighlightBlocks />
-	<PricingColumns />
+	<Pricing variant='cards'/>
 	<FaqSticky title="Questions fréquentes" data={faqData} />
 	<ContactForm variant="simple" />
 </Layout>

@@ -1,103 +1,73 @@
 [
 	{
-		"question": "What is the cost of the basic plan?",
-		"reply": "The basic plan is $9.99 per month, which includes access to core features and limited integrations. This plan is perfect for individuals or small teams looking to improve their productivity without a large investment.",
-		"category": "pricing",
+		"question": "Pourquoi 7 jours ? C'est réellement possible ?",
+		"reply": "Oui, absolument. Nous avons industrialisé notre processus avec une bibliothèque de composants prêts à l'emploi. Nous ne partons pas de zéro à chaque fois. Vous choisissez les blocs qui vous intéressent (services, témoignages, galerie, FAQ...), nous les personnalisons avec votre contenu et votre identité visuelle. Le délai de 7 jours ouvrés est garanti par contrat.",
+		"category": "process",
 		"open": true
 	},
 	{
-		"question": "Are there any discounts for annual subscriptions?",
-		"reply": "Yes, we offer a 20% discount on annual subscriptions for all our plans. By choosing an annual subscription, you can save money and ensure uninterrupted access to all Foxi features for the entire year.",
+		"question": "Que se passe-t-il si je n'ai pas de contenu (textes, photos) ?",
+		"reply": "Pas de panique, c'est très courant. Nous vous guidons dans la création de contenu avec un questionnaire simple. Pour les textes, nous rédigeons une première version que vous validez. Pour les photos, nous pouvons utiliser des banques d'images professionnelles (inclus) ou vous conseiller sur les photos à prendre avec votre smartphone. Nous faisons aussi le montage et l'optimisation.",
+		"category": "process",
+		"open": false
+	},
+	{
+		"question": "Je ne suis pas à l'aise avec l'informatique, c'est un problème ?",
+		"reply": "Absolument pas. Nous gérons 100% de la technique : création, design, mise en ligne, connexion du nom de domaine. Vous n'avez qu'à valider vos textes et images par email ou WhatsApp. Si vous souhaitez pouvoir modifier vous-même vos contenus plus tard, nous incluons une formation de 30 minutes (très simple, pas de code). Mais vous pouvez aussi nous demander de faire les modifications.",
+		"category": "process",
+		"open": false
+	},
+	{
+		"question": "Quels sont les coûts cachés ? Hébergement, maintenance ?",
+		"reply": "Aucun coût caché. Le prix annoncé inclut : hébergement performant 1 an, nom de domaine 1 an si besoin, certificat SSL (cadenas sécurisé), emails professionnels (jusqu'à 5 adresses). Après la première année, l'hébergement coûte 120€ HT/an. La maintenance (mises à jour, sauvegardes) est incluse. Vous ne payez que si vous demandez des modifications de contenu après la période de support.",
 		"category": "pricing",
 		"open": false
 	},
 	{
-		"question": "Can I change my subscription plan at any time?",
-		"reply": "Yes, you can upgrade or downgrade your subscription plan at any time from your account settings. This flexibility allows you to adjust your plan based on your changing needs and usage.",
-		"category": "pricing",
+		"question": "Puis-je modifier mon site après la livraison ?",
+		"reply": "Oui, de deux façons. 1) Vous pouvez le modifier vous-même après la formation (incluse dans les offres Pro et Premium). L'interface est très simple, pas besoin de coder. 2) Vous pouvez nous demander de faire les modifications. Support inclus pendant 3 mois (Pro) ou 6 mois (Premium), puis facturation à l'heure selon vos besoins (60€ HT/heure).",
+		"category": "process",
 		"open": false
 	},
 	{
-		"question": "Is there a free trial available?",
-		"reply": "Yes, we offer a 14-day free trial for all new users. During the trial, you can explore all the features of Foxi without any commitment, allowing you to see how it fits into your workflow.",
-		"category": "pricing",
-		"open": false
-	},
-	{
-		"question": "Do you offer refunds?",
-		"reply": "We offer a 30-day money-back guarantee if you are not satisfied with our service. Simply contact our support team within 30 days of your purchase, and we'll process your refund.",
-		"category": "pricing",
-		"open": false
-	},
-	{
-		"question": "How do I cancel my subscription?",
-		"reply": "You can cancel your subscription from your account settings at any time. After cancellation, you will still have access to your account until the end of the billing cycle.",
-		"category": "pricing",
-		"open": false
-	},
-	{
-		"question": "Can I use Foxi with Google Calendar?",
-		"reply": "Yes, Foxi integrates seamlessly with Google Calendar for easy scheduling and task management. This integration helps you keep track of your events and tasks in one place.",
-		"category": "integrations",
-		"open": true
-	},
-	{
-		"question": "Does Foxi work with Slack?",
-		"reply": "Yes, you can integrate Foxi with Slack to receive notifications and updates directly in your channels. This allows you to stay informed about your projects without leaving Slack.",
-		"category": "integrations",
-		"open": false
-	},
-	{
-		"question": "How do I connect Foxi with Trello?",
-		"reply": "To connect Foxi with Trello, go to the integrations page in your settings and follow the instructions to link your accounts. This integration helps you manage your Trello boards and Foxi projects together.",
-		"category": "integrations",
-		"open": false
-	},
-	{
-		"question": "Is there an API for custom integrations?",
-		"reply": "Yes, we provide an API that allows you to create custom integrations with Foxi. Our API documentation provides detailed instructions and examples to help you get started.",
-		"category": "integrations",
-		"open": false
-	},
-	{
-		"question": "Can I sync Foxi with my email?",
-		"reply": "Currently, we do not support email integration, but this feature is on our roadmap for future releases. Stay tuned for updates as we continue to enhance Foxi's capabilities.",
-		"category": "integrations",
-		"open": false
-	},
-	{
-		"question": "Does Foxi support Zapier?",
-		"reply": "Yes, Foxi integrates with Zapier, allowing you to connect with over 2,000 apps and automate your workflows. This integration helps you streamline your processes and improve efficiency.",
-		"category": "integrations",
-		"open": false
-	},
-	{
-		"question": "What are the main features of Foxi?",
-		"reply": "Foxi includes in-app messaging, project management, time tracking, customizable dashboards, and more. These features are designed to help you stay organized, communicate effectively, and manage your time efficiently.",
-		"category": "features",
-		"open": true
-	},
-	{
-		"question": "How do I use the in-app messaging feature?",
-		"reply": "In-app messaging allows you to communicate with your team directly within Foxi. Simply navigate to the messaging tab to start a conversation. You can send messages, share files, and create group chats.",
+		"question": "Mon site sera-t-il bien référencé sur Google ?",
+		"reply": "Oui. Tous nos sites sont optimisés SEO dès la création : structure technique correcte, vitesse de chargement optimale, responsive mobile, balises méta configurées. Pour l'offre Premium, nous allons plus loin avec une stratégie de mots-clés adaptée à votre secteur et zone géographique. Nous optimisons aussi votre fiche Google My Business (inclus dans Pro et Premium) pour apparaître sur Google Maps.",
 		"category": "features",
 		"open": false
 	},
 	{
-		"question": "Can I customize my dashboard?",
-		"reply": "Yes, you can customize your dashboard by adding, removing, and rearranging widgets to fit your workflow. This customization helps you keep important information at your fingertips.",
+		"question": "Que se passe-t-il si je ne suis pas satisfait du résultat ?",
+		"reply": "Nous incluons 2 rounds de modifications dans tous nos tarifs pour garantir votre satisfaction. Vous validez la structure avant que nous passions à la personnalisation, puis vous validez le design final. Si vraiment le résultat ne vous convient pas du tout, nous remboursons 50% de l'acompte (geste commercial, car nous avons déjà investi du temps). Mais en 2 ans, nous n'avons eu aucune demande de ce type.",
+		"category": "pricing",
+		"open": false
+	},
+	{
+		"question": "Différence entre les offres Vitrine, Pro et Premium ?",
+		"reply": "Vitrine (890€) : site simple et efficace, idéal pour une présence en ligne rapide. Pro (1490€, le plus populaire) : ajoute formulaire contact avancé, WhatsApp, avis Google, FAQ et optimisation Google My Business. Parfait pour artisans et professionnels de santé. Premium (2490€) : ajoute système de prise de RDV en ligne, galerie projets, témoignages détaillés, blog et stratégie SEO poussée. Pour maximiser les conversions.",
+		"category": "pricing",
+		"open": false
+	},
+	{
+		"question": "Puis-je voir des exemples de sites créés ?",
+		"reply": "Oui, contactez-nous et nous vous enverrons 3 à 5 exemples de sites similaires à votre secteur d'activité. Nous adaptons le design et les fonctionnalités à chaque métier (artisan, thérapeute, consultant, etc.). Chaque site est unique même s'il utilise notre bibliothèque de composants.",
 		"category": "features",
 		"open": false
 	},
 	{
-		"question": "How does the time tracking feature work?",
-		"reply": "Time tracking allows you to log the time spent on tasks and projects. Start the timer when you begin a task and stop it when you're done. You can also manually log time if needed.",
+		"question": "Comment fonctionne le paiement ?",
+		"reply": "Paiement en 2 fois : 50% à la signature du devis pour lancer le projet, 50% à la livraison du site. Paiement par virement bancaire ou CB (via Stripe sécurisé). Facture avec garantie et conditions générales fournies. Pas d'abonnement mensuel, c'est un paiement unique (sauf hébergement annuel après la première année).",
+		"category": "pricing",
+		"open": false
+	},
+	{
+		"question": "Que se passe-t-il si j'ai besoin d'un composant spécifique ?",
+		"reply": "Aucun problème. Si le composant que vous souhaitez n'existe pas dans notre bibliothèque, nous nous engageons à le créer sans surcoût (dans la limite du raisonnable). Par exemple : formulaire multi-étapes, calculateur de devis, système de filtres, etc. Nous évaluons la faisabilité lors du rendez-vous découverte et l'incluons dans le devis si c'est plus complexe.",
 		"category": "features",
 		"open": false
 	},
 	{
-		"question": "Is there a mobile app for Foxi?",
-		"reply": "Yes, Foxi is available on both iOS and Android, allowing you to manage your tasks and projects on the go. Download the app from the App Store or Google Play to stay productive anywhere.",
+		"question": "Le site sera-t-il rapide sur mobile ?",
+		"reply": "Oui, c'est une priorité absolue. Plus de 70% de vos visiteurs viennent du mobile. Nos sites sont construits avec Astro, une technologie moderne ultra-performante. Résultats : score Google PageSpeed > 90/100, temps de chargement < 2 secondes. Nous testons systématiquement sur iPhone, Android, tablettes. Le design s'adapte parfaitement à toutes les tailles d'écran.",
 		"category": "features",
 		"open": false
 	}

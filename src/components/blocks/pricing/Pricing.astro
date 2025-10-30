@@ -1,0 +1,167 @@
+---
+// Pricing Section with Variants
+// ------------
+// Description: Flexible pricing component with multiple display variants
+
+// Components
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+import PricingTable from '../../ui/pricing-tables/PricingTable.astro'
+import Button from '../../ui/Button.astro'
+
+// Content
+import pricingTablesData from '../../../data/json-files/pricingTablesdata.json'
+
+// Props
+interface Props {
+	variant?: 'columns' | 'cards' | 'simple'
+	title?: string
+	subtitle?: string
+	showToggle?: boolean
+}
+
+const {
+	variant = 'columns',
+	title = 'Choisissez l\'offre adaptée à vos besoins',
+	subtitle = 'Prix fixe, transparent, sans surprise. Paiement en 2 fois possible. Livraison garantie en 7-14 jours ouvrés.',
+	showToggle = false
+} = Astro.props
+
+type PricingTableData = {
+	header: {
+		title: string
+		subtitle: string
+		currency: string
+		price: string
+		priceLabel: string
+		priceMonthly?: string
+		priceLabelMonthly?: string
+		buttonName: string
+		buttonLink: string
+	}
+	body?: {
+		listItems: Array<{ listItem: string }>
+	}
+	footer?: {
+		buttonName: string
+		buttonLink: string
+	}
+	type: 'basic' | 'featured'
+}
+
+const pricingData: PricingTableData[] = pricingTablesData as PricingTableData[]
+---
+
+{variant === 'columns' && (
+	<Section id="pricing">
+		<Row>
+			<Col span="12" align="center" classes="mb-12">
+				<h2 class="mb-4 text-4xl font-bold">{title}</h2>
+				<p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">{subtitle}</p>
+			</Col>
+			{pricingData.map((item, key) => (
+				<Col span="4">
+					<PricingTable data={item} listType="checklist" id={`plan-${key}`} />
+				</Col>
+			))}
+		</Row>
+	</Section>
+)}
+
+{variant === 'cards' && (
+	<Section id="pricing" classes="bg-neutral-50 dark:bg-neutral-900">
+		<Row>
+			<Col span="12" align="center" classes="mb-16">
+				<h2 class="mb-6 text-4xl font-bold text-neutral-900 dark:text-white">{title}</h2>
+				<p class="mx-auto max-w-2xl text-xl text-neutral-600 dark:text-neutral-300">{subtitle}</p>
+			</Col>
+		</Row>
+		
+		<div class="container mx-auto px-4">
+			<div class="grid gap-8 lg:grid-cols-3">
+				{pricingData.map((plan) => (
+					<div class={plan.type === 'featured' 
+						? "relative scale-105 transform rounded-2xl border-2 border-primary-500 bg-primary-50 p-8 dark:bg-primary-900/20"
+						: "rounded-2xl border border-neutral-200 bg-white p-8 dark:border-neutral-700 dark:bg-neutral-800"
+					}>
+						{plan.type === 'featured' && (
+							<div class="absolute -top-4 left-1/2 -translate-x-1/2">
+								<span class="rounded-full bg-primary-500 px-4 py-1 text-sm font-semibold text-white">
+									Le plus populaire
+								</span>
+							</div>
+						)}
+						
+						<div class="mb-6 text-center">
+							<h3 class="mb-2 text-2xl font-bold text-neutral-900 dark:text-white">
+								{plan.header.title}
+							</h3>
+							<p class="mb-4 text-neutral-600 dark:text-neutral-300">
+								{plan.header.subtitle}
+							</p>
+							<div class="mb-4">
+								<span class="text-4xl font-bold text-neutral-900 dark:text-white">{plan.header.price}</span>
+								<span class="text-neutral-500"> {plan.header.currency}</span>
+							</div>
+							<p class="text-sm text-neutral-500">{plan.header.priceLabel}</p>
+						</div>
+						
+						<ul class="mb-8 space-y-3">
+							{plan.body?.listItems.map((item) => (
+								<li class="flex items-center">
+									<span class="mr-3 text-green-500">✓</span>
+									<span class="text-sm">{item.listItem}</span>
+								</li>
+							))}
+						</ul>
+						
+						<Button
+							type="link"
+							link={plan.header.buttonLink}
+							style={plan.type === 'featured' ? 'primary' : 'outline'}
+							size="lg"
+							classes="w-full"
+						>
+							{plan.header.buttonName}
+						</Button>
+					</div>
+				))}
+			</div>
+		</div>
+	</Section>
+)}
+
+{variant === 'simple' && (
+	<Section id="pricing" classes="bg-white dark:bg-neutral-800">
+		<Row>
+			<Col span="12" align="center" classes="mb-12">
+				<h2 class="mb-4 text-3xl font-bold">{title}</h2>
+				<p class="text-lg text-neutral-600 dark:text-neutral-300 max-w-xl mx-auto">{subtitle}</p>
+			</Col>
+		</Row>
+		
+		<div class="container mx-auto px-4">
+			<div class="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
+				{pricingData.map((plan) => (
+					<div class="rounded-xl border border-neutral-200 bg-white p-6 text-center dark:border-neutral-700 dark:bg-neutral-900">
+						<h3 class="mb-2 text-xl font-bold">{plan.header.title}</h3>
+						<div class="mb-4">
+							<span class="text-3xl font-bold text-primary-600">{plan.header.price}{plan.header.currency}</span>
+							<p class="text-sm text-neutral-500">{plan.header.priceLabel}</p>
+						</div>
+						<Button
+							type="link"
+							link={plan.header.buttonLink}
+							style="primary"
+							size="md"
+							classes="w-full"
+						>
+							{plan.header.buttonName}
+						</Button>
+					</div>
+				))}
+			</div>
+		</div>
+	</Section>
+)}
