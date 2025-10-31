@@ -39,10 +39,12 @@ const savedNavActions = navActions.map((action) => ({
 	<div class="header__container">
 		<nav aria-label="main navigation" role="navigation" class="header__nav">
 			<!-- Logo -->
-			<a href="/" class="header__logo">
-				<img src={logo.src} alt={logo.alt} width="48" height="48" />
-				<span>{logo.text}</span>
-			</a>
+			{logo && (
+				<a href="/" class="header__logo">
+					{logo.src && <img src={logo.src} alt={logo.alt || ''} width="48" height="48" />}
+					{logo.text && <span>{logo.text}</span>}
+				</a>
+			)}
 
 			<!-- Menu toggle -->
 			<button

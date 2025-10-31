@@ -2,9 +2,9 @@
 // ------------
 // Description: The navigation bar data for the website.
 export interface Logo {
-	src: string
-	alt: string
-	text: string
+	src?: string
+	alt?: string
+	text?: string
 }
 
 export interface NavSubItem {
@@ -26,23 +26,21 @@ export interface NavAction {
 }
 
 export interface NavData {
-	logo: Logo
+	logo?: Logo
 	navItems: NavItem[]
 	navActions: NavAction[]
 }
 
 export const navigationBarData: NavData = {
 	logo: {
-		src: '/logo.svg',
-		alt: 'The tailwind astro theme',
-		text: 'Foxi.'
+		alt: 'Grégory Leroux',
+		text: 'Grégory Leroux'
 	},
 	navItems: [
-		{ name: 'Home', link: '/' },
-		{ name: 'Pricing', link: '/#pricing' },
-		{ name: 'Features', link: '/#features' },
-		{ name: 'FAQ', link: '/#faq' },
-		{ name: 'Contact', link: '/#contact' }
+		{ name: 'Accueil', link: '/' },
+		{ name: 'Prix', link: '/#pricing' },
+		{ name: 'Méthode', link: '/#steps' },
+		{ name: 'FAQ', link: '/#faq' }
 	],
-	navActions: [{ name: 'Try it now', link: '/', style: 'primary', size: 'lg' }]
+	navActions: [{ name: 'Réserver un appel ', link: '/#', style: 'primary', size: 'lg' }]
 }
