@@ -8,14 +8,12 @@
 import TextImage from '../basic/TextImage.astro'
 
 // Content
-import highlight01 from '../../../assets/highlights/highlight-01.svg'
-import highlight01mobile from '../../../assets/highlights/highlight-01-mobile.svg'
-import highlight02 from '../../../assets/highlights/highlight-02.svg'
-import highlight02mobile from '../../../assets/highlights/highlight-02-mobile.svg'
-import highlight03 from '../../../assets/highlights/highlight-03.svg'
-import highlight03mobile from '../../../assets/highlights/highlight-03-mobile.svg'
-import highlight04 from '../../../assets/highlights/highlight-04.svg'
-import highlight04mobile from '../../../assets/highlights/highlight-04-mobile.svg'
+import highlight01 from '../../../assets/images/time.svg'
+import highlight01mobile from '../../../assets/images/time-mobile.svg'
+import highlight02 from '../../../assets/images/collaboration.svg'
+import highlight02mobile from '../../../assets/images/collaboration-mobile.svg'
+import highlight03 from '../../../assets/images/responsive.svg'
+import highlight03mobile from '../../../assets/images/responsive-mobile.svg'
 
 type HighlightBlock = {
 	title: string
@@ -38,7 +36,7 @@ const highlightBlocks: HighlightBlock[] = [
 	},
 	{
 		title: '<strong>Zéro connaissance technique</strong> requise',
-		text: 'Vous êtes expert dans votre domaine, pas en création de sites web. C\'est normal. Nous gérons tout : design, rédaction, mise en ligne, connexion à votre domaine. Vous validez simplement vos textes et vos photos. Formation de 30 minutes incluse pour que vous puissiez modifier vos contenus en toute autonomie.',
+		text: "Vous êtes expert dans votre domaine, pas en création de sites web. C'est normal. Nous gérons tout : design, rédaction, mise en ligne, connexion à votre domaine. Vous validez simplement vos textes et vos photos.",
 		image: highlight02,
 		mobileImage: highlight02mobile,
 		imageWidth: highlight02.width,
@@ -47,21 +45,12 @@ const highlightBlocks: HighlightBlock[] = [
 	},
 	{
 		title: 'Design <strong>moderne et responsive</strong>',
-		text: 'Plus de 70% de vos clients vous cherchent sur mobile. Votre site s\'adapte parfaitement à tous les écrans : smartphone, tablette, ordinateur. Design épuré et professionnel qui inspire confiance. Optimisé pour Google avec des temps de chargement ultra-rapides. Votre image de marque valorisée.',
+		text: "Plus de 70% de vos clients vous cherchent sur mobile. Votre site s'adapte parfaitement à tous les écrans : smartphone, tablette, ordinateur. Design épuré et professionnel qui inspire confiance. Optimisé pour Google avec des temps de chargement ultra-rapides. Votre image de marque valorisée.",
 		image: highlight03,
 		mobileImage: highlight03mobile,
 		imageWidth: highlight03.width,
 		imageHeight: highlight03.height,
 		imagePosition: 'right'
-	},
-	{
-		title: '<strong>Support et mises à jour</strong> inclus',
-		text: 'Vous n\'êtes pas seul après la livraison. Support par email et WhatsApp inclus pendant 3 mois. Besoin d\'ajouter un service ? De modifier vos tarifs ? De changer une photo ? Nous vous accompagnons. Hébergement sécurisé et sauvegardes automatiques comprises. Tranquillité d\'esprit garantie.',
-		image: highlight04,
-		mobileImage: highlight04mobile,
-		imageWidth: highlight04.width,
-		imageHeight: highlight04.height,
-		imagePosition: 'left'
 	}
 ]
 ---

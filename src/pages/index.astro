@@ -9,10 +9,11 @@ import HighlightBlocks from '../components/blocks/highlights/HightlightRows.astr
 import Steps from '../components/blocks/Steps.astro'
 import ContactForm from '../components/blocks/contact/ContactForm.astro'
 import Pricing from '../components/blocks/pricing/Pricing.astro'
-import FaqSticky from '../components/blocks/FAQ/FaqSticky.astro'
 
 // Data
 import faqData from '../data/json-files/faqData.json'
+import FAQ from '../components/blocks/FAQ/FAQ.astro'
+import CalendarBooking from '../components/blocks/booking/CalendarBooking.astro'
 
 // - SEO
 const SEO = {
@@ -27,7 +28,16 @@ const SEO = {
 	<Features />
 	<Steps />
 	<HighlightBlocks />
-	<Pricing variant='cards'/>
-	<FaqSticky title="Questions fréquentes" data={faqData} />
-	<ContactForm variant="simple" />
+	<Pricing variant="cards" />
+	<FAQ
+		variant="default"
+		title="Questions <strong>fréquentes</strong>"
+		data={faqData}
+		includeCTA={false}
+	/>
+	<CalendarBooking
+		mode="single"
+		title="Réservez votre appel gratuit"
+		description="30 minutes pour définir vos besoins et recevoir votre devis personnalisé"
+	/>
 </Layout>

@@ -40,9 +40,9 @@ const { title = '', subtitle, titleSize = 'lg', image, icon, link, type, classes
 			<Image
 				src={image}
 				alt={title}
-				class={type === 'image-bottom' ? 'order-2' : ''}
-				width={600}
-				height={400}
+				class={type === 'image-bottom' ? 'order-2 h-16 w-16 object-contain mx-auto' : 'h-16 w-16 object-contain mx-auto'}
+				width={64}
+				height={64}
 			/>
 		)
 	}

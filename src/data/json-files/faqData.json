@@ -1,73 +1,37 @@
 [
 	{
-		"question": "Pourquoi 7 jours ? C'est réellement possible ?",
-		"reply": "Oui, absolument. Nous avons industrialisé notre processus avec une bibliothèque de composants prêts à l'emploi. Nous ne partons pas de zéro à chaque fois. Vous choisissez les blocs qui vous intéressent (services, témoignages, galerie, FAQ...), nous les personnalisons avec votre contenu et votre identité visuelle. Le délai de 7 jours ouvrés est garanti par contrat.",
-		"category": "process",
-		"open": true
-	},
-	{
-		"question": "Que se passe-t-il si je n'ai pas de contenu (textes, photos) ?",
-		"reply": "Pas de panique, c'est très courant. Nous vous guidons dans la création de contenu avec un questionnaire simple. Pour les textes, nous rédigeons une première version que vous validez. Pour les photos, nous pouvons utiliser des banques d'images professionnelles (inclus) ou vous conseiller sur les photos à prendre avec votre smartphone. Nous faisons aussi le montage et l'optimisation.",
-		"category": "process",
-		"open": false
-	},
-	{
 		"question": "Je ne suis pas à l'aise avec l'informatique, c'est un problème ?",
-		"reply": "Absolument pas. Nous gérons 100% de la technique : création, design, mise en ligne, connexion du nom de domaine. Vous n'avez qu'à valider vos textes et images par email ou WhatsApp. Si vous souhaitez pouvoir modifier vous-même vos contenus plus tard, nous incluons une formation de 30 minutes (très simple, pas de code). Mais vous pouvez aussi nous demander de faire les modifications.",
+		"reply": "Absolument pas. Nous gérons 100% de la technique : création, design, mise en ligne, connexion du nom de domaine. Vous n'avez qu'à valider vos textes et images par email ou WhatsApp.",
 		"category": "process",
 		"open": false
 	},
 	{
 		"question": "Quels sont les coûts cachés ? Hébergement, maintenance ?",
-		"reply": "Aucun coût caché. Le prix annoncé inclut : hébergement performant 1 an, nom de domaine 1 an si besoin, certificat SSL (cadenas sécurisé), emails professionnels (jusqu'à 5 adresses). Après la première année, l'hébergement coûte 120€ HT/an. La maintenance (mises à jour, sauvegardes) est incluse. Vous ne payez que si vous demandez des modifications de contenu après la période de support.",
+		"reply": "Aucun coût caché. Le prix annoncé inclut : hébergement, nom de domaine 1 an, emails professionnels (jusqu'à 5 adresses). Après la première année, le renouvellement de l'hébergement et du nom de domaine est facturé 100€ HT/an.",
 		"category": "pricing",
 		"open": false
 	},
 	{
-		"question": "Puis-je modifier mon site après la livraison ?",
-		"reply": "Oui, de deux façons. 1) Vous pouvez le modifier vous-même après la formation (incluse dans les offres Pro et Premium). L'interface est très simple, pas besoin de coder. 2) Vous pouvez nous demander de faire les modifications. Support inclus pendant 3 mois (Pro) ou 6 mois (Premium), puis facturation à l'heure selon vos besoins (60€ HT/heure).",
-		"category": "process",
-		"open": false
-	},
-	{
 		"question": "Mon site sera-t-il bien référencé sur Google ?",
-		"reply": "Oui. Tous nos sites sont optimisés SEO dès la création : structure technique correcte, vitesse de chargement optimale, responsive mobile, balises méta configurées. Pour l'offre Premium, nous allons plus loin avec une stratégie de mots-clés adaptée à votre secteur et zone géographique. Nous optimisons aussi votre fiche Google My Business (inclus dans Pro et Premium) pour apparaître sur Google Maps.",
+		"reply": "Oui. Tous nos sites sont optimisés SEO dès la création : structure technique correcte, vitesse de chargement optimale, responsive mobile, balises méta configurées. Nous optimisons aussi votre fiche Google My Business (inclus dans Pro et Premium) pour apparaître sur Google Maps.",
 		"category": "features",
 		"open": false
 	},
 	{
 		"question": "Que se passe-t-il si je ne suis pas satisfait du résultat ?",
-		"reply": "Nous incluons 2 rounds de modifications dans tous nos tarifs pour garantir votre satisfaction. Vous validez la structure avant que nous passions à la personnalisation, puis vous validez le design final. Si vraiment le résultat ne vous convient pas du tout, nous remboursons 50% de l'acompte (geste commercial, car nous avons déjà investi du temps). Mais en 2 ans, nous n'avons eu aucune demande de ce type.",
-		"category": "pricing",
-		"open": false
-	},
-	{
-		"question": "Différence entre les offres Vitrine, Pro et Premium ?",
-		"reply": "Vitrine (890€) : site simple et efficace, idéal pour une présence en ligne rapide. Pro (1490€, le plus populaire) : ajoute formulaire contact avancé, WhatsApp, avis Google, FAQ et optimisation Google My Business. Parfait pour artisans et professionnels de santé. Premium (2490€) : ajoute système de prise de RDV en ligne, galerie projets, témoignages détaillés, blog et stratégie SEO poussée. Pour maximiser les conversions.",
-		"category": "pricing",
-		"open": false
-	},
-	{
-		"question": "Puis-je voir des exemples de sites créés ?",
-		"reply": "Oui, contactez-nous et nous vous enverrons 3 à 5 exemples de sites similaires à votre secteur d'activité. Nous adaptons le design et les fonctionnalités à chaque métier (artisan, thérapeute, consultant, etc.). Chaque site est unique même s'il utilise notre bibliothèque de composants.",
-		"category": "features",
-		"open": false
-	},
-	{
-		"question": "Comment fonctionne le paiement ?",
-		"reply": "Paiement en 2 fois : 50% à la signature du devis pour lancer le projet, 50% à la livraison du site. Paiement par virement bancaire ou CB (via Stripe sécurisé). Facture avec garantie et conditions générales fournies. Pas d'abonnement mensuel, c'est un paiement unique (sauf hébergement annuel après la première année).",
+		"reply": "Nous incluons 2 rounds de modifications dans tous nos tarifs pour garantir votre satisfaction. Vous validez la structure avant que nous passions à la personnalisation, puis vous validez le design final.",
 		"category": "pricing",
 		"open": false
 	},
 	{
 		"question": "Que se passe-t-il si j'ai besoin d'un composant spécifique ?",
-		"reply": "Aucun problème. Si le composant que vous souhaitez n'existe pas dans notre bibliothèque, nous nous engageons à le créer sans surcoût (dans la limite du raisonnable). Par exemple : formulaire multi-étapes, calculateur de devis, système de filtres, etc. Nous évaluons la faisabilité lors du rendez-vous découverte et l'incluons dans le devis si c'est plus complexe.",
+		"reply": "Si le composant que vous souhaitez n'existe pas dans notre bibliothèque, sur le plan premiumn nous nous engageons à le créer sans surcoût (dans la limite du raisonnable). Nous évaluons la faisabilité lors du rendez-vous découverte et l'incluons dans le devis si c'est plus complexe.",
 		"category": "features",
 		"open": false
 	},
 	{
 		"question": "Le site sera-t-il rapide sur mobile ?",
-		"reply": "Oui, c'est une priorité absolue. Plus de 70% de vos visiteurs viennent du mobile. Nos sites sont construits avec Astro, une technologie moderne ultra-performante. Résultats : score Google PageSpeed > 90/100, temps de chargement < 2 secondes. Nous testons systématiquement sur iPhone, Android, tablettes. Le design s'adapte parfaitement à toutes les tailles d'écran.",
+		"reply": "Oui, c'est une priorité absolue. Plus de 70% de vos visiteurs viennent du mobile. Nos sites sont construits avec Astro, une technologie moderne ultra-performante. Résultats : score Google PageSpeed > 90/100, temps de chargement < 2 secondes.",
 		"category": "features",
 		"open": false
 	}

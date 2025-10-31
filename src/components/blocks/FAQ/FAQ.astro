@@ -26,7 +26,8 @@ interface Props {
 	subtitle?: string
 	data?: Array<{
 		question: string
-		answer: string
+		answer?: string
+		reply?: string
 		open?: boolean
 	}>
 	classes?: string
@@ -71,7 +72,7 @@ const faqStructuredData = {
 		name: faq.question,
 		acceptedAnswer: {
 			'@type': 'Answer',
-			text: faq.answer
+			text: faq.answer || faq.reply || ''
 		}
 	}))
 }
@@ -118,7 +119,7 @@ const faqStructuredData = {
 								</summary>
 								<div class="border-t border-neutral-100 px-6 py-5 dark:border-neutral-800">
 									<p class="pl-10 leading-relaxed text-neutral-600 dark:text-neutral-400">
-										{faq.answer}
+										{faq.answer || faq.reply}
 									</p>
 								</div>
 							</details>
@@ -189,7 +190,11 @@ const faqStructuredData = {
 				<Col span="8">
 					<Card classes="divide-y divide-neutral-100 dark:divide-neutral-800">
 						{data.map((faq) => (
-							<Accordion title={faq.question} text={faq.answer} open={faq.open} />
+							<Accordion
+								title={faq.question}
+								text={faq.answer || faq.reply || ''}
+								open={faq.open}
+							/>
 						))}
 					</Card>
 				</Col>
@@ -240,7 +245,7 @@ const faqStructuredData = {
 										{faq.question}
 									</h3>
 									<p class="text-muted mt-3 text-neutral-600 dark:text-neutral-400">
-										{faq.answer}
+										{faq.answer || faq.reply}
 									</p>
 								</div>
 							</div>

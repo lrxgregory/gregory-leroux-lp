@@ -23,48 +23,39 @@ import feature05 from '../../../assets/cards/feature-05.svg'
 <Section id="features">
 	<Row>
 		<Col span="12" align="center" classes="mb-12 max-w-4xl mx-auto">
-			<h2 class="text-pretty">Pourquoi choisir notre solution <strong>clé en main</strong> ?</h2>
+			<h2 class="text-pretty">
+				Pourquoi choisir notre solution <strong>clé en main</strong> ?
+			</h2>
 			<p class="pb-0 text-lg">
-				Pas de jargon technique, pas de surprises. Vous obtenez exactement ce dont vous avez besoin pour attirer et convertir vos clients en ligne.
+				Pas de jargon technique, pas de surprises. Vous obtenez exactement ce dont vous avez
+				besoin pour attirer et convertir vos clients en ligne.
 			</p>
 		</Col>
 	</Row>
 	<Row>
-		<Col span="4">
-			<Card
-				title="En ligne en 7 jours ouvrés"
-				subtitle="Votre activité ne peut pas attendre 3 mois. Nous livrons votre site fonctionnel et optimisé en une semaine. Délai garanti par contrat."
-				image={feature01}
-				link="#pricing"
-			/>
-		</Col>
-		<Col span="4" classes="flex flex-col gap-6">
-			<Card
-				title="Prix fixe, sans surprise"
-				subtitle="Vous connaissez le prix exact avant de commencer. Aucun dépassement, aucun frais caché. Budget maîtrisé du début à la fin."
-				image={feature02}
-				link="#pricing"
-			/>
-			<Card
-				title="Composants sur-mesure"
-				subtitle="Choisissez parmi notre bibliothèque de blocs : galerie projets, témoignages, zone d'intervention, FAQ. Si vous ne trouvez pas, on le crée."
-				image={feature03}
-				link="#pricing"
-			/>
-		</Col>
-		<Col span="4" classes="flex flex-col gap-6">
-			<Card
-				title="Optimisé pour convertir"
-				subtitle="Formulaire de contact, bouton WhatsApp, système de prise de RDV. Tout est pensé pour transformer vos visiteurs en clients."
-				image={feature04}
-				link="#pricing"
-			/>
-			<Card
-				title="Google Business inclus"
-				subtitle="Nous optimisons aussi votre fiche Google My Business pour maximiser votre visibilité locale. Plus de clients qui vous trouvent sur Google Maps."
-				image={feature05}
-				link="#pricing"
-			/>
+		<Col span="12">
+			<div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+				<Card
+					title="En ligne en 7 jours ouvrés"
+					subtitle="Votre activité ne peut pas attendre 3 mois. Nous livrons votre site fonctionnel et optimisé en une semaine. Délai garanti par contrat."
+					link="#pricing"
+				/>
+				<Card
+					title="Prix fixe, sans surprise"
+					subtitle="Vous connaissez le prix exact avant de commencer. Aucun dépassement, aucun frais caché. Budget maîtrisé du début à la fin."
+					link="#pricing"
+				/>
+				<Card
+					title="Composants sur-mesure"
+					subtitle="Choisissez parmi notre bibliothèque de blocs : galerie projets, témoignages, zone d'intervention, FAQ. Si vous ne trouvez pas, on le crée."
+					link="#pricing"
+				/>
+				<Card
+					title="Optimisé pour convertir"
+					subtitle="Formulaire de contact, bouton WhatsApp, système de prise de RDV. Tout est pensé pour transformer vos visiteurs en clients."
+					link="#pricing"
+				/>
+			</div>
 		</Col>
 	</Row>
 </Section>

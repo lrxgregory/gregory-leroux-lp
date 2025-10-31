@@ -40,9 +40,9 @@ const {
 					'Vos contenus, couleurs, images - tout est adapté à votre identité. Aperçus réguliers pour validation.'
 			},
 			{
-				title: '<span class="font-medium">Livraison & formation</span>',
+				title: '<span class="font-medium">Mise en ligne</span>',
 				description:
-					'Site en ligne + formation personnalisée pour que vous soyez autonome. Support inclus.'
+					'Votre site est hébergé et votre nom de domaine configuré.'
 			}],
   classes = ""
 } = Astro.props
@@ -71,19 +71,19 @@ const {
             <div class="flex gap-6 items-start">
               <!-- Numéro/Icône -->
               <div class="flex-shrink-0">
-                <div class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white font-bold text-xl shadow-lg">
+                <div class="step-badge flex h-16 w-16 items-center justify-center bg-gradient-to-br from-primary-500 to-primary-600 text-white font-bold text-xl">
                   {index + 1}
                 </div>
               </div>
-              
+
               <!-- Contenu -->
               <div class="flex-1 pb-8 relative">
                 <!-- Ligne de connexion -->
                 {index < steps.length - 1 && (
                   <div class="absolute -left-14 top-16 w-0.5 h-full bg-gradient-to-b from-primary-300 to-neutral-200 dark:from-primary-700 dark:to-neutral-700 -z-10"></div>
                 )}
-                
-                <div class="bg-white dark:bg-neutral-800 rounded-xl p-6 shadow-sm border border-neutral-200 dark:border-neutral-700 ml-2">
+
+                <div class="step-card bg-white dark:bg-neutral-800 p-6 border border-neutral-200 dark:border-neutral-700 ml-2">
                   <h3 class="mb-3 text-xl font-semibold text-neutral-900 dark:text-white" set:html={step.title} />
                   <p class="text-neutral-600 dark:text-neutral-300 leading-relaxed">
                     {step.description}
@@ -97,3 +97,13 @@ const {
     </Col>
   </Row>
 </Section>
+
+<style>
+  .step-badge {
+    @apply rounded-full shadow-lg transition-all;
+  }
+
+  .step-card {
+    @apply rounded-lg shadow-sm transition-all hover:shadow-md;
+  }
+</style>

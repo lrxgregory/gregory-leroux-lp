@@ -16,7 +16,6 @@ import AvatarGroup from '../../ui/AvatarGroup.astro'
 
 // Content
 // - Hero Image
-import heroImage from '../../../assets/hero-01.png'
 // - Avatars
 import user1 from '../../../assets/avatars/avatar-01.webp'
 import user2 from '../../../assets/avatars/avatar-02.webp'
@@ -28,7 +27,7 @@ const avatars = [
 ]
 ---
 
-<Section id="intro" padding="top" classes="bg-neutral-50 dark:bg-neutral-900">
+<Section id="intro" padding="none" classes="bg-neutral-50 dark:bg-neutral-900 min-h-screen flex items-center">
 	<Row>
 		<Col span="2" />
 		<Col span="8" align="center">
@@ -39,14 +38,6 @@ const avatars = [
 		</Col>
 		<Col span="2" />
 		<Col span="2" />
-		<Col span="8">
-			<Image
-				src={heroImage}
-				alt="Foxi. The tailwind astro theme"
-				class="translate-y-8 shadow-2xl shadow-neutral-200 dark:shadow-neutral-950"
-				format="webp"
-			/></Col
-		>
 		<Col span="2" />
 	</Row>
 </Section>
