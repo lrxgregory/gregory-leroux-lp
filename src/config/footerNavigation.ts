@@ -35,63 +35,66 @@ export interface FooterData {
 
 export const footerNavigationData: FooterData = {
 	footerAbout: {
-		title: 'Foxi.',
-		aboutText: 'Développeur web',
+		title: 'Grégory Leroux',
+		aboutText: 'Sites vitrine professionnels livrés en 7 jours. Design moderne, optimisé pour convertir vos visiteurs en clients.',
 		logo: {
-			alt: 'Grégory Leroux',
 			text: 'Grégory Leroux'
 		}
 	},
 	footerColumns: [
 		{
-			category: 'Product',
+			category: 'Navigation',
 			subCategories: [
 				{
-					subCategory: 'Features',
-					subCategoryLink: '/features'
+					subCategory: 'Accueil',
+					subCategoryLink: '/'
 				},
 				{
-					subCategory: 'Pricing',
-					subCategoryLink: '/pricing'
+					subCategory: 'Prix',
+					subCategoryLink: '/#pricing'
+				},
+				{
+					subCategory: 'Méthode',
+					subCategoryLink: '/#steps'
 				},
 				{
 					subCategory: 'FAQ',
-					subCategoryLink: '/faq'
+					subCategoryLink: '/#faq'
 				}
 			]
 		},
 		{
-			category: 'Legal',
+			category: 'Légal',
 			subCategories: [
 				{
-					subCategory: 'Terms of Service',
-					subCategoryLink: '/terms'
+					subCategory: 'Mentions légales',
+					subCategoryLink: '/mentions-legales'
 				},
 				{
-					subCategory: 'Privacy Policy',
-					subCategoryLink: '/privacy'
+					subCategory: 'Politique de confidentialité',
+					subCategoryLink: '/confidentialite'
 				},
 				{
-					subCategory: 'Cookie Policy',
-					subCategoryLink: '/cookies'
+					subCategory: 'CGV',
+					subCategoryLink: '/cgv'
 				}
 			]
 		},
 		{
-			category: 'Get in touch',
+			category: 'Contact',
 			subCategories: [
 				{
-					subCategory: 'Contact',
-					subCategoryLink: '/contact'
+					subCategory: 'Réserver un appel',
+					subCategoryLink: '/#booking'
 				},
 				{
-					subCategory: 'Support',
-					subCategoryLink: '/contact'
+					subCategory: 'Email',
+					subCategoryLink: 'mailto:contact@gregoryleroux.com'
 				}
 			]
 		}
 	],
 	subFooter: {
-		copywriteText: 'Grégory Leroux - Développeur web'
+		copywriteText: '© 2024 Grégory Leroux. Tous droits réservés.'
 	}
 }
