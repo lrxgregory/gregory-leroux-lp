@@ -1,0 +1,11 @@
+node_modules
+.git
+.astro
+dist
+.DS_Store
+*.log
+scripts/clients-data.json
+scripts/legal-info.json
+setup.md
+copywriting.md
+DESIGN_SYSTEM.md

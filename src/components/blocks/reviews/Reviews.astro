@@ -218,16 +218,16 @@ const carouselId = `reviews-carousel-${Math.random().toString(36).substr(2, 9)}`
 
 		containers.forEach((container) => {
 			const items = container.querySelectorAll('.carousel-item')
-			const dotsContainer = container.parentElement.querySelector('.carousel-dots')
+			const dotsContainer = container.parentElement?.querySelector('.carousel-dots')
 			if (!dotsContainer) return
 
 			const dots = dotsContainer.querySelectorAll('.carousel-dot')
 			if (items.length <= 1) return
 
 			let currentIndex = 0
-			let autoplayInterval
+			let autoplayInterval: ReturnType<typeof setInterval> | null = null
 
-			const showItem = (index) => {
+			const showItem = (index: number) => {
 				// Update items
 				items.forEach((item, i) => {
 					if (i === index) {
@@ -256,7 +256,7 @@ const carouselId = `reviews-carousel-${Math.random().toString(36).substr(2, 9)}`
 				showItem(currentIndex)
 			}
 
-			const goToItem = (index) => {
+			const goToItem = (index: number) => {
 				currentIndex = index
 				showItem(currentIndex)
 				// Reset autoplay
@@ -280,8 +280,8 @@ const carouselId = `reviews-carousel-${Math.random().toString(36).substr(2, 9)}`
 			})
 
 			// Pause on hover
-			container.parentElement.addEventListener('mouseenter', stopAutoplay)
-			container.parentElement.addEventListener('mouseleave', startAutoplay)
+			container.parentElement?.addEventListener('mouseenter', stopAutoplay)
+			container.parentElement?.addEventListener('mouseleave', startAutoplay)
 
 			// Start autoplay
 			startAutoplay()

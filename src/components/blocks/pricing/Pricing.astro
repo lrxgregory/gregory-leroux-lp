@@ -121,7 +121,7 @@ const pricingData: PricingTableData[] = data || (pricingTablesData as PricingTab
 						<Button
 							type="link"
 							link={plan.header.buttonLink}
-							style={plan.type === 'featured' ? 'primary' : 'outline'}
+							style={plan.type === 'featured' ? 'primary' : 'secondary'}
 							size="lg"
 							classes="w-full"
 						>
@@ -156,7 +156,7 @@ const pricingData: PricingTableData[] = data || (pricingTablesData as PricingTab
 							type="link"
 							link={plan.header.buttonLink}
 							style="primary"
-							size="md"
+							size="base"
 							classes="w-full"
 						>
 							{plan.header.buttonName}
