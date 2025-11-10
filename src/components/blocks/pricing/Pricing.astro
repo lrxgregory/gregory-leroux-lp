@@ -13,21 +13,6 @@ import Button from '../../ui/Button.astro'
 // Content
 import pricingTablesData from '../../../data/json-files/pricingTablesdata.json'
 
-// Props
-interface Props {
-	variant?: 'columns' | 'cards' | 'simple'
-	title?: string
-	subtitle?: string
-	showToggle?: boolean
-}
-
-const {
-	variant = 'columns',
-	title = 'Choisissez l\'offre adaptée à vos besoins',
-	subtitle = 'Prix fixe, transparent, sans surprise. Livraison garantie en 7-14 jours ouvrés.',
-	showToggle = false
-} = Astro.props
-
 type PricingTableData = {
 	header: {
 		title: string
@@ -50,7 +35,24 @@ type PricingTableData = {
 	type: 'basic' | 'featured'
 }
 
-const pricingData: PricingTableData[] = pricingTablesData as PricingTableData[]
+// Props
+interface Props {
+	variant?: 'columns' | 'cards' | 'simple'
+	title?: string
+	subtitle?: string
+	showToggle?: boolean
+	data?: PricingTableData[]
+}
+
+const {
+	variant = 'columns',
+	title = 'Choisissez l\'offre adaptée à vos besoins',
+	subtitle = 'Prix fixe, transparent, sans surprise. Livraison en 7 jours ouvrés.',
+	showToggle = false,
+	data
+} = Astro.props
+
+const pricingData: PricingTableData[] = data || (pricingTablesData as PricingTableData[])
 ---
 
 {variant === 'columns' && (

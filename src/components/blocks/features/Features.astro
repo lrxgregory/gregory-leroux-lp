@@ -12,9 +12,9 @@ import Row from '../../ui/Row.astro'
 import Col from '../../ui/Col.astro'
 
 // Components - UI
-import FeatureCard from '../../ui/cards/FeatureCard.astro'
 import Feature from '../../ui/Feature.astro'
 import BasicCard from '../../ui/cards/BasicCard.astro'
+import { Image } from 'astro:assets'
 
 // Props
 type Variant = 'image' | 'list' | 'cards'
@@ -96,11 +96,22 @@ const {
 			<Row>
 				{data.map((service, index) => (
 					<Col span="4" classes={index >= 3 ? 'pt-6' : ''}>
-						<FeatureCard
-							title={service.title}
-							subtitle={service.description}
-							image={service.image || 'https://picsum.photos/id/237/400/300'}
-						/>
+						<div class="group relative h-full overflow-hidden rounded-xl border border-neutral-200 bg-white transition-all hover:shadow-xl dark:border-neutral-800 dark:bg-neutral-900">
+							<div class="relative aspect-[4/3] overflow-hidden">
+								<Image
+									src={service.image || 'https://picsum.photos/id/237/400/300'}
+									alt={service.title}
+									width={400}
+									height={300}
+									class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+							</div>
+							<div class="p-6">
+								<h3 class="mb-3 text-xl font-bold text-neutral-900 dark:text-white">{service.title}</h3>
+								<p class="text-neutral-600 dark:text-neutral-400">{service.description}</p>
+							</div>
+						</div>
 					</Col>
 				))}
 			</Row>

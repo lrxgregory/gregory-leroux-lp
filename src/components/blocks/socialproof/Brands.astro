@@ -1,0 +1,82 @@
+---
+// Brands Section (Logo Cloud)
+// ------------
+// Description: Display partner/client logos to build trust and credibility
+
+// Components
+// - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+// - UI
+import { Image } from 'astro:assets'
+
+// Content
+import airtable from '../../../assets/logos/airtable-logo.svg'
+import asana from '../../../assets/logos/asana-logo.svg'
+import basecamp from '../../../assets/logos/basecamp-logo.svg'
+import evernote from '../../../assets/logos/evernote-logo.svg'
+import notion from '../../../assets/logos/notion-logo.svg'
+import slack from '../../../assets/logos/slack-logo.svg'
+
+const defaultImages = [
+	{
+		image: airtable,
+		alt: 'Airtable logo'
+	},
+	{
+		image: asana,
+		alt: 'Asana logo'
+	},
+	{
+		image: basecamp,
+		alt: 'Basecamp logo'
+	},
+	{
+		image: evernote,
+		alt: 'Evernote logo'
+	},
+	{
+		image: notion,
+		alt: 'Notion logo'
+	},
+	{
+		image: slack,
+		alt: 'Slack logo'
+	}
+]
+
+// Props
+type Props = {
+	title?: string
+	logos?: Array<{ image: ImageMetadata; alt: string }>
+	classes?: string
+}
+const { title, logos = defaultImages, classes } = Astro.props
+---
+
+<Section padding="both" classes={classes}>
+	{title && (
+		<Row>
+			<Col span="12" align="center">
+				<h3 class="mb-6 text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-500">
+					{title}
+				</h3>
+			</Col>
+		</Row>
+	)}
+
+	<Row flex classes="!flex-row">
+		<Col span="12">
+			<div class="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
+				{
+					logos.map((item) => (
+						<div class="w-24 grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100 md:w-28 lg:w-32">
+							<Image src={item.image} alt={item.alt} class="h-auto w-full" />
+						</div>
+					))
+				}
+			</div>
+		</Col>
+	</Row>
+</Section>

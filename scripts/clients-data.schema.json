@@ -1,0 +1,266 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Clients Data Schema",
+  "description": "Configuration schema for client landing pages",
+  "type": "object",
+  "properties": {
+    "clients": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Client"
+      }
+    }
+  },
+  "required": ["clients"],
+  "definitions": {
+    "Client": {
+      "type": "object",
+      "properties": {
+        "slug": {
+          "type": "string",
+          "description": "Unique identifier for the client (used in npm run set-client <slug>)"
+        },
+        "businessName": {
+          "type": "string",
+          "description": "Business display name"
+        },
+        "legalName": {
+          "type": "string",
+          "description": "Legal business name (SARL, SAS, etc.)"
+        },
+        "tagline": {
+          "type": "string",
+          "description": "Short tagline for the business"
+        },
+        "description": {
+          "type": "string",
+          "description": "Longer description for SEO and meta tags"
+        },
+        "sector": {
+          "type": "string",
+          "enum": ["plumber", "heating", "electrician", "contractor", "landscaper", "other"],
+          "description": "Business sector (affects content and images)"
+        },
+        "city": {
+          "type": "string",
+          "description": "Main city of operation"
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "Postal code"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street address"
+        },
+        "coordinates": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "number",
+              "description": "Latitude"
+            },
+            "lng": {
+              "type": "number",
+              "description": "Longitude"
+            }
+          },
+          "required": ["lat", "lng"]
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number (display format)"
+        },
+        "phoneLink": {
+          "type": "string",
+          "description": "Phone number (tel: link format)"
+        },
+        "whatsapp": {
+          "type": "string",
+          "description": "WhatsApp number (international format without +)"
+        },
+        "whatsappMessage": {
+          "type": "string",
+          "description": "Default WhatsApp message"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email"
+        },
+        "googleMapsUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Google Maps URL"
+        },
+        "mapEmbedUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Google Maps embed URL"
+        },
+        "pricingPlan": {
+          "type": "string",
+          "enum": ["vitrine", "pro", "premium"],
+          "description": "Pricing plan tier"
+        },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of services offered"
+        },
+        "serviceAreas": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Cities/areas served"
+        },
+        "hours": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Business hours"
+        },
+        "emergency": {
+          "type": "boolean",
+          "description": "Offers emergency services"
+        },
+        "colors": {
+          "type": "object",
+          "properties": {
+            "primary": {
+              "type": "string",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "description": "Primary brand color (hex format)"
+            },
+            "secondary": {
+              "type": "string",
+              "pattern": "^#[0-9A-Fa-f]{6}$",
+              "description": "Secondary brand color (hex format)"
+            }
+          },
+          "required": ["primary"]
+        },
+        "designSystem": {
+          "type": "object",
+          "description": "Design system customization for border-radius and shadows",
+          "properties": {
+            "borderRadius": {
+              "type": "string",
+              "enum": ["none", "sm", "default", "md", "lg", "xl", "2xl", "3xl", "full"],
+              "description": "Border radius style: none (0px), sm (2px), default (4px), md (6px), lg (8px), xl (12px), 2xl (16px), 3xl (24px), full (9999px)"
+            },
+            "shadow": {
+              "type": "string",
+              "enum": ["none", "sm", "default", "md", "lg", "xl", "2xl"],
+              "description": "Shadow style: none, sm (subtle), default, md (medium), lg (large), xl (extra large), 2xl (dramatic)"
+            }
+          }
+        },
+        "googleReviews": {
+          "type": "object",
+          "properties": {
+            "rating": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 5,
+              "description": "Average rating (0-5)"
+            },
+            "count": {
+              "type": "integer",
+              "minimum": 0,
+              "description": "Number of reviews"
+            },
+            "link": {
+              "type": "string",
+              "format": "uri",
+              "description": "Link to Google reviews"
+            }
+          },
+          "required": ["rating", "count", "link"]
+        },
+        "seoKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "SEO keywords"
+        },
+        "seoAdvanced": {
+          "type": "object",
+          "description": "Advanced SEO configuration (Pro plan only)",
+          "properties": {
+            "businessType": {
+              "type": "string",
+              "description": "Schema.org business type (e.g., 'Plumber', 'Electrician', 'Restaurant')",
+              "default": "LocalBusiness"
+            },
+            "priceRange": {
+              "type": "string",
+              "description": "Price range indicator (e.g., '€', '€€', '€€€')"
+            },
+            "foundingDate": {
+              "type": "string",
+              "description": "Business founding date (ISO 8601 format: YYYY-MM-DD)"
+            },
+            "founder": {
+              "type": "string",
+              "description": "Founder name"
+            },
+            "logo": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL to business logo"
+            }
+          }
+        },
+        "socialMedia": {
+          "type": "object",
+          "description": "Social media profiles",
+          "properties": {
+            "facebook": {
+              "type": "string",
+              "format": "uri",
+              "description": "Facebook profile URL"
+            },
+            "instagram": {
+              "type": "string",
+              "format": "uri",
+              "description": "Instagram profile URL"
+            },
+            "linkedin": {
+              "type": "string",
+              "format": "uri",
+              "description": "LinkedIn profile URL"
+            },
+            "twitter": {
+              "type": "string",
+              "format": "uri",
+              "description": "Twitter profile URL"
+            }
+          }
+        }
+      },
+      "required": [
+        "slug",
+        "businessName",
+        "tagline",
+        "description",
+        "sector",
+        "city",
+        "postalCode",
+        "street",
+        "coordinates",
+        "phone",
+        "phoneLink",
+        "email",
+        "pricingPlan",
+        "services",
+        "serviceAreas"
+      ]
+    }
+  }
+}

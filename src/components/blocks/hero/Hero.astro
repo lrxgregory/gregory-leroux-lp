@@ -14,7 +14,7 @@ import Col from '../../ui/Col.astro'
 import Button from '../../ui/Button.astro'
 
 // Props
-type Variant = 'home' | 'page'
+type Variant = 'home' | 'page' | 'split'
 
 interface Props {
 	variant?: Variant
@@ -27,6 +27,8 @@ interface Props {
 	secondaryButtonText?: string
 	secondaryButtonLink?: string
 	showTrustBadges?: boolean
+	heroImage?: string
+	heroImageAlt?: string
 	classes?: string
 }
 
@@ -41,17 +43,24 @@ const {
 	secondaryButtonText = 'Devis gratuit',
 	secondaryButtonLink = '#contact',
 	showTrustBadges = true,
+	heroImage,
+	heroImageAlt = 'Hero image',
 	classes = ''
 } = Astro.props
 
 // Default values based on variant
 const defaultTitle =
-	variant === 'home' ? '<strong>Entreprise Lorem</strong>' : title || 'Page Title'
+	variant === 'home' || variant === 'split'
+		? '<strong>Entreprise Lorem</strong>'
+		: title || 'Page Title'
 
-const defaultSubtitle = variant === 'home' ? 'Votre partenaire de confiance' : subtitle
+const defaultSubtitle =
+	variant === 'home' || variant === 'split'
+		? 'Votre partenaire de confiance'
+		: subtitle
 
 const defaultDescription =
-	variant === 'home'
+	variant === 'home' || variant === 'split'
 		? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
 		: description
 ---
@@ -153,6 +162,129 @@ const defaultDescription =
 }
 
 {
+	variant === 'split' && (
+		<Section id={id} padding="both" classes={`bg-neutral-50 dark:bg-neutral-900 ${classes}`}>
+			<div class="split-hero">
+				<!-- Colonne gauche: Contenu -->
+				<div class="split-hero__content">
+					<h1 class="split-hero__title">
+						<Fragment set:html={defaultTitle} />
+						{defaultSubtitle && (
+							<>
+								<br />
+								<span class="split-hero__subtitle">
+									<Fragment set:html={defaultSubtitle} />
+								</span>
+							</>
+						)}
+					</h1>
+					<p class="split-hero__description">{defaultDescription}</p>
+					<div class="split-hero__ctas">
+						<Button size="lg" style="primary" link={primaryButtonLink}>
+							<svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+								<path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+							</svg>
+							{primaryButtonText}
+						</Button>
+						<Button size="lg" style="secondary" link={secondaryButtonLink}>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="size-6"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
+								/>
+							</svg>
+							{secondaryButtonText}
+						</Button>
+					</div>
+					{showTrustBadges && (
+						<div class="split-hero__badges">
+							<span class="split-hero__badge">
+								<svg
+									class="h-4 w-4 text-green-500"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+								Badge 1
+							</span>
+							<span class="split-hero__badge">
+								<svg
+									class="h-4 w-4 text-green-500"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+								Badge 2
+							</span>
+							<span class="split-hero__badge">
+								<svg
+									class="h-4 w-4 text-green-500"
+									fill="currentColor"
+									viewBox="0 0 20 20"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+								Badge 3
+							</span>
+						</div>
+					)}
+				</div>
+
+				<!-- Colonne droite: Image -->
+				<div class="split-hero__visual">
+					{heroImage ? (
+						<img
+							src={heroImage}
+							alt={heroImageAlt}
+							class="split-hero__image"
+							loading="eager"
+						/>
+					) : (
+						<div class="split-hero__placeholder">
+							<svg
+								class="h-24 w-24 text-neutral-300"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+								/>
+							</svg>
+						</div>
+					)}
+				</div>
+			</div>
+		</Section>
+	)
+}
+
+{
 	variant === 'page' && (
 		<Section id={id} classes={`bg-neutral-50 dark:bg-neutral-900 ${classes}`}>
 			<Row>
@@ -170,6 +302,63 @@ const defaultDescription =
 }
 
 <style>
+	/* Split Hero Variant */
+	.split-hero {
+		@apply grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20;
+		align-items: center;
+	}
+
+	.split-hero__content {
+		@apply flex flex-col gap-8;
+	}
+
+	.split-hero__title {
+		@apply text-4xl font-bold leading-tight text-neutral-900 dark:text-white md:text-5xl lg:text-6xl;
+	}
+
+	.split-hero__subtitle {
+		@apply text-3xl font-normal text-neutral-600 dark:text-neutral-400 md:text-4xl;
+	}
+
+	.split-hero__description {
+		@apply max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-400;
+	}
+
+	.split-hero__ctas {
+		@apply flex flex-col gap-4 sm:flex-row;
+	}
+
+	.split-hero__badges {
+		@apply flex flex-wrap items-center gap-6 text-sm text-neutral-500;
+	}
+
+	.split-hero__badge {
+		@apply flex items-center gap-2;
+	}
+
+	.split-hero__visual {
+		@apply relative flex items-center justify-center;
+	}
+
+	.split-hero__image {
+		@apply h-auto w-full max-w-xl object-cover;
+		border-radius: 16px 16px 16px 16px;
+		box-shadow:
+			0 10px 40px -10px rgba(0, 0, 0, 0.1),
+			0 20px 60px -20px rgba(0, 0, 0, 0.15),
+			0 30px 80px -30px rgba(0, 0, 0, 0.2);
+	}
+
+	.split-hero__placeholder {
+		@apply flex h-96 w-full max-w-xl items-center justify-center bg-neutral-100 dark:bg-neutral-800;
+		border-radius: 16px 16px 16px 16px;
+		box-shadow:
+			0 10px 40px -10px rgba(0, 0, 0, 0.1),
+			0 20px 60px -20px rgba(0, 0, 0, 0.15),
+			0 30px 80px -30px rgba(0, 0, 0, 0.2);
+	}
+
+	/* Page Header Variant */
 	.page-header {
 		@apply mx-auto max-w-3xl;
 	}

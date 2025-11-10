@@ -12,13 +12,13 @@
 		"body": {
 			"listItems": [
 				{
-					"listItem": "Site responsive (mobile, tablette, desktop)"
+					"listItem": "Site responsive (mobile, tablette, ordinateur)"
 				},
 				{
 					"listItem": "Formulaire de contact"
 				},
 				{
-					"listItem": "Optimisation SEO + données structurées"
+					"listItem": "Optimisation SEO de base"
 				},
 				{
 					"listItem": "Gestion de l'hébergement"
@@ -42,7 +42,7 @@
 			"title": "Pro",
 			"subtitle": "Maximisez vos conversions",
 			"currency": "€",
-			"price": "790",
+			"price": "690",
 			"priceLabel": "TTC",
 			"buttonName": "Obtenir un devis",
 			"buttonLink": "#contact"
@@ -53,25 +53,16 @@
 					"listItem": "Tout de l'offre Vitrine"
 				},
 				{
+					"listItem": "Accès à toutes les sections"
+				},
+				{
 					"listItem": "Bouton WhatsApp flottant"
 				},
 				{
-					"listItem": "Avis Google intégrés automatiquement"
+					"listItem": "Avis Google intégrés avec notation"
 				},
 				{
-					"listItem": "Section FAQ personnalisée"
-				},
-				{
-					"listItem": "Composants pro"
-				},
-				{
-					"listItem": "Optimisation fiche Google Business"
-				},
-				{
-					"listItem": "Support technique 3 mois"
-				},
-				{
-					"listItem": "Livraison en 10 jours"
+					"listItem": "Optimisation SEO avancée"
 				}
 			]
 		},
@@ -83,35 +74,29 @@
 	},
 	{
 		"header": {
-			"title": "Premium",
-			"subtitle": "Solution complète clé en main",
-			"currency": "€",
-			"price": "990",
-			"priceLabel": "TTC",
-			"buttonName": "Obtenir un devis",
+			"title": "Options",
+			"subtitle": "Personnalisez votre site",
+			"currency": "",
+			"price": "",
+			"priceLabel": "",
+			"buttonName": "Demander un devis",
 			"buttonLink": "#contact"
 		},
 		"body": {
 			"listItems": [
 				{
-					"listItem": "Tout de l'offre Pro"
+					"listItem": "Système de réservation Cal.com : +150€"
 				},
 				{
-					"listItem": "Système de réservation Cal.com"
+					"listItem": "Intégration spécifique : sur devis"
 				},
 				{
-					"listItem": "1 composant personnalisé inclus"
-				},
-				{
-					"listItem": "Support prioritaire 6 mois"
-				},
-				{
-					"listItem": "Livraison en 14 jours"
+					"listItem": "Fonctionnalité avancée : sur devis"
 				}
 			]
 		},
 		"footer": {
-			"buttonName": "Voir tous les détails",
+			"buttonName": "Discutons de votre projet",
 			"buttonLink": "#contact"
 		},
 		"type": "basic"

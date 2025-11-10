@@ -1,0 +1,290 @@
+---
+// Reviews Section
+// ------------
+// Description: Display customer reviews in various formats (global rating, testimonial cards, etc.)
+
+// Components
+// - Layout
+import Section from '../../ui/Section.astro'
+import Row from '../../ui/Row.astro'
+import Col from '../../ui/Col.astro'
+import Button from '../../ui/Button.astro'
+
+// Types
+type Testimonial = {
+	name: string
+	role?: string
+	avatar?: string
+	rating: number
+	text: string
+	date?: string
+}
+
+type Props = {
+	variant?: 'cards' | 'featured'
+	// Testimonials props
+	testimonials?: Testimonial[]
+	// Common props
+	title?: string
+	subtitle?: string
+	classes?: string
+}
+
+const { variant = 'cards', testimonials = [], title, subtitle, classes } = Astro.props
+
+const maxStars = 5
+
+// Default testimonials for demo
+const defaultTestimonials: Testimonial[] = [
+	{
+		name: 'Marie Dubois',
+		role: 'Entrepreneuse',
+		rating: 5,
+		text: "Service exceptionnel ! L'équipe a été très professionnelle et à l'écoute de nos besoins. Je recommande vivement.",
+		date: 'Il y a 2 semaines'
+	},
+	{
+		name: 'Jean Martin',
+		role: 'Directeur Commercial',
+		rating: 5,
+		text: 'Excellent travail, délais respectés et résultat au-delà de nos attentes. Une collaboration vraiment agréable.',
+		date: 'Il y a 1 mois'
+	},
+	{
+		name: 'Sophie Laurent',
+		role: 'Chef de projet',
+		rating: 4,
+		text: 'Très satisfaite du résultat. Le rapport qualité-prix est imbattable et le suivi client est impeccable.',
+		date: 'Il y a 3 semaines'
+	}
+]
+
+const displayTestimonials = testimonials.length > 0 ? testimonials : defaultTestimonials
+
+// Generate unique ID for carousel
+const carouselId = `reviews-carousel-${Math.random().toString(36).substr(2, 9)}`
+---
+
+{
+	variant === 'cards' && (
+		<Section classes={classes}>
+			<Row>
+				<Col span="12" align="center">
+					{title && <h2 class="mb-4 text-3xl font-bold" set:html={title} />}
+					{subtitle && <p class="mb-12 text-lg text-neutral-600 dark:text-neutral-400">{subtitle}</p>}
+				</Col>
+			</Row>
+			<Row>
+				<Col span="12">
+					<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+						{displayTestimonials.map((testimonial) => (
+							<div class="flex flex-col rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md dark:border-neutral-800 dark:bg-neutral-900">
+								<div class="mb-4 flex items-center gap-1">
+									{Array.from({ length: maxStars }, (_, i) => (
+										<svg
+											class:list={[
+												'h-5 w-5',
+												i < testimonial.rating
+													? 'fill-yellow-400 text-yellow-400'
+													: 'text-neutral-300 dark:text-neutral-700'
+											]}
+											viewBox="0 0 20 20"
+											fill="currentColor"
+										>
+											<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+										</svg>
+									))}
+								</div>
+								<p class="mb-4 flex-1 text-neutral-700 dark:text-neutral-300">{testimonial.text}</p>
+								<div class="flex items-center gap-3">
+									{testimonial.avatar ? (
+										<img
+											src={testimonial.avatar}
+											alt={testimonial.name}
+											class="h-10 w-10 flex-shrink-0 rounded-full object-cover"
+										/>
+									) : (
+										<div class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 text-base font-semibold text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
+											{testimonial.name.charAt(0)}
+										</div>
+									)}
+									<p class="text-sm font-semibold text-neutral-900 dark:text-white">{testimonial.name}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</Col>
+			</Row>
+		</Section>
+	)
+}
+
+{
+	variant === 'featured' && displayTestimonials.length > 0 && (
+		<Section
+			classes={
+				classes ||
+				'bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-950/20 dark:to-primary-900/20'
+			}
+		>
+			<Row>
+				<Col span="12" align="center">
+					{title && <h2 class="mb-4 text-3xl font-bold" set:html={title} />}
+					{subtitle && <p class="mb-12 text-lg text-neutral-600 dark:text-neutral-400">{subtitle}</p>}
+				</Col>
+			</Row>
+			<Row>
+				<Col span="12">
+					<div class="mx-auto max-w-4xl">
+						<div class="relative overflow-hidden rounded-2xl bg-white p-8 shadow-xl dark:bg-neutral-900 md:p-12">
+							<!-- Carousel Container -->
+							<div class="reviews-carousel-container relative">
+								{displayTestimonials.map((testimonial, index) => (
+									<div
+										class:list={[
+											'carousel-item transition-opacity duration-700',
+											index === 0 ? 'active opacity-100' : 'opacity-0 absolute inset-0 pointer-events-none'
+										]}
+									>
+										<div class="mb-6 flex items-center gap-1">
+											{Array.from({ length: maxStars }, (_, i) => (
+												<svg
+													class:list={[
+														'h-7 w-7',
+														i < testimonial.rating
+															? 'fill-yellow-400 text-yellow-400'
+															: 'text-neutral-300 dark:text-neutral-700'
+													]}
+													viewBox="0 0 20 20"
+													fill="currentColor"
+												>
+													<path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+												</svg>
+											))}
+										</div>
+										<blockquote class="mb-8 text-xl font-normal leading-relaxed text-neutral-700 dark:text-neutral-300 md:text-2xl">
+											"{testimonial.text}"
+										</blockquote>
+										<div class="flex items-center gap-4">
+											{testimonial.avatar ? (
+												<img
+													src={testimonial.avatar}
+													alt={testimonial.name}
+													class="h-12 w-12 flex-shrink-0 rounded-full object-cover"
+												/>
+											) : (
+												<div class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 text-lg font-semibold text-primary-700 dark:bg-primary-900/30 dark:text-primary-300">
+													{testimonial.name.charAt(0)}
+												</div>
+											)}
+											<p class="text-base font-semibold text-neutral-900 dark:text-white">
+												{testimonial.name}
+											</p>
+										</div>
+									</div>
+								))}
+							</div>
+
+							<!-- Navigation Dots -->
+							{displayTestimonials.length > 1 && (
+								<div class="carousel-dots mt-8 flex justify-center gap-2">
+									{displayTestimonials.map((_, index) => (
+										<button
+											type="button"
+											class:list={[
+												'carousel-dot h-2 w-2 rounded-full transition-all duration-300',
+												index === 0
+													? 'active w-8 bg-primary-600'
+													: 'bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
+											]}
+											data-index={index}
+											aria-label={`Go to testimonial ${index + 1}`}
+										/>
+									))}
+								</div>
+							)}
+						</div>
+					</div>
+				</Col>
+			</Row>
+		</Section>
+	)
+}
+
+<script>
+	// Auto-carousel for featured testimonials
+	document.addEventListener('DOMContentLoaded', () => {
+		const containers = document.querySelectorAll('.reviews-carousel-container')
+
+		containers.forEach((container) => {
+			const items = container.querySelectorAll('.carousel-item')
+			const dotsContainer = container.parentElement.querySelector('.carousel-dots')
+			if (!dotsContainer) return
+
+			const dots = dotsContainer.querySelectorAll('.carousel-dot')
+			if (items.length <= 1) return
+
+			let currentIndex = 0
+			let autoplayInterval
+
+			const showItem = (index) => {
+				// Update items
+				items.forEach((item, i) => {
+					if (i === index) {
+						item.classList.remove('opacity-0', 'absolute', 'inset-0', 'pointer-events-none')
+						item.classList.add('active', 'opacity-100')
+					} else {
+						item.classList.remove('active', 'opacity-100')
+						item.classList.add('opacity-0', 'absolute', 'inset-0', 'pointer-events-none')
+					}
+				})
+
+				// Update dots
+				dots.forEach((dot, i) => {
+					if (i === index) {
+						dot.classList.remove('bg-neutral-300', 'dark:bg-neutral-700', 'w-2')
+						dot.classList.add('active', 'bg-primary-600', 'w-8')
+					} else {
+						dot.classList.remove('active', 'bg-primary-600', 'w-8')
+						dot.classList.add('bg-neutral-300', 'dark:bg-neutral-700', 'w-2')
+					}
+				})
+			}
+
+			const nextItem = () => {
+				currentIndex = (currentIndex + 1) % items.length
+				showItem(currentIndex)
+			}
+
+			const goToItem = (index) => {
+				currentIndex = index
+				showItem(currentIndex)
+				// Reset autoplay
+				stopAutoplay()
+				startAutoplay()
+			}
+
+			const startAutoplay = () => {
+				autoplayInterval = setInterval(nextItem, 5000) // Change every 5 seconds
+			}
+
+			const stopAutoplay = () => {
+				if (autoplayInterval) {
+					clearInterval(autoplayInterval)
+				}
+			}
+
+			// Dot click handlers
+			dots.forEach((dot, index) => {
+				dot.addEventListener('click', () => goToItem(index))
+			})
+
+			// Pause on hover
+			container.parentElement.addEventListener('mouseenter', stopAutoplay)
+			container.parentElement.addEventListener('mouseleave', startAutoplay)
+
+			// Start autoplay
+			startAutoplay()
+		})
+	})
+</script>

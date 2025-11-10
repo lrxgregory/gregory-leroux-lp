@@ -22,7 +22,6 @@ import MarqueeGallery from '../components/blocks/gallery/MarqueeGallery.astro'
 import ProjectGallery from '../components/blocks/gallery/ProjectGallery.astro'
 
 // FAQ
-import FAQSticky from '../components/blocks/FAQ/FaqSticky.astro'
 import FAQ from '../components/blocks/FAQ/FAQ.astro'
 
 // Media
@@ -32,22 +31,26 @@ import MediaTextSection from '../components/blocks/media/MediaTextSection.astro'
 import ContactForm from '../components/blocks/contact/ContactForm.astro'
 
 // Reviews
-import GoogleReviews from '../components/blocks/reviews/GoogleReviews.astro'
+import Reviews from '../components/blocks/reviews/Reviews.astro'
 
 // Highlights
 import HightlightRows from '../components/blocks/highlights/HightlightRows.astro'
 
-// Coverage
-import ServiceArea from '../components/blocks/coverage/ServiceArea.astro'
-
 // Social Proof
-import SocialProof from '../components/blocks/socialproof/Basic.astro'
+import Brands from '../components/blocks/socialproof/Brands.astro'
+
+// Pricing
+import Pricing from '../components/blocks/pricing/Pricing.astro'
 
 // UI Components
 import Section from '../components/ui/Section.astro'
 import Row from '../components/ui/Row.astro'
 import Col from '../components/ui/Col.astro'
-import DesignSystemDemo from '../components/ui/DesignSystemDemo.astro'
+import Steps from '../components/blocks/Steps.astro'
+import CalEmbed from '../components/blocks/booking/CalEmbed.astro'
+
+// Lucide Icons
+import { Palette, Box, Rocket, DollarSign, Calendar, Mail, Star, Users, Lightbulb, Route, Image, MessageCircle, PhoneCall } from 'lucide-astro'
 
 // Images for demos - Using Picsum placeholder images
 const heatpumpImg = { src: 'https://picsum.photos/id/237/400/300' }
@@ -55,20 +58,103 @@ const maintenanceImg = { src: 'https://picsum.photos/id/180/400/300' }
 const plumbingImg = { src: 'https://picsum.photos/id/162/400/300' }
 
 // Demo data
+const demoPricingData = [
+	{
+		header: {
+			title: 'Formule A',
+			subtitle: 'Lorem ipsum dolor',
+			currency: '€',
+			price: '49',
+			priceLabel: '/mois',
+			buttonName: 'Choisir',
+			buttonLink: '#contact'
+		},
+		body: {
+			listItems: [
+				{ listItem: 'Lorem ipsum dolor sit' },
+				{ listItem: 'Consectetur adipiscing' },
+				{ listItem: 'Sed do eiusmod' },
+				{ listItem: 'Tempor incididunt' },
+				{ listItem: 'Ut labore et dolore' }
+			]
+		},
+		footer: {
+			buttonName: 'En savoir plus',
+			buttonLink: '#'
+		},
+		type: 'basic' as const
+	},
+	{
+		header: {
+			title: 'Formule B',
+			subtitle: 'Le plus populaire',
+			currency: '€',
+			price: '99',
+			priceLabel: '/mois',
+			buttonName: 'Choisir',
+			buttonLink: '#contact'
+		},
+		body: {
+			listItems: [
+				{ listItem: 'Tout de la Formule A' },
+				{ listItem: 'Magna aliqua enim' },
+				{ listItem: 'Quis nostrud exercitation' },
+				{ listItem: 'Ullamco laboris nisi' },
+				{ listItem: 'Ut aliquip ex ea' },
+				{ listItem: 'Commodo consequat duis' }
+			]
+		},
+		footer: {
+			buttonName: 'Essai gratuit',
+			buttonLink: '#'
+		},
+		type: 'featured' as const
+	},
+	{
+		header: {
+			title: 'Formule C',
+			subtitle: 'Solution complète',
+			currency: '€',
+			price: '299',
+			priceLabel: '/mois',
+			buttonName: 'Choisir',
+			buttonLink: '#contact'
+		},
+		body: {
+			listItems: [
+				{ listItem: 'Tout de la Formule B' },
+				{ listItem: 'Aute irure dolor in' },
+				{ listItem: 'Reprehenderit voluptate' },
+				{ listItem: 'Velit esse cillum' },
+				{ listItem: 'Dolore eu fugiat' },
+				{ listItem: 'Nulla pariatur excepteur' }
+			]
+		},
+		footer: {
+			buttonName: 'Demander une démo',
+			buttonLink: '#contact'
+		},
+		type: 'basic' as const
+	}
+]
+
 const faqData = [
 	{
-		question: "Première question fréquente ?",
-		answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+		question: 'Première question fréquente ?',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 		open: true
 	},
 	{
 		question: 'Deuxième question importante ?',
-		answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
 		open: false
 	},
 	{
-		question: "Troisième question courante ?",
-		answer: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.',
+		question: 'Troisième question courante ?',
+		answer:
+			'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.',
 		open: false
 	}
 ]
@@ -118,87 +204,60 @@ const projectsData = [
 	<Section padding="both" classes="bg-gradient-to-br from-primary-500 to-primary-700 text-white">
 		<Row>
 			<Col span="12" align="center">
-				<h1 class="mb-4 text-5xl font-bold text-white">Créez votre Landing Page parfaite</h1>
+				<h1 class="mb-4 text-5xl font-bold text-white">Composez votre site web sur mesure</h1>
 				<p class="mx-auto mb-8 max-w-3xl text-xl text-white/90">
-					Suivez notre guide étape par étape pour construire une landing page qui convertit. 
-					Chaque section a été pensée pour maximiser vos résultats.
+					Choisissez votre identité visuelle, sélectionnez les sections qui vous correspondent, et
+					obtenez un site professionnel optimisé pour convertir vos visiteurs en clients.
 				</p>
+
+				<!-- Plan Selector -->
+				<div class="mx-auto mb-8 max-w-2xl">
+					<h2 class="mb-4 text-2xl font-bold text-white">Sélectionnez votre offre</h2>
+					<div class="flex flex-col justify-center gap-4 sm:flex-row">
+						<button
+							class="plan-selector active rounded-lg bg-white px-6 py-3 font-semibold text-primary-700 transition-all hover:scale-105"
+							data-plan="vitrine"
+						>
+							<div class="text-lg font-bold">Vitrine</div>
+							<div class="text-sm opacity-80">490€ TTC</div>
+						</button>
+						<button
+							class="plan-selector rounded-lg bg-white/20 px-6 py-3 font-semibold text-white transition-all hover:scale-105 hover:bg-white/30"
+							data-plan="pro"
+						>
+							<div class="text-lg font-bold">Pro</div>
+							<div class="text-sm opacity-80">690€ TTC</div>
+						</button>
+					</div>
+					<p class="mt-4 text-sm text-white/70">
+						Les composants disponibles pour votre offre sont affichés ci-dessous
+					</p>
+				</div>
 
 				<!-- Process Steps -->
 				<div class="mx-auto grid max-w-4xl grid-cols-1 gap-6 text-center md:grid-cols-3">
 					<div class="rounded-lg bg-white/10 p-6">
-						<div class="text-4xl mb-3">🎨</div>
-						<h3 class="text-lg font-bold text-white mb-2">1. Choisissez votre style</h3>
-						<p class="text-sm text-white/80">Design, polices et couleurs</p>
+						<div class="mb-3 flex justify-center">
+							<Palette class="h-10 w-10 text-white" />
+						</div>
+						<h3 class="mb-2 text-lg font-bold text-white">1. Définissez votre look</h3>
+						<p class="text-sm text-white/80">Style, typographie et palette de couleurs</p>
 					</div>
 					<div class="rounded-lg bg-white/10 p-6">
-						<div class="text-4xl mb-3">🧩</div>
-						<h3 class="text-lg font-bold text-white mb-2">2. Sélectionnez vos sections</h3>
-						<p class="text-sm text-white/80">Composants optimisés pour convertir</p>
+						<div class="mb-3 flex justify-center">
+							<Box class="h-10 w-10 text-white" />
+						</div>
+						<h3 class="mb-2 text-lg font-bold text-white">2. Composez votre site</h3>
+						<p class="text-sm text-white/80">Sections dans l'ordre optimal de conversion</p>
 					</div>
 					<div class="rounded-lg bg-white/10 p-6">
-						<div class="text-4xl mb-3">🚀</div>
-						<h3 class="text-lg font-bold text-white mb-2">3. Générez votre site</h3>
-						<p class="text-sm text-white/80">Prêt en quelques minutes</p>
+						<div class="mb-3 flex justify-center">
+							<Rocket class="h-10 w-10 text-white" />
+						</div>
+						<h3 class="mb-2 text-lg font-bold text-white">3. Lancez-vous</h3>
+						<p class="text-sm text-white/80">Site unique prêt à générer des leads</p>
 					</div>
 				</div>
-
-				<p class="mx-auto mt-6 max-w-2xl text-lg text-white/80">
-					<strong>Pourquoi cette méthode fonctionne ?</strong> Nous suivons les meilleures pratiques 
-					de conversion utilisées par les plus grandes entreprises.
-				</p>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- Navigation des étapes -->
-	<Section
-		classes="sticky top-0 z-10 bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 shadow-sm"
-	>
-		<Row>
-			<Col span="12">
-				<nav class="flex flex-wrap justify-center gap-2 px-4 text-sm">
-					<a
-						href="#style-selection"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>🎨 Style</a
-					>
-					<a
-						href="#hero-section"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>🎯 Hero</a
-					>
-					<a
-						href="#social-proof"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>🏆 Preuve sociale</a
-					>
-					<a
-						href="#benefits"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>✨ Bénéfices</a
-					>
-					<a
-						href="#how-it-works"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>🔄 Processus</a
-					>
-					<a
-						href="#testimonials"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>💬 Témoignages</a
-					>
-					<a
-						href="#faq"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>❓ FAQ</a
-					>
-					<a
-						href="#final-cta"
-						class="whitespace-nowrap py-3 px-4 font-medium transition-colors hover:text-primary-600 rounded-lg hover:bg-primary-50"
-						>🚀 CTA Final</a
-					>
-				</nav>
 			</Col>
 		</Row>
 	</Section>
@@ -208,199 +267,207 @@ const projectsData = [
 		<Row>
 			<Col span="12">
 				<div class="mb-12 text-center">
-					<div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-2 text-primary-700 font-semibold mb-4">
-						<span class="text-2xl">🎨</span>
+					<div
+						class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-2 font-semibold text-primary-700"
+					>
+						<Palette class="h-6 w-6" />
 						Étape 1 sur 3
 					</div>
-					<h2 class="mb-4 text-4xl font-bold">Choisissez votre identité visuelle</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
-						Votre style visuel influence directement la perception de votre marque. 
-						Sélectionnez le design system qui correspond à votre secteur d'activité.
+					<h2 class="mb-4 text-4xl font-bold">Définissez votre identité visuelle</h2>
+					<p class="mx-auto max-w-3xl text-lg text-neutral-600 dark:text-neutral-400">
+						<strong>Choisissez le style graphique qui correspond à votre activité.
 					</p>
 				</div>
 			</Col>
 		</Row>
 	</Section>
 
-	<!-- ÉTAPE 2: Construction de votre landing page -->
-	<Section id="hero-section" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
-		<Row>
-			<Col span="12">
-				<div class="mb-12 text-center">
-					<div class="inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-2 text-primary-700 font-semibold mb-4">
-						<span class="text-2xl">🧩</span>
-						Étape 2 sur 3
-					</div>
-					<h2 class="mb-4 text-4xl font-bold">Construisez votre landing page</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
-						Suivez l'ordre optimal de conversion. Chaque section a un rôle précis dans le parcours de vos visiteurs.
-					</p>
-				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- 1️⃣ Hero Section -->
-	<div class="landing-section">
-		<div class="section-header">
-			<div class="section-number">1️⃣</div>
-			<div>
-				<h3 class="section-title">Hero Section</h3>
-				<p class="section-description">
-					<strong>Pourquoi c'est crucial :</strong> Vous avez 3 secondes pour convaincre. 
-					Le hero doit immédiatement expliquer ce que vous faites et inciter à l'action.
-				</p>
-				<div class="section-tips">
-					<span class="tip">✅ Titre accrocheur</span>
-					<span class="tip">✅ Sous-titre explicatif</span>
-					<span class="tip">✅ CTA visible</span>
-					<span class="tip">✅ Badges de confiance</span>
-				</div>
-			</div>
-		</div>
-
-		<!-- Hero Variant 1: Home (Centered) -->
-		<div class="component-demo">
-			<div class="component-demo__label">
-				<div class="flex items-center justify-between">
-					<div>
-						<span class="component-demo__badge">Recommandé</span>
-						<h4 class="component-demo__title">Hero Complet - Page d'accueil</h4>
-						<p class="component-demo__description">
-							Design centré avec titre, description, 2 boutons d'action et badges de confiance.
-							Taux de conversion optimal.
-						</p>
-					</div>
-					<label class="component-selector">
-						<input type="checkbox" name="hero-home" />
-						<span class="checkmark"></span>
-					</label>
-				</div>
-			</div>
-			<div class="component-demo__preview">
-				<Hero variant="home" />
-			</div>
-		</div>
-
-		<!-- Hero Variant 2: Page Header -->
-		<div class="component-demo">
-			<div class="component-demo__label">
-				<div class="flex items-center justify-between">
-					<div>
-						<span class="component-demo__badge">Simple</span>
-						<h4 class="component-demo__title">Hero Simple - En-tête</h4>
-						<p class="component-demo__description">
-							Version minimaliste pour les pages internes ou les approches sobres.
-						</p>
-					</div>
-					<label class="component-selector">
-						<input type="checkbox" name="hero-simple" />
-						<span class="checkmark"></span>
-					</label>
-				</div>
-			</div>
-			<div class="component-demo__preview">
-				<Hero
-					variant="page"
-					title="Titre de page"
-					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-				/>
-			</div>
-		</div>
-	</div>
-
-	<!-- Design Systems Selection -->
+	<!-- Border Radius Selection (Tailwind Style) -->
 	<Section classes="bg-white dark:bg-neutral-900">
 		<Row>
 			<Col span="12">
 				<div class="mb-8">
-					<h3 class="mb-4 text-2xl font-bold">1. Choisissez votre Design System</h3>
-					<p class="text-neutral-600 dark:text-neutral-400 mb-6">
-						Chaque style véhicule une image différente. Sélectionnez celui qui correspond à votre secteur et positionnement.
-					</p>
+					<h3 class="mb-4 text-2xl font-bold">1. Choisissez vos coins arrondis</h3>
 				</div>
 			</Col>
 		</Row>
 		<Row>
-			<Col span="12" classes="mb-6">
-				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-					<label class="design-system-option">
-						<input type="radio" name="design-system" value="modern" />
-						<div class="design-system-card">
-							<h4 class="font-bold mb-2">Modern</h4>
-							<p class="text-sm text-neutral-600 mb-4">Coins arrondis moyens, ombres douces</p>
-							<div class="space-y-2">
-								<div class="rounded-lg bg-primary-500 p-2 text-center text-white text-sm shadow-md">
-									Bouton Modern
-								</div>
-								<div class="rounded-xl bg-white p-3 shadow-sm dark:bg-neutral-800 text-sm">
-									Carte Modern
-								</div>
-							</div>
+			<Col span="12">
+				<div class="grid grid-cols-3 gap-3 md:grid-cols-5 lg:grid-cols-8">
+					<!-- rounded-none -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="none" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-none bg-primary-500"></div>
+							<span class="option-label">none</span>
+							<code class="option-code">0px</code>
 						</div>
 					</label>
 
-					<label class="design-system-option">
-						<input type="radio" name="design-system" value="soft" />
-						<div class="design-system-card">
-							<h4 class="font-bold mb-2">Soft</h4>
-							<p class="text-sm text-neutral-600 mb-4">Coins très arrondis, ombres prononcées</p>
-							<div class="space-y-2">
-								<div class="rounded-full bg-primary-500 p-2 text-center text-white text-sm shadow-lg">
-									Bouton Soft
-								</div>
-								<div class="rounded-2xl bg-white p-3 shadow-md dark:bg-neutral-800 text-sm">
-									Carte Soft
-								</div>
-							</div>
+					<!-- rounded-sm -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="sm" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-sm bg-primary-500"></div>
+							<span class="option-label">sm</span>
+							<code class="option-code">2px</code>
 						</div>
 					</label>
 
-					<label class="design-system-option">
-						<input type="radio" name="design-system" value="sharp" />
-						<div class="design-system-card">
-							<h4 class="font-bold mb-2">Sharp</h4>
-							<p class="text-sm text-neutral-600 mb-4">Coins peu arrondis, bordures visibles</p>
-							<div class="space-y-2">
-								<div class="rounded-md border-2 border-primary-500 bg-primary-500 p-2 text-center text-white text-sm">
-									Bouton Sharp
-								</div>
-								<div class="rounded-lg border border-neutral-200 bg-white p-3 dark:border-neutral-700 dark:bg-neutral-800 text-sm">
-									Carte Sharp
-								</div>
-							</div>
+					<!-- rounded (default) -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="default" checked />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded bg-primary-500"></div>
+							<span class="option-label">default</span>
+							<code class="option-code">4px</code>
 						</div>
 					</label>
 
-					<label class="design-system-option">
-						<input type="radio" name="design-system" value="minimal" />
-						<div class="design-system-card">
-							<h4 class="font-bold mb-2">Minimal</h4>
-							<p class="text-sm text-neutral-600 mb-4">Coins droits, bordures fines, style épuré</p>
-							<div class="space-y-2">
-								<div class="border-2 border-primary-500 bg-primary-500 p-2 text-center text-white text-sm">
-									Bouton Minimal
-								</div>
-								<div class="border border-neutral-200 bg-white p-3 dark:border-neutral-700 dark:bg-neutral-800 text-sm">
-									Carte Minimal
-								</div>
-							</div>
+					<!-- rounded-md -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="md" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-md bg-primary-500"></div>
+							<span class="option-label">md</span>
+							<code class="option-code">6px</code>
 						</div>
 					</label>
 
-					<label class="design-system-option">
-						<input type="radio" name="design-system" value="elegant" />
-						<div class="design-system-card">
-							<h4 class="font-bold mb-2">Elegant</h4>
-							<p class="text-sm text-neutral-600 mb-4">Coins très arrondis, ombres XXL, animations</p>
-							<div class="space-y-2">
-								<div class="transform rounded-2xl bg-primary-500 p-2 text-center text-white text-sm shadow-xl transition-all hover:-translate-y-1">
-									Bouton Elegant
-								</div>
-								<div class="transform rounded-3xl bg-white p-3 shadow-lg transition-all hover:-translate-y-1 dark:bg-neutral-800 text-sm">
-									Carte Elegant
-								</div>
+					<!-- rounded-lg -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="lg" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-lg bg-primary-500"></div>
+							<span class="option-label">lg</span>
+							<code class="option-code">8px</code>
+						</div>
+					</label>
+
+					<!-- rounded-xl -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="xl" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-xl bg-primary-500"></div>
+							<span class="option-label">xl</span>
+							<code class="option-code">12px</code>
+						</div>
+					</label>
+
+					<!-- rounded-2xl -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="2xl" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-2xl bg-primary-500"></div>
+							<span class="option-label">2xl</span>
+							<code class="option-code">16px</code>
+						</div>
+					</label>
+
+					<!-- rounded-3xl -->
+					<label class="tailwind-option">
+						<input type="radio" name="border-radius" value="3xl" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-3xl bg-primary-500"></div>
+							<span class="option-label">3xl</span>
+							<code class="option-code">24px</code>
+						</div>
+					</label>
+				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Shadow Selection (Tailwind Style) -->
+	<Section classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-8">
+					<h3 class="mb-4 text-2xl font-bold">2. Choisissez l'intensité des ombres</h3>
+				</div>
+			</Col>
+		</Row>
+		<Row>
+			<Col span="12">
+				<div class="grid grid-cols-3 gap-3 md:grid-cols-4 lg:grid-cols-7">
+					<!-- shadow-none -->
+					<label class="tailwind-option">
+						<input type="radio" name="shadow" value="none" />
+						<div class="tailwind-preview-card">
+							<div
+								class="mx-auto mb-2 h-16 w-24 rounded-lg border border-neutral-200 bg-white shadow-none dark:border-neutral-600 dark:bg-neutral-700"
+							>
 							</div>
+							<span class="option-label">none</span>
+							<code class="option-code">shadow-none</code>
+						</div>
+					</label>
+
+					<!-- shadow-sm -->
+					<label class="tailwind-option">
+						<input type="radio" name="shadow" value="sm" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-lg bg-white shadow-sm dark:bg-neutral-700">
+							</div>
+							<span class="option-label">sm</span>
+							<code class="option-code">shadow-sm</code>
+						</div>
+					</label>
+
+					<!-- shadow (default) -->
+					<label class="tailwind-option">
+						<input type="radio" name="shadow" value="default" checked />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-lg bg-white shadow dark:bg-neutral-700">
+							</div>
+							<span class="option-label">default</span>
+							<code class="option-code">shadow</code>
+						</div>
+					</label>
+
+					<!-- shadow-md -->
+					<label class="tailwind-option">
+						<input type="radio" name="shadow" value="md" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-lg bg-white shadow-md dark:bg-neutral-700">
+							</div>
+							<span class="option-label">md</span>
+							<code class="option-code">shadow-md</code>
+						</div>
+					</label>
+
+					<!-- shadow-lg -->
+					<label class="tailwind-option">
+						<input type="radio" name="shadow" value="lg" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-lg bg-white shadow-lg dark:bg-neutral-700">
+							</div>
+							<span class="option-label">lg</span>
+							<code class="option-code">shadow-lg</code>
+						</div>
+					</label>
+
+					<!-- shadow-xl -->
+					<label class="tailwind-option">
+						<input type="radio" name="shadow" value="xl" />
+						<div class="tailwind-preview-card">
+							<div class="mx-auto mb-2 h-16 w-24 rounded-lg bg-white shadow-xl dark:bg-neutral-700">
+							</div>
+							<span class="option-label">xl</span>
+							<code class="option-code">shadow-xl</code>
+						</div>
+					</label>
+
+					<!-- shadow-2xl -->
+					<label class="tailwind-option">
+						<input type="radio" name="shadow" value="2xl" />
+						<div class="tailwind-preview-card">
+							<div
+								class="mx-auto mb-2 h-16 w-24 rounded-lg bg-white shadow-2xl dark:bg-neutral-700"
+							>
+							</div>
+							<span class="option-label">2xl</span>
+							<code class="option-code">shadow-2xl</code>
 						</div>
 					</label>
 				</div>
@@ -413,16 +480,18 @@ const projectsData = [
 		<Row>
 			<Col span="12">
 				<div class="mb-8">
-					<h3 class="mb-4 text-2xl font-bold">2. Sélectionnez vos polices</h3>
-					<p class="text-neutral-600 dark:text-neutral-400 mb-6">
-						La typographie influence la perception de votre marque. Choisissez une police principale et une secondaire.
+					<h3 class="mb-4 text-2xl font-bold">3. Choisissez votre typographie</h3>
+					<p class="mb-6 text-neutral-600 dark:text-neutral-400">
+						<strong>La typographie = la voix de votre marque.</strong> Une police principale pour vos
+						titres (impact), et une secondaire pour vos textes (confort de lecture). Privilégiez la lisibilité
+						sur mobile.
 					</p>
 				</div>
 			</Col>
 		</Row>
 		<Row>
 			<Col span="6">
-				<h4 class="font-bold mb-4">Police principale (titres)</h4>
+				<h4 class="mb-4 font-bold">Police principale (titres)</h4>
 				<div class="space-y-3">
 					<label class="font-option">
 						<input type="radio" name="primary-font" value="inter" />
@@ -440,7 +509,10 @@ const projectsData = [
 					</label>
 					<label class="font-option">
 						<input type="radio" name="primary-font" value="jakarta" />
-						<div class="font-preview" style="font-family: 'Plus Jakarta Sans Variable', sans-serif;">
+						<div
+							class="font-preview"
+							style="font-family: 'Plus Jakarta Sans Variable', sans-serif;"
+						>
 							<span class="font-name">Plus Jakarta Sans</span>
 							<span class="font-sample">Élégant et premium</span>
 						</div>
@@ -455,7 +527,7 @@ const projectsData = [
 				</div>
 			</Col>
 			<Col span="6">
-				<h4 class="font-bold mb-4">Police secondaire (textes)</h4>
+				<h4 class="mb-4 font-bold">Police secondaire (textes)</h4>
 				<div class="space-y-3">
 					<label class="font-option">
 						<input type="radio" name="secondary-font" value="manrope" />
@@ -495,131 +567,195 @@ const projectsData = [
 		<Row>
 			<Col span="12">
 				<div class="mb-8">
-					<h3 class="mb-4 text-2xl font-bold">3. Choisissez votre couleur primaire</h3>
-					<p class="text-neutral-600 dark:text-neutral-400 mb-6">
-						La couleur primaire sera utilisée pour vos boutons, liens et éléments d'accentuation.
-					</p>
+					<h3 class="mb-4 text-2xl font-bold">4. Choisissez vos couleurs</h3>
 				</div>
 			</Col>
 		</Row>
 		<Row>
-			<Col span="12">
-				<div class="grid grid-cols-4 md:grid-cols-8 gap-4">
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="blue" />
-						<div class="color-preview bg-blue-500"></div>
-						<span class="color-name">Bleu</span>
+			<Col span="6">
+				<h4 class="mb-4 font-bold">Couleur primaire</h4>
+				<div class="color-picker-wrapper">
+					<input
+						type="color"
+						id="primary-color-picker"
+						value="#2563eb"
+						class="color-picker-input"
+					/>
+					<label for="primary-color-picker" class="color-picker-display">
+						<div class="color-picker-preview" id="primary-preview"></div>
+						<div class="color-picker-info">
+							<span class="color-picker-label">Cliquez pour choisir</span>
+							<span class="color-picker-value" id="primary-value">#2563EB</span>
+						</div>
 					</label>
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="green" />
-						<div class="color-preview bg-green-500"></div>
-						<span class="color-name">Vert</span>
-					</label>
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="purple" />
-						<div class="color-preview bg-purple-500"></div>
-						<span class="color-name">Violet</span>
-					</label>
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="red" />
-						<div class="color-preview bg-red-500"></div>
-						<span class="color-name">Rouge</span>
-					</label>
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="orange" />
-						<div class="color-preview bg-orange-500"></div>
-						<span class="color-name">Orange</span>
-					</label>
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="yellow" />
-						<div class="color-preview bg-yellow-500"></div>
-						<span class="color-name">Jaune</span>
-					</label>
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="pink" />
-						<div class="color-preview bg-pink-500"></div>
-						<span class="color-name">Rose</span>
-					</label>
-					<label class="color-option">
-						<input type="radio" name="primary-color" value="indigo" />
-						<div class="color-preview bg-indigo-500"></div>
-						<span class="color-name">Indigo</span>
+				</div>
+			</Col>
+			<Col span="6">
+				<h4 class="mb-4 font-bold">Couleur secondaire (optionnelle)</h4>
+				<div class="color-picker-wrapper">
+					<input
+						type="color"
+						id="secondary-color-picker"
+						value="#06b6d4"
+						class="color-picker-input"
+					/>
+					<label for="secondary-color-picker" class="color-picker-display">
+						<div class="color-picker-preview" id="secondary-preview"></div>
+						<div class="color-picker-info">
+							<span class="color-picker-label">Cliquez pour choisir</span>
+							<span class="color-picker-value" id="secondary-value">#06B6D4</span>
+						</div>
 					</label>
 				</div>
 			</Col>
 		</Row>
 	</Section>
 
-	<!-- 2️⃣ Preuve Sociale -->
-	<div class="landing-section">
-		<div class="section-header">
-			<div class="section-number">2️⃣</div>
-			<div>
-				<h3 class="section-title">Preuve Sociale</h3>
-				<p class="section-description">
-					<strong>Pourquoi c'est crucial :</strong> Les visiteurs cherchent des preuves que d'autres vous font confiance. 
-					Les logos de clients rassurent immédiatement.
-				</p>
-				<div class="section-tips">
-					<span class="tip">✅ Logos reconnaissables</span>
-					<span class="tip">✅ Certifications</span>
-					<span class="tip">✅ Partenaires</span>
+	<!-- ÉTAPE 2: Construction de votre landing page -->
+	<Section id="hero-section" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<div class="mb-12 text-center">
+					<div
+						class="mb-4 inline-flex items-center gap-2 rounded-full bg-primary-100 px-4 py-2 font-semibold text-primary-700"
+					>
+						<Box class="h-6 w-6" />
+						Étape 2 sur 3
+					</div>
+					<h2 class="mb-4 text-4xl font-bold">Composez votre site section par section</h2>
+					<p class="mx-auto max-w-3xl text-lg text-neutral-600 dark:text-neutral-400">
+						<strong>Sélectionnez les sections qui correspondent à vos besoins.
+					</p>
 				</div>
+			</Col>
+		</Row>
+	</Section>
+
+	<!-- Hero Section -->
+	<div class="landing-section" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<Star class="h-8 w-8" />
 			</div>
+			<div>
+				<h3 class="section-title">Première Impression : Le Hero</h3>
+				<p class="section-description">
+					Première section visible de votre site. Doit capter l'attention et inciter à l'action.
+				</p>
+				</div>
 		</div>
 
-		<div class="component-demo">
+		<!-- Hero Variant 1: Home (Centered) -->
+		<div class="component-demo" data-plan="vitrine">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Essentiel</span>
-						<h4 class="component-demo__title">Logos Partenaires</h4>
-						<p class="component-demo__description">
-							Affichez vos clients, partenaires ou certifications pour renforcer votre crédibilité.
-						</p>
+						<h4 class="component-demo__title">Hero Impact Maximum</h4>
+						<p class="component-demo__description">Design centré avec double CTA et badges. Idéal pour page d'accueil.</p>
 					</div>
 					<label class="component-selector">
-						<input type="checkbox" name="social-proof" />
+						<input type="checkbox" name="hero-home" />
 						<span class="checkmark"></span>
 					</label>
 				</div>
 			</div>
 			<div class="component-demo__preview">
-				<SocialProof />
+				<Hero
+					variant="home"
+					title="<strong>Votre Entreprise</strong>"
+					subtitle="Votre slogan accrocheur ici"
+					primaryButtonText="Appelez-nous"
+					primaryButtonLink="tel:+33123456789"
+					secondaryButtonText="Devis gratuit"
+				/>
+			</div>
+		</div>
+
+		<!-- Hero Variant 2: Split (2 colonnes) -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Hero Split (2 colonnes)</h4>
+						<p class="component-demo__description">Layout 50/50 avec texte à gauche et image à droite. Moderne et engageant.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="hero-split" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Hero
+					variant="split"
+					title="<strong>Votre Entreprise</strong>"
+					subtitle="Votre slogan accrocheur ici"
+					primaryButtonText="Appelez-nous"
+					primaryButtonLink="tel:+33123456789"
+					secondaryButtonText="Devis gratuit"
+					heroImage="https://picsum.photos/seed/hero-demo/800/600"
+					heroImageAlt="Image démonstration hero"
+				/>
 			</div>
 		</div>
 	</div>
 
-
-
-	<!-- 3️⃣ Bénéfices -->
-	<div class="landing-section" id="benefits">
+	<!-- Preuve Sociale -->
+	<div class="landing-section" id="social-proof" data-plan="vitrine">
 		<div class="section-header">
-			<div class="section-number">3️⃣</div>
-			<div>
-				<h3 class="section-title">Bénéfices</h3>
-				<p class="section-description">
-					<strong>Fonctionnalités ≠ Bénéfices :</strong> Ne listez pas ce que vous faites, 
-					mais les avantages que vos clients en retirent. Concentrez-vous sur leurs gains.
-				</p>
-				<div class="section-tips">
-					<span class="tip">✅ Orienté client</span>
-					<span class="tip">✅ Gains concrets</span>
-					<span class="tip">✅ Problèmes résolus</span>
-				</div>
+			<div class="section-number">
+				<Users class="h-8 w-8" />
 			</div>
+			<div>
+				<h3 class="section-title">Crédibilité Instantanée</h3>
+				<p class="section-description">
+					Logos de partenaires, notes d'avis clients pour établir votre crédibilité et rassurer vos visiteurs.
+				</p>
+				</div>
 		</div>
 
-		<!-- Features Variant 1: image -->
-		<div class="component-demo">
+		<!-- Brands: Logo Cloud -->
+		<div class="component-demo" data-plan="vitrine">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Visuel</span>
-						<h4 class="component-demo__title">Grille avec images</h4>
-						<p class="component-demo__description">
-							Format visuel impactant. Idéal pour présenter 4-6 bénéfices principaux avec des visuels.
-						</p>
+						<h4 class="component-demo__title">Logos Partenaires</h4>
+						<p class="component-demo__description">Logos clients, partenaires ou certifications.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="brands-default" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Brands />
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Bénéfices -->
+	<div class="landing-section" id="benefits" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<Lightbulb class="h-8 w-8" />
+			</div>
+			<div>
+				<h3 class="section-title">Proposition de Valeur : Pourquoi Vous ?</h3>
+				<p class="section-description">
+					Présentez vos avantages du point de vue client : résultats concrets plutôt que fonctionnalités.
+				</p>
+				</div>
+		</div>
+
+		<!-- Features Variant 1: image -->
+		<div class="component-demo" data-plan="pro">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Grille avec Photos</h4>
+						<p class="component-demo__description">Chaque bénéfice illustré par une photo. Pour services visuels (4-6 bénéfices).</p>
 					</div>
 					<label class="component-selector">
 						<input type="checkbox" name="benefits-image" />
@@ -633,15 +769,12 @@ const projectsData = [
 		</div>
 
 		<!-- Features Variant 2: List -->
-		<div class="component-demo">
+		<div class="component-demo" data-plan="vitrine">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Compact</span>
-						<h4 class="component-demo__title">Liste avec icônes</h4>
-						<p class="component-demo__description">
-							Format scannable rapidement. Parfait pour présenter jusqu'à 8 bénéfices.
-						</p>
+						<h4 class="component-demo__title">Liste Compacte</h4>
+						<p class="component-demo__description">Format compact avec icônes (6-8 bénéfices). Idéal sans photos.</p>
 					</div>
 					<label class="component-selector">
 						<input type="checkbox" name="benefits-list" />
@@ -655,15 +788,12 @@ const projectsData = [
 		</div>
 
 		<!-- Features Variant 3: Cards -->
-		<div class="component-demo">
+		<div class="component-demo" data-plan="vitrine">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Équilibré</span>
-						<h4 class="component-demo__title">Cartes centrées</h4>
-						<p class="component-demo__description">
-							Design équilibré entre visuel et contenu. Idéal pour 4 bénéfices clés.
-						</p>
+						<h4 class="component-demo__title">Cartes avec Icônes</h4>
+						<p class="component-demo__description">Présentation aérée avec icônes colorées (4 bénéfices). Format moderne.</p>
 					</div>
 					<label class="component-selector">
 						<input type="checkbox" name="benefits-cards" />
@@ -677,251 +807,386 @@ const projectsData = [
 		</div>
 	</div>
 
-	<!-- 4️⃣ Comment ça marche -->
-	<div class="landing-section" id="how-it-works">
+	<!-- Comment ça marche -->
+	<div class="landing-section" id="how-it-works" data-plan="vitrine">
 		<div class="section-header">
-			<div class="section-number">4️⃣</div>
-			<div>
-				<h3 class="section-title">Comment ça marche ?</h3>
-				<p class="section-description">
-					<strong>La simplicité rassure :</strong> Expliquez votre processus en 3-5 étapes maximum. 
-					Vos prospects doivent comprendre immédiatement comment vous travaillez.
-				</p>
-				<div class="section-tips">
-					<span class="tip">✅ 3-5 étapes max</span>
-					<span class="tip">✅ Processus clair</span>
-					<span class="tip">✅ Rassure le prospect</span>
-				</div>
+			<div class="section-number">
+				<Route class="h-8 w-8" />
 			</div>
+			<div>
+				<h3 class="section-title">Votre Processus Simplifié</h3>
+				<p class="section-description">
+					Expliquez votre méthode de travail en 3 à 5 étapes claires pour rassurer vos prospects.
+				</p>
+				</div>
 		</div>
 
-		<div class="component-demo">
+		<div class="component-demo" data-plan="vitrine">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Processus</span>
-						<h4 class="component-demo__title">Étapes du processus</h4>
-						<p class="component-demo__description">
-							Présentez votre méthode de travail étape par étape pour rassurer vos prospects.
-						</p>
+						<h4 class="component-demo__title">Timeline Visuelle</h4>
+						<p class="component-demo__description">Timeline numérotée de votre processus (3-5 étapes).</p>
 					</div>
 					<label class="component-selector">
-						<input type="checkbox" name="steps-process" />
+						<input type="checkbox" name="steps-process" disabled />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+				<div class="component-demo__preview">
+					<Steps />
+				</div>
+		</div>
+	</div>
+
+	<!-- Highlights: Sections alternées -->
+	<div class="landing-section" id="highlights" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<Star class="h-8 w-8" />
+			</div>
+			<div>
+				<h3 class="section-title">Mise en Valeur : Sections Alternées</h3>
+				<p class="section-description">
+					Sections image + texte alternées pour approfondir vos points forts de manière visuelle.
+				</p>
+				</div>
+		</div>
+
+		<!-- Highlight Rows Variant -->
+		<div class="component-demo" data-plan="pro">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Sections Alternées Automatiques</h4>
+						<p class="component-demo__description">4 sections alternées avec illustrations SVG. Format engageant.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="highlights-rows" />
 						<span class="checkmark"></span>
 					</label>
 				</div>
 			</div>
 			<div class="component-demo__preview">
-				<!-- Ici on pourrait ajouter le composant Steps si il existe -->
-				<div class="p-8 text-center text-neutral-500">
-					Composant "Étapes du processus" à développer
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- SECTION: Sections Image + Texte -->
-	<Section id="media-text" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
-		<Row>
-			<Col span="12">
-				<div class="mb-8 text-center">
-					<h2 class="mb-3 text-4xl font-bold">Sections Image + Texte</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400">
-						Présentez vos services ou votre entreprise en combinant visuels et contenu.
-						Parfait pour raconter votre histoire.
-					</p>
-				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- Media Text - Image Left -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">Media 1</span>
-			<h3 class="component-demo__title">Image à gauche, texte à droite</h3>
-			<p class="component-demo__description">
-				Layout 50/50 avec image à gauche et contenu texte à droite. Supporte images et
-				vidéos. Idéal pour présenter un service en détail.
-			</p>
-		</div>
-		<div class="component-demo__preview">
-			<MediaTextSection
-				image={heatpumpImg.src}
-				imageAlt="Image exemple"
-				mediaPosition="left"
-				title="Titre de section"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
-				cta={{
-					text: 'Bouton d\'action',
-					href: '#contact',
-					variant: 'primary'
-				}}
-			/>
-		</div>
-	</div>
-
-	<!-- Media Text - Image Right -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">Media 2</span>
-			<h3 class="component-demo__title">Image à droite, texte à gauche</h3>
-			<p class="component-demo__description">
-				Layout inversé : texte à gauche, image à droite. Permet d'alterner les layouts pour
-				créer un rythme visuel dans la page.
-			</p>
-		</div>
-		<div class="component-demo__preview">
-			<MediaTextSection
-				image={maintenanceImg.src}
-				imageAlt="Image exemple 2"
-				mediaPosition="right"
-				title="Autre titre de section"
-				description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation."
-				backgroundColor="gray"
-				cta={{
-					text: 'Autre bouton',
-					href: '#contact',
-					variant: 'primary'
-				}}
-			/>
-		</div>
-	</div>
-
-	<!-- SECTION: Galeries -->
-	<Section id="galeries" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
-		<Row>
-			<Col span="12">
-				<div class="mb-8 text-center">
-					<h2 class="mb-3 text-4xl font-bold">Galeries Photos</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400">
-						Montrez vos réalisations avec style. Les images parlent mieux que les mots.
-					</p>
-				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- Gallery: Before/After -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">Galerie 1</span>
-			<h3 class="component-demo__title">Avant / Après</h3>
-			<p class="component-demo__description">
-				Slider interactif pour comparer vos réalisations avant/après. Parfait pour les
-				rénovations, installations de pompes à chaleur, etc.
-			</p>
-		</div>
-		<div class="component-demo__preview">
-			<BeforeAfter />
-		</div>
-	</div>
-
-	<!-- Gallery: Marquee -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">Galerie 2</span>
-			<h3 class="component-demo__title">Galerie défilante</h3>
-			<p class="component-demo__description">
-				Défilement automatique et infini de vos photos. Effet moderne et dynamique pour
-				présenter plusieurs réalisations.
-			</p>
-		</div>
-		<div class="component-demo__preview">
-			<MarqueeGallery />
-		</div>
-	</div>
-
-	<!-- Gallery: Project Gallery -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">Galerie 3</span>
-			<h3 class="component-demo__title">Galerie de projets avec filtres</h3>
-			<p class="component-demo__description">
-				Grille de projets avec filtres par catégorie et lightbox (zoom sur clic). Idéal pour
-				un portfolio de réalisations organisé par type (chauffage, plomberie, etc.).
-			</p>
-		</div>
-		<div class="component-demo__preview">
-			<ProjectGallery
-				title="Galerie de projets"
-				subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-				projects={projectsData}
-				columns={3}
-				showCategories={true}
-			/>
-		</div>
-	</div>
-
-	<!-- 7️⃣ CTA Final -->
-	<div class="landing-section" id="final-cta">
-		<div class="section-header">
-			<div class="section-number">7️⃣</div>
-			<div>
-				<h3 class="section-title">CTA Final</h3>
-				<p class="section-description">
-					<strong>L'étape décisive :</strong> Après avoir présenté vos bénéfices et rassuré vos prospects, 
-					c'est le moment de les inciter à passer à l'action avec un CTA puissant.
-				</p>
-				<div class="section-tips">
-					<span class="tip">✅ Message clair</span>
-					<span class="tip">✅ Urgence/Scarcité</span>
-					<span class="tip">✅ Bouton contrasté</span>
-				</div>
+				<HightlightRows />
 			</div>
 		</div>
 
-		<!-- CTA -->
-		<div class="component-demo">
+		<!-- Media Text - Image Left -->
+		<div class="component-demo" data-plan="vitrine">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Conversion</span>
-						<h4 class="component-demo__title">CTA avec rating</h4>
-						<p class="component-demo__description">
-							CTA optimisé avec preuve sociale intégrée pour maximiser les conversions.
-						</p>
+						<h4 class="component-demo__title">Image + Texte (Gauche)</h4>
+						<p class="component-demo__description">Section 50/50 avec image à gauche. Pour un service spécifique.</p>
 					</div>
 					<label class="component-selector">
-						<input type="checkbox" name="cta-final" />
+						<input type="checkbox" name="media-text-left" />
 						<span class="checkmark"></span>
 					</label>
 				</div>
 			</div>
 			<div class="component-demo__preview">
-				<CTA variant="light" />
+				<MediaTextSection
+					image={heatpumpImg.src}
+					imageAlt="Image exemple"
+					mediaPosition="left"
+					title="Titre de section"
+					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+					cta={{
+						text: "Bouton d'action",
+						href: '#contact',
+						variant: 'primary'
+					}}
+				/>
+			</div>
+		</div>
+
+		<!-- Media Text - Image Right -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Image + Texte (Droite)</h4>
+						<p class="component-demo__description">Section 50/50 avec image à droite. À alterner pour créer du rythme.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="media-text-right" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<MediaTextSection
+					image={maintenanceImg.src}
+					imageAlt="Image exemple 2"
+					mediaPosition="right"
+					title="Autre service important"
+					description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+					cta={{
+						text: "En savoir plus",
+						href: '#contact',
+						variant: 'secondary'
+					}}
+				/>
 			</div>
 		</div>
 	</div>
 
-	<!-- 6️⃣ FAQ -->
-	<div class="landing-section" id="faq">
+	<!-- Galeries -->
+	<div class="landing-section" id="galleries" data-plan="vitrine">
 		<div class="section-header">
-			<div class="section-number">6️⃣</div>
+			<div class="section-number">
+				<Image class="h-8 w-8" />
+			</div>
 			<div>
-				<h3 class="section-title">FAQ</h3>
+				<h3 class="section-title">Portfolio : Montrez Vos Réalisations</h3>
 				<p class="section-description">
-					<strong>Anticipez les objections :</strong> Répondez aux questions fréquentes 
-					pour lever les freins à l'achat avant qu'ils ne se posent.
+					Mettez en avant vos réalisations avec des galeries photos. Particulièrement efficace pour les métiers visuels.
 				</p>
-				<div class="section-tips">
-					<span class="tip">✅ Questions courantes</span>
-					<span class="tip">✅ Lève les objections</span>
-					<span class="tip">✅ Rassure sur l'achat</span>
+				</div>
+		</div>
+
+		<!-- Gallery: Before/After -->
+		<div class="component-demo" data-plan="pro">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Slider Avant / Après</h4>
+						<p class="component-demo__description">Slider interactif avant/après. Très efficace pour transformations visuelles.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="gallery-before-after" />
+						<span class="checkmark"></span>
+					</label>
 				</div>
 			</div>
+			<div class="component-demo__preview">
+				<BeforeAfter
+					projects={[
+						{
+							id: 'demo-1',
+							title: 'Rénovation Salle de Bain',
+							description: 'Transformation complète avec carrelage moderne',
+							beforeImage: 'https://picsum.photos/id/537/600/400',
+							afterImage: 'https://picsum.photos/id/342/600/400',
+							beforeAlt: 'Salle de bain avant rénovation',
+							afterAlt: 'Salle de bain après rénovation'
+						},
+						{
+							id: 'demo-2',
+							title: 'Installation Chauffage',
+							description: 'Remplacement système de chauffage complet',
+							beforeImage: 'https://picsum.photos/id/180/600/400',
+							afterImage: 'https://picsum.photos/id/162/600/400',
+							beforeAlt: 'Ancien système de chauffage',
+							afterAlt: 'Nouveau système installé'
+						}
+					]}
+				/>
+			</div>
+		</div>
+
+		<!-- Gallery: Marquee -->
+		<div class="component-demo" data-plan="pro">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Défilement Automatique</h4>
+						<p class="component-demo__description">Défilement automatique de photos. Idéal pour 10-15 réalisations.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="gallery-marquee" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<MarqueeGallery />
+			</div>
+		</div>
+
+		<!-- Gallery: Project Gallery -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Grille avec Filtres</h4>
+						<p class="component-demo__description">Grille avec filtres par catégorie et lightbox. Pour 15+ projets.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="gallery-projects" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<ProjectGallery
+					title="Galerie de projets"
+					subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+					projects={projectsData}
+					columns={3}
+					showCategories={true}
+				/>
+			</div>
+		</div>
+	</div>
+
+	<!-- Tarifs (Optionnel) -->
+	<div class="landing-section" id="pricing" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<DollarSign class="h-8 w-8" />
+			</div>
+			<div>
+				<h3 class="section-title">Tarifs : Présentez Vos Offres (Optionnel)</h3>
+				<p class="section-description">
+					Affichez vos tarifs de manière claire. Recommandé pour forfaits et abonnements.
+				</p>
+				</div>
+		</div>
+
+		<!-- Pricing - Columns Variant -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Grille 3 Colonnes Complète</h4>
+						<p class="component-demo__description">3 colonnes avec offre du milieu mise en avant. Pour forfaits et abonnements.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="pricing-columns" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Pricing variant="columns" data={demoPricingData} />
+			</div>
+		</div>
+
+		<!-- Pricing - Cards Variant -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Cartes Premium avec Badge</h4>
+						<p class="component-demo__description">Format carte avec badge "Le plus populaire". Design moderne.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="pricing-cards" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Pricing variant="cards" data={demoPricingData} />
+			</div>
+		</div>
+
+		<!-- Pricing - Simple Variant -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Tarifs Compacts</h4>
+						<p class="component-demo__description">Version compacte : titre + prix + CTA. Présentation rapide.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="pricing-simple" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Pricing variant="simple" data={demoPricingData} />
+			</div>
+		</div>
+	</div>
+
+	<!-- Témoignages -->
+	<div class="landing-section" id="testimonials" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<MessageCircle class="h-8 w-8" />
+			</div>
+			<div>
+				<h3 class="section-title">Preuve Sociale : Vos Clients Parlent pour Vous</h3>
+				<p class="section-description">
+					Affichez les avis de vos clients pour renforcer votre crédibilité avec des formats modernes et engageants.
+				</p>
+				</div>
+		</div>
+
+		<!-- Reviews: Cards -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Cartes de Témoignages</h4>
+						<p class="component-demo__description">Grille de témoignages avec photo, nom, rôle et note. Format moderne.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="reviews-cards" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Reviews
+					variant="cards"
+					title="Ce que disent <strong>nos clients</strong>"
+					subtitle="Des centaines de clients satisfaits nous font confiance"
+				/>
+			</div>
+		</div>
+
+		<!-- Reviews: Featured Carousel -->
+		<div class="component-demo" data-plan="pro">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Carrousel de Témoignages Premium</h4>
+						<p class="component-demo__description">Témoignages en grand format qui défilent automatiquement. Impact visuel maximal.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="reviews-featured" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<Reviews
+					variant="featured"
+					title="Témoignages <strong>clients</strong>"
+					subtitle="Ce qu'ils disent de nous"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<!-- FAQ -->
+	<div class="landing-section" id="faq" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<MessageCircle class="h-8 w-8" />
+			</div>
+			<div>
+				<h3 class="section-title">FAQ : Levez les Derniers Freins</h3>
+				<p class="section-description">
+					Répondez aux questions fréquentes pour lever les derniers freins à la conversion.
+				</p>
+				</div>
 		</div>
 
 		<!-- FAQ Basic -->
-		<div class="component-demo">
+		<div class="component-demo" data-plan="vitrine">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Simple</span>
-						<h4 class="component-demo__title">FAQ accordéon</h4>
-						<p class="component-demo__description">
-							Format classique et efficace. Questions/réponses dépliables.
-						</p>
+						<h4 class="component-demo__title">Accordéon Simple</h4>
+						<p class="component-demo__description">Accordéon classique. Permet 7-10 questions sans surcharger.</p>
 					</div>
 					<label class="component-selector">
 						<input type="checkbox" name="faq-basic" />
@@ -935,15 +1200,12 @@ const projectsData = [
 		</div>
 
 		<!-- FAQ Default (numbered) -->
-		<div class="component-demo">
+		<div class="component-demo" data-plan="pro">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Recommandé</span>
-						<h4 class="component-demo__title">FAQ numérotée avec CTA</h4>
-						<p class="component-demo__description">
-							Version optimisée avec numéros et CTA intégré. Meilleur pour la conversion.
-						</p>
+						<h4 class="component-demo__title">FAQ Numérotée + CTA</h4>
+						<p class="component-demo__description">FAQ numérotée avec CTA intégré. Optimisée pour la conversion.</p>
 					</div>
 					<label class="component-selector">
 						<input type="checkbox" name="faq-numbered" />
@@ -962,15 +1224,12 @@ const projectsData = [
 		</div>
 
 		<!-- FAQ Grid -->
-		<div class="component-demo">
+		<div class="component-demo" data-plan="pro">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Scan rapide</span>
-						<h4 class="component-demo__title">FAQ grille statique</h4>
-						<p class="component-demo__description">
-							Toutes les réponses visibles d'un coup. Plus rapide à scanner.
-						</p>
+						<h4 class="component-demo__title">Grille Statique</h4>
+						<p class="component-demo__description">Toutes les réponses visibles directement. Pour 4-6 questions courtes.</p>
 					</div>
 					<label class="component-selector">
 						<input type="checkbox" name="faq-grid" />
@@ -989,190 +1248,164 @@ const projectsData = [
 		</div>
 	</div>
 
-	<!-- 8️⃣ Contact -->
-	<div class="landing-section" id="contact">
+	<!-- CTA Final -->
+	<div class="landing-section" id="final-cta" data-plan="pro">
 		<div class="section-header">
-			<div class="section-number">8️⃣</div>
-			<div>
-				<h3 class="section-title">Contact</h3>
-				<p class="section-description">
-					<strong>Facilitez la prise de contact :</strong> Un formulaire simple et efficace 
-					pour transformer vos visiteurs en prospects qualifiés.
-				</p>
-				<div class="section-tips">
-					<span class="tip">✅ Formulaire simple</span>
-					<span class="tip">✅ Champs essentiels</span>
-					<span class="tip">✅ Validation en temps réel</span>
-				</div>
+			<div class="section-number">
+				<Rocket class="h-8 w-8" />
 			</div>
+			<div>
+				<h3 class="section-title">Dernier Rappel : Passez à l'Action</h3>
+				<p class="section-description">
+					Section d'appel à l'action finale pour inciter vos visiteurs à passer à l'action.
+				</p>
+				</div>
 		</div>
 
-		<!-- Contact Form -->
-		<div class="component-demo">
+		<!-- CTA Light -->
+		<div class="component-demo" data-plan="pro">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Essentiel</span>
-						<h4 class="component-demo__title">Formulaire de contact</h4>
-						<p class="component-demo__description">
-							Formulaire optimisé avec validation et envoi automatique par email.
-						</p>
+						<h4 class="component-demo__title">CTA Simple avec Note</h4>
+						<p class="component-demo__description">CTA simple avec note client. Design sobre sur fond clair.</p>
 					</div>
 					<label class="component-selector">
-						<input type="checkbox" name="contact-form" />
+						<input type="checkbox" name="cta-light" />
 						<span class="checkmark"></span>
 					</label>
 				</div>
 			</div>
 			<div class="component-demo__preview">
-				<ContactForm />
-			</div>
-		</div>
-	</div>
-
-	<!-- 5️⃣ Témoignages -->
-	<div class="landing-section" id="testimonials">
-		<div class="section-header">
-			<div class="section-number">5️⃣</div>
-			<div>
-				<h3 class="section-title">Témoignages</h3>
-				<p class="section-description">
-					<strong>Rien ne vaut l'expérience client :</strong> Les témoignages authentiques 
-					sont plus convaincants que tous vos arguments commerciaux.
-				</p>
-				<div class="section-tips">
-					<span class="tip">✅ Témoignages authentiques</span>
-					<span class="tip">✅ Résultats concrets</span>
-					<span class="tip">✅ Photos clients</span>
-				</div>
+				<CTA variant="light" />
 			</div>
 		</div>
 
-		<!-- Google Reviews -->
-		<div class="component-demo">
+		<!-- CTA Dark -->
+		<div class="component-demo" data-plan="pro">
 			<div class="component-demo__label">
 				<div class="flex items-center justify-between">
 					<div>
-						<span class="component-demo__badge">Avis Google</span>
-						<h4 class="component-demo__title">Avis Google avec rating</h4>
-						<p class="component-demo__description">
-							Affichez vos avis Google pour rassurer instantanément vos visiteurs.
-						</p>
+						<h4 class="component-demo__title">CTA avec Image de Fond</h4>
+						<p class="component-demo__description">CTA avec image de fond et badge. Design premium à fort impact.</p>
 					</div>
 					<label class="component-selector">
-						<input type="checkbox" name="google-reviews" />
+						<input type="checkbox" name="cta-dark" />
 						<span class="checkmark"></span>
 					</label>
 				</div>
 			</div>
 			<div class="component-demo__preview">
-				<GoogleReviews />
+				<CTA variant="dark" />
 			</div>
 		</div>
 	</div>
 
-	<!-- SECTION: Highlights -->
-	<Section id="highlights" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
-		<Row>
-			<Col span="12">
-				<div class="mb-8 text-center">
-					<h2 class="mb-3 text-4xl font-bold">Points forts alternés</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400">
-						Sections image + texte qui alternent (gauche/droite) pour créer un rythme
-						visuel.
-					</p>
+	<!-- Réservation en ligne (Option à la carte +150€) -->
+	<div class="landing-section" id="booking" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<Calendar class="h-8 w-8" />
+			</div>
+			<div>
+				<h3 class="section-title">Réservation en Ligne avec Cal.com (Option +150€)</h3>
+				<p class="section-description">
+					Système de réservation en ligne avec Cal.com. Vos clients réservent directement.
+				</p>
 				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- Highlight Rows -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">Highlights 1</span>
-			<h3 class="component-demo__title">4 sections alternées</h3>
-			<p class="component-demo__description">
-				Bloc de 4 sections (texte + illustration SVG) qui alternent automatiquement. Idéal
-				pour présenter vos avantages clés de manière visuelle et dynamique.
-			</p>
 		</div>
-		<div class="component-demo__preview">
-			<HightlightRows />
+
+		<!-- Cal.com Booking -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Système de Réservation Cal.com</h4>
+						<p class="component-demo__description">Widget Cal.com intégré. Prise de rendez-vous automatique.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="cal-booking" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<CalEmbed mode="single" />
+			</div>
 		</div>
 	</div>
 
-	<!-- SECTION: Zone d'intervention -->
-	<Section id="coverage" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
-		<Row>
-			<Col span="12">
-				<div class="mb-8 text-center">
-					<h2 class="mb-3 text-4xl font-bold">Zone d'intervention</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400">
-						Montrez votre zone géographique avec Google Maps intégré.
-					</p>
+	<!-- Contact -->
+	<div class="landing-section" id="contact" data-plan="vitrine">
+		<div class="section-header">
+			<div class="section-number">
+				<PhoneCall class="h-8 w-8" />
+			</div>
+			<div>
+				<h3 class="section-title">Formulaire de Contact</h3>
+				<p class="section-description">
+					Formulaire de contact simple et efficace. Limitez les champs pour maximiser les conversions.
+				</p>
 				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- Service Area -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">Coverage 1</span>
-			<h3 class="component-demo__title">Carte Google Maps</h3>
-			<p class="component-demo__description">
-				Carte interactive Google Maps iframe pour montrer votre zone d'intervention. Liste
-				automatique des villes desservies depuis client.ts.
-			</p>
 		</div>
-		<div class="component-demo__preview">
-			<ServiceArea />
-		</div>
-	</div>
 
-	<!-- SECTION: Preuve Sociale -->
-	<Section id="social-proof" padding="top" classes="bg-neutral-50 dark:bg-neutral-950">
-		<Row>
-			<Col span="12">
-				<div class="mb-8 text-center">
-					<h2 class="mb-3 text-4xl font-bold">Preuve sociale</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400">
-						Logos de partenaires, certifications ou clients pour renforcer la
-						crédibilité.
-					</p>
+		<!-- Contact Form - Full -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Formulaire avec Infos Contact</h4>
+						<p class="component-demo__description">Formulaire avec sidebar d'informations. Pour page contact dédiée.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="contact-form-full" />
+						<span class="checkmark"></span>
+					</label>
 				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- Social Proof -->
-	<div class="component-demo">
-		<div class="component-demo__label">
-			<span class="component-demo__badge">SocialProof 1</span>
-			<h3 class="component-demo__title">Logos partenaires</h3>
-			<p class="component-demo__description">
-				Ligne de logos (clients, partenaires, certifications) pour renforcer la confiance.
-				Facilement personnalisable avec vos propres images.
-			</p>
+			</div>
+			<div class="component-demo__preview">
+				<ContactForm variant="full" />
+			</div>
 		</div>
-		<div class="component-demo__preview">
-			<SocialProof />
+
+		<!-- Contact Form - Simple -->
+		<div class="component-demo" data-plan="vitrine">
+			<div class="component-demo__label">
+				<div class="flex items-center justify-between">
+					<div>
+						<h4 class="component-demo__title">Formulaire Simple Centré</h4>
+						<p class="component-demo__description">Formulaire simple centré sans sidebar. Pour landing page.</p>
+					</div>
+					<label class="component-selector">
+						<input type="checkbox" name="contact-form-simple" />
+						<span class="checkmark"></span>
+					</label>
+				</div>
+			</div>
+			<div class="component-demo__preview">
+				<ContactForm variant="simple" />
+			</div>
 		</div>
 	</div>
 
 	<!-- ÉTAPE 3: Résumé et génération -->
-	<Section id="summary" padding="both" classes="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20">
+	<Section
+		id="summary"
+		padding="both"
+		classes="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/20 dark:to-green-900/20"
+	>
 		<Row>
 			<Col span="12">
-				<div class="text-center mb-12">
-					<div class="inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 text-green-700 font-semibold mb-4">
-						<span class="text-2xl">🚀</span>
+				<div class="mb-12 text-center">
+					<div
+						class="mb-4 inline-flex items-center gap-2 rounded-full bg-green-100 px-4 py-2 font-semibold text-green-700"
+					>
+						<Rocket class="h-6 w-6" />
 						Étape 3 sur 3
 					</div>
 					<h2 class="mb-4 text-4xl font-bold">Votre landing page est prête !</h2>
-					<p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto">
-						Vous avez sélectionné tous les éléments nécessaires pour créer une landing page qui convertit. 
-						Il ne reste plus qu'à la générer !
+					<p class="mx-auto max-w-3xl text-lg text-neutral-600 dark:text-neutral-400">
+						Résumé de vos choix. Nous utiliserons ces éléments pour créer votre site.
 					</p>
 				</div>
 			</Col>
@@ -1180,173 +1413,68 @@ const projectsData = [
 
 		<Row>
 			<Col span="12">
-				<div class="bg-white dark:bg-neutral-800 rounded-2xl p-8 shadow-lg">
-					<h3 class="text-2xl font-bold mb-6 text-center">Résumé de vos sélections</h3>
-					
-					<div class="grid md:grid-cols-2 gap-8 mb-8">
+				<div class="rounded-2xl bg-white p-8 shadow-lg dark:bg-neutral-800">
+					<h3 class="mb-6 text-center text-2xl font-bold">Résumé de vos sélections</h3>
+
+					<div class="mb-8 grid gap-8 md:grid-cols-3">
 						<div>
-							<h4 class="font-bold text-lg mb-4 flex items-center gap-2">
-								<span class="text-2xl">🎨</span>
+							<h4 class="mb-4 flex items-center gap-2 text-lg font-bold">
+								<Palette class="h-6 w-6 text-primary-600" />
 								Style visuel
 							</h4>
 							<div class="space-y-2 text-neutral-600 dark:text-neutral-400">
-								<p>• Design system : <span class="font-medium">À sélectionner</span></p>
-								<p>• Police principale : <span class="font-medium">À sélectionner</span></p>
-								<p>• Couleur primaire : <span class="font-medium">À sélectionner</span></p>
+								<p>
+									• Border radius : <span id="summary-radius" class="font-medium text-primary-600"
+										>default (4px)</span>
+								</p>
+								<p>
+									• Shadow : <span id="summary-shadow" class="font-medium text-primary-600"
+										>default</span>
+								</p>
+								<p>
+									• Couleur primaire : <span
+										id="summary-primary"
+										class="font-medium text-primary-600">#2563EB</span>
+								</p>
+								<p>
+									• Couleur secondaire : <span
+										id="summary-secondary"
+										class="font-medium text-primary-600">Aucune</span>
+								</p>
 							</div>
 						</div>
-						
+
 						<div>
-							<h4 class="font-bold text-lg mb-4 flex items-center gap-2">
-								<span class="text-2xl">🧩</span>
-								Composants sélectionnés
+							<h4 class="mb-4 flex items-center gap-2 text-lg font-bold">
+								<DollarSign class="h-6 w-6 text-primary-600" />
+								Plan tarifaire
 							</h4>
 							<div class="space-y-2 text-neutral-600 dark:text-neutral-400">
-								<p>• Hero section : <span class="font-medium">À sélectionner</span></p>
-								<p>• Preuve sociale : <span class="font-medium">Optionnel</span></p>
-								<p>• Bénéfices : <span class="font-medium">À sélectionner</span></p>
-								<p>• Témoignages : <span class="font-medium">Optionnel</span></p>
-								<p>• FAQ : <span class="font-medium">Recommandé</span></p>
-								<p>• Contact : <span class="font-medium">Obligatoire</span></p>
+								<p>
+									• Plan actif : <span id="summary-plan" class="font-medium text-primary-600"
+										>Vitrine</span>
+								</p>
+								<p class="text-sm italic">
+									Utilisez les boutons ci-dessus pour voir les composants disponibles selon votre
+									plan.
+								</p>
+							</div>
+						</div>
+
+						<div>
+							<h4 class="mb-4 flex items-center gap-2 text-lg font-bold">
+								<Box class="h-6 w-6 text-primary-600" />
+								Composants sélectionnés
+							</h4>
+							<div
+								id="summary-components"
+								class="space-y-1 text-sm text-neutral-600 dark:text-neutral-400"
+							>
+								<p class="italic text-neutral-400">Cochez les composants ci-dessus</p>
 							</div>
 						</div>
 					</div>
-
-					<div class="text-center">
-						<button class="inline-flex items-center gap-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:from-primary-600 hover:to-primary-700 transition-all transform hover:scale-105 shadow-lg">
-							<span class="text-2xl">⚡</span>
-							Générer ma landing page
-						</button>
-						<p class="mt-4 text-sm text-neutral-500">
-							Votre site sera prêt en moins de 5 minutes
-						</p>
-					</div>
 				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- SECTION: Différenciation Automatique -->
-	<Section
-		padding="both"
-		classes="bg-gradient-to-br from-neutral-100 to-neutral-200 dark:from-neutral-800 dark:to-neutral-900"
-	>
-		<Row>
-			<Col span="12" align="center">
-				<h2 class="mb-6 text-4xl font-bold">Différenciation Automatique</h2>
-				<p class="mx-auto mb-8 max-w-3xl text-lg text-neutral-600 dark:text-neutral-400">
-					Chaque site généré est <strong>automatiquement unique</strong> grâce à notre système
-					de randomisation intelligent.
-				</p>
-			</Col>
-		</Row>
-		<Row>
-			<Col span="12">
-				<div class="mb-6 text-center">
-					<div
-						class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-2xl dark:bg-primary-900"
-					>
-						🎨
-					</div>
-					<h3 class="mb-3 text-xl font-bold">Variants Visuels</h3>
-					<p class="text-neutral-600 dark:text-neutral-400">
-						3 Hero variants × 3 Features variants × 3 FAQ variants = <strong
-							>27 combinaisons</strong
-						> de layouts différents
-					</p>
-				</div>
-			</Col>
-			<Col span="12">
-				<div class="mb-6 text-center">
-					<div
-						class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-2xl dark:bg-primary-900"
-					>
-						🎭
-					</div>
-					<h3 class="mb-3 text-xl font-bold">Design Systems</h3>
-					<p class="text-neutral-600 dark:text-neutral-400">
-						5 styles (Modern, Soft, Sharp, Minimal, Elegant) avec des <strong
-							>bordures, ombres et animations</strong
-						> différentes
-					</p>
-				</div>
-			</Col>
-			<Col span="12">
-				<div class="mb-6 text-center">
-					<div
-						class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary-100 text-2xl dark:bg-primary-900"
-					>
-						🔤
-					</div>
-					<h3 class="mb-3 text-xl font-bold">Typographies</h3>
-					<p class="text-neutral-600 dark:text-neutral-400">
-						8 fonts professionnelles sélectionnées pour créer des <strong
-							>personnalités visuelles</strong
-						> distinctes
-					</p>
-				</div>
-			</Col>
-		</Row>
-		<Row>
-			<Col span="12" align="center">
-				<div class="rounded-xl bg-white p-8 shadow-lg dark:bg-neutral-800">
-					<h3 class="mb-4 text-2xl font-bold">Résultat : 1,944 Combinaisons Possibles</h3>
-					<p class="mb-6 text-lg text-neutral-600 dark:text-neutral-400">
-						Même avec <strong>15 clients dans la même ville</strong>, chacun aura un
-						site visuellement unique !
-					</p>
-					<div class="grid grid-cols-1 gap-4 text-left md:grid-cols-2">
-						<div class="rounded-lg bg-neutral-50 p-4 dark:bg-neutral-700">
-							<h4 class="mb-2 font-semibold">Client A - Plombier Lille</h4>
-							<p class="text-sm text-neutral-600 dark:text-neutral-400">
-								Hero Split + Features Cards + FAQ Grid + Design Soft + Font Inter +
-								Couleur Bleue
-							</p>
-						</div>
-						<div class="rounded-lg bg-neutral-50 p-4 dark:bg-neutral-700">
-							<h4 class="mb-2 font-semibold">Client B - Plombier Lille</h4>
-							<p class="text-sm text-neutral-600 dark:text-neutral-400">
-								Hero Centered + Features List + FAQ Basic + Design Sharp + Font
-								Outfit + Couleur Verte
-							</p>
-						</div>
-					</div>
-				</div>
-			</Col>
-		</Row>
-	</Section>
-
-	<!-- Footer CTA -->
-	<Section padding="both" classes="bg-gradient-to-br from-primary-600 to-primary-800 text-white">
-		<Row>
-			<Col span="12" align="center">
-				<h2 class="mb-4 text-4xl font-bold text-white">Prêt à créer votre site ?</h2>
-				<p class="mx-auto mb-8 max-w-2xl text-xl text-white/90">
-					Choisissez les composants qui vous plaisent et nous assemblerons votre site sur
-					mesure en quelques heures. <strong
-						>Chaque site est automatiquement unique !</strong
-					>
-				</p>
-				<a
-					href="mailto:contact@gregoryleroux.com"
-					class="inline-flex items-center gap-2 rounded-lg bg-white px-8 py-4 text-lg font-semibold text-primary-700 transition-colors hover:bg-neutral-100"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="h-6 w-6"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-						></path>
-					</svg>
-					Demander un devis
-				</a>
 			</Col>
 		</Row>
 	</Section>
@@ -1390,19 +1518,19 @@ const projectsData = [
 	}
 
 	.section-header {
-		@apply mb-8 flex gap-6 items-start p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-950/30 dark:to-primary-900/30 rounded-xl border border-primary-200 dark:border-primary-800;
+		@apply mb-8 flex items-start gap-6 rounded-xl border border-primary-200 bg-gradient-to-r from-primary-50 to-primary-100 p-6 dark:border-primary-800 dark:from-primary-950/30 dark:to-primary-900/30;
 	}
 
 	.section-number {
-		@apply text-4xl font-bold text-primary-600 dark:text-primary-400 flex-shrink-0;
+		@apply flex-shrink-0 text-4xl font-bold text-primary-600 dark:text-primary-400;
 	}
 
 	.section-title {
-		@apply text-2xl font-bold text-neutral-900 dark:text-white mb-2;
+		@apply mb-2 text-2xl font-bold text-neutral-900 dark:text-white;
 	}
 
 	.section-description {
-		@apply text-neutral-600 dark:text-neutral-400 mb-4 leading-relaxed;
+		@apply mb-4 leading-relaxed text-neutral-600 dark:text-neutral-400;
 	}
 
 	.section-tips {
@@ -1410,7 +1538,7 @@ const projectsData = [
 	}
 
 	.tip {
-		@apply inline-flex items-center gap-1 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium;
+		@apply inline-flex items-center gap-1 rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-700 dark:bg-green-900/30 dark:text-green-300;
 	}
 
 	/* Component Selector */
@@ -1423,38 +1551,21 @@ const projectsData = [
 	}
 
 	.checkmark {
-		@apply w-6 h-6 bg-white border-2 border-neutral-300 rounded-md flex items-center justify-center transition-all;
+		@apply flex h-6 w-6 items-center justify-center rounded-md border-2 border-neutral-300 bg-white transition-all;
 	}
 
 	.component-selector input:checked + .checkmark {
-		@apply bg-primary-500 border-primary-500;
+		@apply border-primary-500 bg-primary-500;
 	}
 
 	.component-selector input:checked + .checkmark::after {
 		content: '✓';
-		@apply text-white font-bold;
-	}
-
-	/* Design System Options */
-	.design-system-option {
-		@apply cursor-pointer;
-	}
-
-	.design-system-option input {
-		@apply sr-only;
-	}
-
-	.design-system-card {
-		@apply p-4 border-2 border-neutral-200 dark:border-neutral-700 rounded-xl transition-all hover:border-primary-300 dark:hover:border-primary-600;
-	}
-
-	.design-system-option input:checked + .design-system-card {
-		@apply border-primary-500 bg-primary-50 dark:bg-primary-950/30;
+		@apply font-bold text-white;
 	}
 
 	/* Font Options */
 	.font-option {
-		@apply cursor-pointer;
+		@apply block cursor-pointer;
 	}
 
 	.font-option input {
@@ -1462,7 +1573,7 @@ const projectsData = [
 	}
 
 	.font-preview {
-		@apply p-3 border-2 border-neutral-200 dark:border-neutral-700 rounded-lg transition-all hover:border-primary-300 dark:hover:border-primary-600 flex flex-col;
+		@apply flex flex-col rounded-lg border-2 border-neutral-200 p-3 transition-all hover:border-primary-300 dark:border-neutral-700 dark:hover:border-primary-600;
 	}
 
 	.font-option input:checked + .font-preview {
@@ -1470,11 +1581,11 @@ const projectsData = [
 	}
 
 	.font-name {
-		@apply font-bold text-sm;
+		@apply text-sm font-bold;
 	}
 
 	.font-sample {
-		@apply text-neutral-600 dark:text-neutral-400 text-sm;
+		@apply text-sm text-neutral-600 dark:text-neutral-400;
 	}
 
 	/* Color Options */
@@ -1482,19 +1593,373 @@ const projectsData = [
 		@apply cursor-pointer text-center;
 	}
 
-	.color-option input {
+	.color-option input[type="radio"] {
 		@apply sr-only;
 	}
 
 	.color-preview {
-		@apply w-12 h-12 rounded-lg mx-auto mb-2 border-4 border-transparent transition-all;
+		@apply mx-auto mb-2 h-12 w-12 rounded-lg border-4 border-transparent transition-all;
 	}
 
-	.color-option input:checked + .color-preview {
-		@apply border-neutral-800 dark:border-white scale-110;
+	.color-option input[type="radio"]:checked + .color-preview {
+		@apply scale-110 border-neutral-800 dark:border-white;
 	}
 
 	.color-name {
 		@apply text-sm font-medium;
 	}
+
+	/* Sexy Color Picker */
+	.color-picker-wrapper {
+		@apply relative mb-6;
+	}
+
+	.color-picker-input {
+		@apply absolute opacity-0 h-0 w-0;
+	}
+
+	.color-picker-display {
+		@apply flex items-center gap-4 p-4 rounded-xl border-2 border-neutral-200 bg-white cursor-pointer transition-all hover:border-primary-400 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-primary-500;
+	}
+
+	.color-picker-preview {
+		@apply h-16 w-16 rounded-lg border-white shadow-lg transition-transform hover:scale-105 dark:border-neutral-700;
+	}
+
+	.color-picker-info {
+		@apply flex flex-1 flex-col gap-1;
+	}
+
+	.color-picker-label {
+		@apply text-sm font-medium text-neutral-600 dark:text-neutral-400;
+	}
+
+	.color-picker-value {
+		@apply text-lg font-bold font-mono text-neutral-900 dark:text-white;
+	}
+
+	/* Color Picker Custom */
+	.color-picker-option {
+		@apply relative;
+	}
+
+	.color-preview-picker {
+		@apply relative mx-auto mb-2 h-12 w-12 overflow-hidden rounded-lg border-4 border-transparent transition-all cursor-pointer;
+	}
+
+	.color-input {
+		@apply absolute inset-0 h-full w-full cursor-pointer border-0;
+		-webkit-appearance: none;
+		appearance: none;
+	}
+
+	.color-input::-webkit-color-swatch-wrapper {
+		padding: 0;
+	}
+
+	.color-input::-webkit-color-swatch {
+		border: none;
+		border-radius: 0.5rem;
+	}
+
+	.color-input::-moz-color-swatch {
+		border: none;
+		border-radius: 0.5rem;
+	}
+
+	.color-option input[type="radio"]:checked ~ .color-preview-picker {
+		@apply scale-110 border-neutral-800 dark:border-white ring-2 ring-neutral-200 dark:ring-neutral-600;
+	}
+
+	/* Tailwind-style Options (for border-radius and shadows) */
+	.tailwind-option {
+		@apply cursor-pointer;
+	}
+
+	.tailwind-option input {
+		@apply sr-only;
+	}
+
+	.tailwind-preview-card {
+		@apply rounded-lg bg-white p-3 text-center transition-all hover:border-neutral-300 dark:bg-neutral-800 dark:hover:border-neutral-600;
+	}
+
+	.tailwind-option input:checked ~ .tailwind-preview-card {
+		@apply border-primary-500 bg-primary-50 ring-2 ring-primary-200 dark:bg-primary-950/30 dark:ring-primary-800;
+	}
+
+	.option-label {
+		@apply mb-1 block text-xs font-semibold text-neutral-700 dark:text-neutral-300;
+	}
+
+	.option-code {
+		@apply block font-mono text-xs text-neutral-500 dark:text-neutral-400;
+	}
+
+	/* Plan-based filtering */
+	[data-plan].hidden {
+		display: none !important;
+	}
+
+	/* Plan selector active state */
+	.plan-selector.active {
+		@apply bg-white text-primary-700 shadow-lg;
+	}
+
+	.plan-selector:not(.active) {
+		@apply bg-white/20 text-white;
+	}
 </style>
+
+<script>
+	// Plan filtering logic with cumulative hierarchy
+	document.addEventListener('DOMContentLoaded', () => {
+		const planSelectors = document.querySelectorAll('.plan-selector')
+
+		// Define what each plan includes (cumulative)
+		const planIncludes = {
+			vitrine: ['vitrine'],
+			pro: ['vitrine', 'pro']
+		}
+
+		function updateVisibility(selectedPlan: string) {
+			// Get the list of plans to show based on selection
+			const plansToShow = planIncludes[selectedPlan as keyof typeof planIncludes] || []
+
+			// Get all elements with data-plan attribute, but exclude the buttons themselves
+			const allPlanElements = document.querySelectorAll('[data-plan]:not(.plan-selector)')
+
+			allPlanElements.forEach((element) => {
+				const elementPlan = element.getAttribute('data-plan')
+				if (!elementPlan) return
+
+				// Show element if its plan is included in the selected plan
+				if (plansToShow.includes(elementPlan)) {
+					element.classList.remove('hidden')
+				} else {
+					element.classList.add('hidden')
+				}
+			})
+
+			// Update button states
+			planSelectors.forEach((btn) => {
+				if (btn.getAttribute('data-plan') === selectedPlan) {
+					btn.classList.add('active')
+				} else {
+					btn.classList.remove('active')
+				}
+			})
+
+			// Update summary
+			const summaryPlan = document.getElementById('summary-plan')
+			if (summaryPlan) {
+				const planLabels: Record<string, string> = {
+					vitrine: 'Vitrine',
+					pro: 'Pro'
+				}
+				summaryPlan.textContent = planLabels[selectedPlan] || selectedPlan
+			}
+		}
+
+		// Add click handlers
+		planSelectors.forEach((button) => {
+			button.addEventListener('click', () => {
+				const plan = button.getAttribute('data-plan')
+				if (plan) {
+					updateVisibility(plan)
+				}
+			})
+		})
+
+		// Initialize with Vitrine plan by default
+		updateVisibility('vitrine')
+
+		// ========================================
+		// Design Choices Tracker (for set-client.js)
+		// ========================================
+		const designChoices = {
+			borderRadius: 'default',
+			shadow: 'default',
+			primaryColor: '#2563EB',
+			secondaryColor: 'none'
+		}
+
+		// Mapping des valeurs pour l'affichage
+		const borderRadiusLabels: Record<string, string> = {
+			none: 'none (0px)',
+			sm: 'sm (2px)',
+			default: 'default (4px)',
+			md: 'md (6px)',
+			lg: 'lg (8px)',
+			xl: 'xl (12px)',
+			'2xl': '2xl (16px)',
+			'3xl': '3xl (24px)',
+			full: 'full (rond)'
+		}
+
+		// Update summary in the DOM
+		function updateSummary() {
+			const summaryRadius = document.getElementById('summary-radius')
+			const summaryShadow = document.getElementById('summary-shadow')
+			const summaryPrimary = document.getElementById('summary-primary')
+			const summarySecondary = document.getElementById('summary-secondary')
+
+			if (summaryRadius)
+				summaryRadius.textContent =
+					borderRadiusLabels[designChoices.borderRadius] || designChoices.borderRadius
+			if (summaryShadow) summaryShadow.textContent = designChoices.shadow
+			if (summaryPrimary) summaryPrimary.textContent = designChoices.primaryColor
+			if (summarySecondary)
+				summarySecondary.textContent =
+					designChoices.secondaryColor === 'none' ? 'Aucune' : designChoices.secondaryColor
+
+			// Log to console for debugging
+			console.log('📊 Design Choices:', designChoices)
+		}
+
+		// Border Radius Selection
+		const borderRadiusInputs = document.querySelectorAll('input[name="border-radius"]')
+		borderRadiusInputs.forEach((input) => {
+			input.addEventListener('change', (e) => {
+				const target = e.target as HTMLInputElement
+				if (target.checked) {
+					designChoices.borderRadius = target.value
+					updateSummary()
+				}
+			})
+		})
+
+		// Shadow Selection
+		const shadowInputs = document.querySelectorAll('input[name="shadow"]')
+		shadowInputs.forEach((input) => {
+			input.addEventListener('change', (e) => {
+				const target = e.target as HTMLInputElement
+				if (target.checked) {
+					designChoices.shadow = target.value
+					updateSummary()
+				}
+			})
+		})
+
+		// Color Selection - Sexy Color Pickers
+		const primaryColorPicker = document.getElementById('primary-color-picker') as HTMLInputElement
+		const primaryPreview = document.getElementById('primary-preview') as HTMLElement
+		const primaryValue = document.getElementById('primary-value') as HTMLElement
+		const secondaryColorPicker = document.getElementById('secondary-color-picker') as HTMLInputElement
+		const secondaryPreview = document.getElementById('secondary-preview') as HTMLElement
+		const secondaryValue = document.getElementById('secondary-value') as HTMLElement
+
+		// Initialize previews
+		if (primaryColorPicker && primaryPreview) {
+			primaryPreview.style.backgroundColor = primaryColorPicker.value
+		}
+		if (secondaryColorPicker && secondaryPreview) {
+			secondaryPreview.style.backgroundColor = secondaryColorPicker.value
+		}
+
+		// Primary color picker change
+		if (primaryColorPicker && primaryPreview && primaryValue) {
+			primaryColorPicker.addEventListener('input', (e) => {
+				const target = e.target as HTMLInputElement
+				const color = target.value
+				designChoices.primaryColor = color
+				primaryPreview.style.backgroundColor = color
+				primaryValue.textContent = color.toUpperCase()
+				updateSummary()
+			})
+		}
+
+		// Secondary color picker change
+		if (secondaryColorPicker && secondaryPreview && secondaryValue) {
+			secondaryColorPicker.addEventListener('input', (e) => {
+				const target = e.target as HTMLInputElement
+				const color = target.value
+				designChoices.secondaryColor = color
+				secondaryPreview.style.backgroundColor = color
+				secondaryValue.textContent = color.toUpperCase()
+				updateSummary()
+			})
+		}
+
+		// ========================================
+		// Component Selection Tracker
+		// ========================================
+		const selectedComponents: string[] = []
+
+		// Component labels mapping
+		const componentLabels: Record<string, string> = {
+			'hero-home': 'Hero Home',
+			'hero-split': 'Hero Split (2 colonnes)',
+			'hero-simple': 'Hero Simple',
+			'brands-default': 'Logos Partenaires',
+			'benefits-image': 'Benefits Image',
+			'benefits-list': 'Benefits List',
+			'benefits-cards': 'Benefits Cards',
+			'steps-process': 'Steps Process',
+			'highlights-rows': 'Highlights Rows',
+			'media-text-left': 'Media Text (Image Gauche)',
+			'media-text-right': 'Media Text (Image Droite)',
+			'gallery-before-after': 'Before/After Gallery',
+			'gallery-marquee': 'Marquee Gallery',
+			'gallery-projects': 'Projects Gallery',
+			'pricing-columns': 'Pricing Columns',
+			'pricing-cards': 'Pricing Cards',
+			'pricing-simple': 'Pricing Simple',
+			'reviews-cards': 'Témoignages Cards',
+			'reviews-featured': 'Carrousel Témoignages Premium',
+			'faq-basic': 'FAQ Basic',
+			'faq-numbered': 'FAQ Numbered',
+			'faq-grid': 'FAQ Grid',
+			'cta-light': 'CTA Light',
+			'cta-dark': 'CTA Dark',
+			'cal-booking': 'Calendar Booking',
+			'contact-form-full': 'Contact Form (Full)',
+			'contact-form-simple': 'Contact Form (Simple)'
+		}
+
+		// Update components summary
+		function updateComponentsSummary() {
+			const summaryContainer = document.getElementById('summary-components')
+			if (!summaryContainer) return
+
+			if (selectedComponents.length === 0) {
+				summaryContainer.innerHTML =
+					'<p class="italic text-neutral-400">Aucun composant sélectionné</p>'
+			} else {
+				const componentsHTML = selectedComponents
+					.map((comp) => `<p>• ${componentLabels[comp] || comp}</p>`)
+					.join('')
+				summaryContainer.innerHTML = componentsHTML
+			}
+
+			console.log('🧩 Selected Components:', selectedComponents)
+		}
+
+		// Listen to all component checkboxes
+		const componentCheckboxes = document.querySelectorAll(
+			'input[type="checkbox"][name^="hero-"], input[type="checkbox"][name^="brands-"], input[type="checkbox"][name^="reviews-"], input[type="checkbox"][name^="benefits-"], input[type="checkbox"][name^="steps-"], input[type="checkbox"][name^="highlights-"], input[type="checkbox"][name^="media-"], input[type="checkbox"][name^="gallery-"], input[type="checkbox"][name^="pricing-"], input[type="checkbox"][name^="faq-"], input[type="checkbox"][name^="cta-"], input[type="checkbox"][name^="cal-"], input[type="checkbox"][name^="contact-"]'
+		)
+
+		componentCheckboxes.forEach((checkbox) => {
+			checkbox.addEventListener('change', (e) => {
+				const target = e.target as HTMLInputElement
+				const componentName = target.name
+
+				if (target.checked) {
+					// Add to selection if not already present
+					if (!selectedComponents.includes(componentName)) {
+						selectedComponents.push(componentName)
+					}
+				} else {
+					// Remove from selection
+					const index = selectedComponents.indexOf(componentName)
+					if (index > -1) {
+						selectedComponents.splice(index, 1)
+					}
+				}
+
+				updateComponentsSummary()
+			})
+		})
+	})
+</script>

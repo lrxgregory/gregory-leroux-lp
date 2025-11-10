@@ -42,5 +42,12 @@ export const navigationBarData: NavData = {
 		{ name: 'Méthode', link: '/#steps' },
 		{ name: 'FAQ', link: '/#faq' }
 	],
-	navActions: [{ name: 'Réserver un appel ', link: '/#', style: 'primary', size: 'lg' }]
+	navActions: [
+		{
+			name: 'Réserver un appel ',
+			link: 'https://cal.com/gregory-leroux-dev/30min',
+			style: 'primary',
+			size: 'lg'
+		}
+	]
 }

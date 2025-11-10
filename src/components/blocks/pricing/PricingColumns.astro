@@ -41,7 +41,12 @@ type PricingTableData = {
 	type: 'basic' | 'featured'
 }
 
-const pricingData: PricingTableData[] = pricingTablesData as PricingTableData[]
+interface Props {
+	data?: PricingTableData[]
+}
+
+const { data } = Astro.props
+const pricingData: PricingTableData[] = data || (pricingTablesData as PricingTableData[])
 ---
 
 <Section>

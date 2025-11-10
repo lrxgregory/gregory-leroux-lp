@@ -29,6 +29,27 @@ export default {
     },
   ],
   theme: {
+    borderRadius: {
+      'none': '0px',
+      'sm': '0.125rem',
+      DEFAULT: 'var(--client-radius)',
+      'md': '0.375rem',
+      'lg': '0.5rem',
+      'xl': '0.75rem',
+      '2xl': '1rem',
+      '3xl': '1.5rem',
+      'full': '9999px',
+    },
+    boxShadow: {
+      sm: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      DEFAULT: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+      md: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+      lg: 'var(--client-shadow)',
+      xl: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+      '2xl': '0 25px 50px -12px rgb(0 0 0 / 0.25)',
+      inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)',
+      none: 'none',
+    },
     extend: {
       colors: {
         transparent: "transparent",
@@ -44,19 +65,6 @@ export default {
           800: '#154377',
           900: '#133053',
           950: '#0f2542',
-        },
-        secondary: {
-          '50': 'hsl(206, 80%, 97%)',
-          '100': 'hsl(206, 90%, 93%)',
-          '200': 'hsl(206, 95%, 83%)',
-          '300': 'hsl(206, 100%, 68%)',
-          '400': 'hsl(206, 100%, 56%)',
-          '500': '#004E89',
-          '600': 'hsl(206, 100%, 21%)',
-          '700': 'hsl(206, 100%, 17%)',
-          '800': 'hsl(206, 100%, 13%)',
-          '900': 'hsl(206, 80%, 9%)',
-          '950': 'hsl(206, 70%, 7%)',
         },
         neutral: {
           50: "#f8fafc",

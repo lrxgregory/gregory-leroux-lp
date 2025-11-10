@@ -1,0 +1,124 @@
+{
+  "$schema": "./clients-data.schema.json",
+  "clients": [
+    {
+      "slug": "dupont-chauffage",
+      "businessName": "Dupont Chauffage",
+      "legalName": "Dupont Chauffage SARL",
+      "tagline": "Expert chauffage & plomberie - Valenciennes",
+      "description": "Votre partenaire chauffage à Valenciennes. Installation de chaudières à condensation, pompes à chaleur et entretien toutes marques. Service rapide et prix compétitifs.",
+      "sector": "heating",
+      "city": "Valenciennes",
+      "postalCode": "59300",
+      "street": "15 Rue de la République",
+      "coordinates": {
+        "lat": 50.3584,
+        "lng": 3.5252
+      },
+      "phone": "09 52 45 89 33",
+      "phoneLink": "+33952458933",
+      "whatsapp": "33952458933",
+      "whatsappMessage": "Bonjour, je souhaite obtenir un devis.",
+      "email": "contact@dupont-chauffage.fr",
+      "googleMapsUrl": "https://maps.google.com/?q=Valenciennes",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000!2d3.5252!3d50.3584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM!5e0!3m2!1sfr!2sfr!4v1234567890",
+      "pricingPlan": "pro",
+      "services": [
+        "Installation de chaudières",
+        "Dépannage urgence",
+        "Entretien annuel",
+        "Pompes à chaleur"
+      ],
+      "serviceAreas": [
+        "Valenciennes",
+        "Cambrai",
+        "Douai",
+        "Denain",
+        "Maubeuge"
+      ],
+      "hours": ["Lundi - Vendredi : 8h - 18h", "Samedi : 9h - 12h"],
+      "emergency": true,
+      "colors": {
+        "primary": "#FF6B35",
+        "secondary": "#004E89"
+      },
+      "googleReviews": {
+        "rating": 4.8,
+        "count": 52,
+        "link": "https://maps.google.com/?cid=123456789"
+      },
+      "seoKeywords": ["chauffagiste", "Valenciennes", "installation", "dépannage", "pompe à chaleur"],
+      "seoAdvanced": {
+        "businessType": "Plumber",
+        "priceRange": "€€",
+        "foundingDate": "2010-03-15",
+        "founder": "Jean Dupont"
+      },
+      "socialMedia": {
+        "facebook": "https://www.facebook.com/dupontchauffage",
+        "instagram": "https://www.instagram.com/dupontchauffage"
+      }
+    },
+    {
+      "slug": "martin-plomberie",
+      "businessName": "Martin Plomberie",
+      "legalName": "Martin Plomberie SARL",
+      "tagline": "Plombier professionnel à Lille",
+      "description": "Artisan plombier à Lille depuis plus de 15 ans. Spécialiste des installations sanitaires, dépannage d'urgence et rénovation. Intervention rapide et travail soigné garanti.",
+      "sector": "plumber",
+      "city": "Lille",
+      "postalCode": "59000",
+      "street": "10 Rue de la Paix",
+      "coordinates": {
+        "lat": 50.6292,
+        "lng": 3.0573
+      },
+      "phone": "03 20 12 34 56",
+      "phoneLink": "+33320123456",
+      "whatsapp": "33320123456",
+      "whatsappMessage": "Bonjour, je souhaite obtenir un devis.",
+      "email": "contact@martin-plomberie.fr",
+      "googleMapsUrl": "https://maps.google.com/?q=Lille",
+      "mapEmbedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2000!2d3.0573!3d50.6292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM!5e0!3m2!1sfr!2sfr!4v1234567890",
+      "pricingPlan": "pro",
+      "services": [
+        "Dépannage urgence 24h/24",
+        "Installation sanitaire",
+        "Rénovation salle de bain"
+      ],
+      "serviceAreas": [
+        "Lille",
+        "Roubaix",
+        "Tourcoing",
+        "Villeneuve-d'Ascq",
+        "Marcq-en-Barœul"
+      ],
+      "hours": ["Lundi - Vendredi : 8h - 18h"],
+      "emergency": true,
+      "colors": {
+        "primary": "#2E86AB",
+        "secondary": "#06D6A0"
+      },
+      "googleReviews": {
+        "rating": 4.9,
+        "count": 67,
+        "link": "https://maps.google.com/?cid=987654321"
+      },
+      "seoKeywords": ["plombier", "Lille", "dépannage", "installation", "entretien"],
+      "seoAdvanced": {
+        "businessType": "Plumber",
+        "priceRange": "€€",
+        "foundingDate": "2008-06-20",
+        "founder": "Pierre Martin"
+      },
+      "socialMedia": {
+        "facebook": "https://www.facebook.com/martinplomberie",
+        "linkedin": "https://www.linkedin.com/company/martinplomberie"
+      },
+      "designSystem": {
+        "borderRadius": "2xl",
+        "shadow": "xl"
+      }
+    }
+  ]
+}

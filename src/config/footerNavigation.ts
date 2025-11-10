@@ -72,11 +72,11 @@ export const footerNavigationData: FooterData = {
 				},
 				{
 					subCategory: 'Politique de confidentialité',
-					subCategoryLink: '/confidentialite'
+					subCategoryLink: '/politiques-de-confidentialite'
 				},
 				{
-					subCategory: 'CGV',
-					subCategoryLink: '/cgv'
+					subCategory: 'CGU',
+					subCategoryLink: '/cgu'
 				}
 			]
 		},

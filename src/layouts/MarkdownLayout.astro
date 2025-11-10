@@ -1,0 +1,66 @@
+---
+// Components
+import NavigationBar from '../components/ui/NavigationBar.astro'
+import Main from '../components/ui/Main.astro'
+import Footer from '../components/ui/Footer.astro'
+import Header from '../components/blocks/head/Header.astro'
+import CookieBanner from '../components/ui/CookieBanner.astro'
+// Scripts
+import Scriprs from '../components/scripts/LocalScripts.astro'
+import GoogleTagManagerBody from '../components/scripts/googleTagManagerBody.astro'
+// Styles
+import '../styles/global.css'
+// Fonts
+import '@fontsource-variable/inter'
+import '@fontsource-variable/outfit'
+// Data
+import { configData } from '../config/config'
+
+// Props
+type Props = {
+	title?: string
+	description?: string
+	ogImage?: string
+	noindex?: boolean
+	robots?: string
+	frontmatter?: {
+		title?: string
+		robots?: string
+		[key: string]: any
+	}
+}
+
+// Page Metadata
+const { title, description, ogImage, noindex, robots } = Astro.props
+const frontmatter = Astro.props.frontmatter || Astro.props
+---
+
+<!doctype html>
+<html lang="fr" class="scroll-animation mode-auto relative">
+	<Header
+		title={frontmatter.title || title}
+		description={description}
+		ogImage={ogImage}
+		noindex={noindex || frontmatter.robots?.includes('noindex')}
+	/>
+	<body
+		class:list={[
+			{ ['mode-' + `${configData.mode}`]: configData.mode },
+			{ ['scroll-animation']: configData.scrollAnimations }
+		]}
+	>
+		<GoogleTagManagerBody />
+		<NavigationBar />
+		<Main>
+			<div class="container mx-auto px-4 py-16 max-w-4xl">
+				<article class="prose prose-lg prose-slate dark:prose-invert max-w-none">
+					{frontmatter.title && <h1 class="text-4xl font-bold mb-8">{frontmatter.title}</h1>}
+					<slot />
+				</article>
+			</div>
+		</Main>
+		<Footer />
+		<CookieBanner />
+		<Scriprs />
+	</body>
+</html>
