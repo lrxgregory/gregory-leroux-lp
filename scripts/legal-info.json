@@ -1,0 +1,65 @@
+{
+  "$schema": "./legal-info.schema.json",
+  "owner": {
+    "firstName": "Grégory",
+    "lastName": "Leroux",
+    "fullName": "Grégory Leroux",
+    "businessName": "Grégory Leroux",
+    "email": "contact@gregoryleroux.com",
+    "phone": "+33123456789",
+    "address": {
+      "street": "27 Boulevard de l'égalité",
+      "city": "Tourcoing",
+      "postalCode": "59200",
+      "country": "France"
+    },
+    "website": {
+      "url": "https://gregoryleroux.com",
+      "name": "gregoryleroux.com"
+    }
+  },
+  "hosting": {
+    "provider": "Vercel",
+    "providerLegalName": "Vercel Inc.",
+    "address": "440 N Barranca Ave #4133, Covina, CA 91723",
+    "country": "États-Unis",
+    "contact": "https://vercel.com/support"
+  },
+  "legal": {
+    "effectiveDate": "10/11/2025",
+    "lastUpdate": "25/01/2025",
+    "gdprCompliant": true,
+    "dataRetention": {
+      "emails": "12 mois après la fin de la campagne de lancement",
+      "analytics": "14 mois"
+    },
+    "thirdPartyServices": [
+      {
+        "name": "Cal.com",
+        "purpose": "Gestion des réservations et prises de rendez-vous en ligne",
+        "dataShared": "nom, prénom, adresse email, numéro de téléphone, détails des rendez-vous",
+        "privacyPolicy": "https://cal.com/privacy"
+      },
+      {
+        "name": "Formulaire de contact",
+        "purpose": "Traitement des demandes de contact et devis",
+        "dataShared": "nom, prénom, adresse email, numéro de téléphone, message",
+        "privacyPolicy": null
+      },
+      {
+        "name": "Google Analytics",
+        "purpose": "Analyse statistique du trafic et mesure d'audience",
+        "dataShared": "adresse IP anonymisée, données de navigation (pages visitées, durée des sessions)",
+        "privacyPolicy": "https://policies.google.com/privacy"
+      }
+    ]
+  },
+  "contentType": "portfolio",
+  "allowsCommerce": false,
+  "features": {
+    "newsletter": false,
+    "booking": true,
+    "ecommerce": false,
+    "blog": false
+  }
+}
