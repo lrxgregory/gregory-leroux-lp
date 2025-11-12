@@ -1,66 +1,72 @@
 ---
-// Components
-import NavigationBar from '../components/ui/NavigationBar.astro'
-import Main from '../components/ui/Main.astro'
-import Footer from '../components/ui/Footer.astro'
-import Header from '../components/blocks/head/Header.astro'
-import CookieBanner from '../components/ui/CookieBanner.astro'
-// Scripts
-import Scriprs from '../components/scripts/LocalScripts.astro'
-import GoogleTagManagerBody from '../components/scripts/googleTagManagerBody.astro'
-// Styles
-import '../styles/global.css'
-// Fonts
-import '@fontsource-variable/inter'
-import '@fontsource-variable/outfit'
-// Data
-import { configData } from '../config/config'
+// Layout for Markdown pages
+import Layout from './Layout.astro'
+import Section from '../components/ui/Section.astro'
+import Row from '../components/ui/Row.astro'
+import Col from '../components/ui/Col.astro'
 
 // Props
 type Props = {
 	title?: string
 	description?: string
-	ogImage?: string
-	noindex?: boolean
 	robots?: string
-	frontmatter?: {
-		title?: string
-		robots?: string
-		[key: string]: any
-	}
 }
 
-// Page Metadata
-const { title, description, ogImage, noindex, robots } = Astro.props
-const frontmatter = Astro.props.frontmatter || Astro.props
+const { title, description, robots } = Astro.props.frontmatter || Astro.props
+const noindex = robots?.includes('noindex') || false
 ---
 
-<!doctype html>
-<html lang="fr" class="scroll-animation mode-auto relative">
-	<Header
-		title={frontmatter.title || title}
-		description={description}
-		ogImage={ogImage}
-		noindex={noindex || frontmatter.robots?.includes('noindex')}
-	/>
-	<body
-		class:list={[
-			{ ['mode-' + `${configData.mode}`]: configData.mode },
-			{ ['scroll-animation']: configData.scrollAnimations }
-		]}
-	>
-		<GoogleTagManagerBody />
-		<NavigationBar />
-		<Main>
-			<div class="container mx-auto px-4 py-16 max-w-4xl">
-				<article class="prose prose-lg prose-slate dark:prose-invert max-w-none">
-					{frontmatter.title && <h1 class="text-4xl font-bold mb-8">{frontmatter.title}</h1>}
+<Layout title={title} description={description} noindex={noindex}>
+	<Section padding="top" classes="bg-white dark:bg-neutral-950">
+		<Row>
+			<Col span="12">
+				<article class="prose prose-neutral dark:prose-invert max-w-4xl mx-auto">
+					<h1>{title}</h1>
 					<slot />
 				</article>
-			</div>
-		</Main>
-		<Footer />
-		<CookieBanner />
-		<Scriprs />
-	</body>
-</html>
+			</Col>
+		</Row>
+	</Section>
+</Layout>
+
+<style>
+	article {
+		@apply text-neutral-900 dark:text-neutral-100;
+	}
+
+	article :global(h1) {
+		@apply text-4xl font-bold mb-8 text-neutral-900 dark:text-white;
+	}
+
+	article :global(h2) {
+		@apply text-3xl font-bold mt-12 mb-6 text-neutral-900 dark:text-white;
+	}
+
+	article :global(h3) {
+		@apply text-2xl font-bold mt-8 mb-4 text-neutral-900 dark:text-white;
+	}
+
+	article :global(p) {
+		@apply mb-4 leading-relaxed;
+	}
+
+	article :global(ul) {
+		@apply mb-4 list-disc pl-6;
+	}
+
+	article :global(ol) {
+		@apply mb-4 list-decimal pl-6;
+	}
+
+	article :global(li) {
+		@apply mb-2;
+	}
+
+	article :global(a) {
+		@apply text-primary-600 hover:text-primary-700 underline;
+	}
+
+	article :global(strong) {
+		@apply font-semibold text-neutral-900 dark:text-white;
+	}
+</style>
